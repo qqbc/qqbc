@@ -123,7 +123,7 @@ private:
     static const char* DEFAULT_CATEGORY;
     static constexpr int PRESION_SIZE = 4;
     static constexpr int PRESION_MUL = 10000;
-    static constexpr double PRESION_DELTA = 5.0 / (10.0 * PRESION_MUL) ;
+    static constexpr double PRESION_DELTA = 0.5 / PRESION_MUL;
     std::string doubleToStr(const double num) const
     {
         const double num_upper = (num > 0.0) ? (num + PRESION_DELTA) : (num - PRESION_DELTA);
