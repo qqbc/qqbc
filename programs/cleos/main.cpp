@@ -2104,6 +2104,94 @@ struct closerex_subcommand {
    }
 };
 
+//qqbc:
+struct invite_subcommand {
+    string inviter_str;
+    vector<std::string> invitee_names;
+
+    invite_subcommand(CLI::App* actionRoot) {
+        auto invite = actionRoot->add_subcommand("invite", localized("Invite users for voting"));
+        invite->add_option("inviter", inviter_str, localized("The invitor account"))->required();
+        invite->add_option("invitees", invitee_names, localized("The account(s) to be invited"))->required();
+        add_standard_transaction_options(invite, "inviter@active");
+
+        invite->set_callback([this] {
+            std::sort( invitee_names.begin(), invitee_names.end() );
+
+            fc::variant act_payload = fc::mutable_variant_object()
+                    ("inviter", inviter_str)
+                    ("invitees", invitee_names);
+            auto accountPermissions = get_account_permissions(tx_permission, {name(inviter_str), config::active_name});
+            send_actions({create_action(accountPermissions, config::system_account_name, N(invite), act_payload)});
+        });
+    }
+};
+
+struct list_inviters_subcommand {
+    string account;
+    bool print_json = false;
+
+    list_inviters_subcommand(CLI::App* actionRoot) {
+        auto list_inviters = actionRoot->add_subcommand("listinviters", localized("List inviters"));
+        list_inviters->add_option("account", account, localized("The account has been invited"))->required();
+        list_inviters->add_flag("--json,-j", print_json, localized("Output in JSON format") );
+
+        list_inviters->set_callback([this] {
+            //get entire table in scope of user account
+            auto result = call(get_table_func, fc::mutable_variant_object("json", true)
+                    ("code", name(config::system_account_name).to_string())
+                    ("scope", name(account).to_string())
+                    ("table", "inviters")
+            );
+            if (!print_json) {
+                auto res = result.as<eosio::chain_apis::read_only::get_table_rows_result>();
+                if ( !res.rows.empty() ) {
+                    constexpr size_t indent_size = 5;
+                    const string indent(indent_size, ' ');
+
+                    for ( auto& r : res.rows ){
+                        auto& inviters = r["inviters"].get_array();
+                        std::cout << std::setw(16) << std::left <<"Inviters:" ;
+                        if ( !inviters.empty() ) {
+                            for ( size_t i = 0; i < inviters.size(); ++i ) {
+                                if ( i%3 == 0 ) {
+                                    std::cout << std::endl << indent;
+                                }
+                                std::cout << std::setw(16) << std::left << inviters[i].as_string();
+                            }
+                        }
+                        else{
+                            std::cout << std::endl << indent << std::setw(16) << std::left << "[]";
+                        }
+                        std::cout << std::endl;
+
+                        auto& pending = r["pending_inviters"].get_array();
+                        std::cout << std::setw(16) << std::left <<"Pending:" ;
+                        if ( !pending.empty() ) {
+                            for ( size_t i = 0; i < pending.size(); ++i ) {
+                                if ( i%3 == 0 ) {
+                                    std::cout << std::endl << indent;
+                                }
+                                std::cout << std::setw(16) << std::left << pending[i].as_string();
+                            }
+                        }
+                        else{
+                            std::cout << std::endl << indent << std::setw(16) << std::left << "[]";
+                        }
+                        std::cout << std::endl;
+
+                    }
+
+                } else {
+                    std::cerr << "No Record found" << std::endl;
+                }
+            } else {
+                std::cout << fc::json::to_pretty_string(result) << std::endl;
+            }
+        });
+    }
+};
+
 void get_account( const string& accountName, const string& coresym, bool json_format ) {
    fc::variant json;
    if (coresym.empty()) {
@@ -3993,6 +4081,9 @@ int main( int argc, char** argv ) {
    auto rexexec        = rexexec_subcommand(rex);
    auto closerex       = closerex_subcommand(rex);
 
+    //qqbc: inviter
+    auto invite = invite_subcommand(system);
+    auto listinviters = list_inviters_subcommand(system);
 
    try {
        app.parse(argc, argv);
