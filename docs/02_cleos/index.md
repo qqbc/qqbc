@@ -30,7 +30,7 @@ Options:
   -h,--help                   Print this help message and exit
   -u,--url TEXT=http://127.0.0.1:8888/
                               the http/https URL where nodeos is running
-  --wallet-url TEXT=unix:///Users/username/eosio-wallet/keosd.sock
+  --wallet-url TEXT=unix:///Users/username/qqbc-wallet/keosd.sock
                               the http/https URL where keosd is running
   -r,--header                 pass specific HTTP header; repeat this option to pass multiple headers
   -n,--no-verify              don't verify peer certificate when using HTTPS
