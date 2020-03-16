@@ -62,12 +62,12 @@ class Utils:
     EosServerName="nodeos"
     EosServerPath="programs/nodeos/"+ EosServerName
 
-    EosLauncherPath="programs/eosio-launcher/eosio-launcher"
+    EosLauncherPath="programs/eosio-launcher/qqbc-launcher"
     MongoPath="mongo"
     ShuttingDown=False
     CheckOutputDeque=deque(maxlen=10)
 
-    EosBlockLogPath="programs/eosio-blocklog/eosio-blocklog"
+    EosBlockLogPath="programs/eosio-blocklog/qqbc-blocklog"
 
     FileDivider="================================================================="
     DataDir="var/lib/"
