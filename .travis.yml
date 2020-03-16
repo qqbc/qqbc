@@ -41,7 +41,7 @@ matrix:
             - ccache
             - jq
             - boost
-            - python@2
+            - python2
             - python
             - libtool
             - libusb
