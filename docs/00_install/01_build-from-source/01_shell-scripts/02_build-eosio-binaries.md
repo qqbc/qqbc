@@ -9,7 +9,7 @@ The build script first installs all dependencies and then builds EOSIO. The scri
 
 ```sh
 $ cd ~/eosio/eos
-$ ./scripts/eosio_build.sh
+$ ./scripts/qqbc_build.sh
 ```
 
 The build process writes temporary content to the `eos/build` folder. After building, the program binaries can be found at `eos/build/programs`.

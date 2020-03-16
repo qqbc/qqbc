@@ -8,7 +8,7 @@ steps:
     agents:
       queue: "automation-eks-eos-builder-fleet"
     command:
-      - "./scripts/eosio_build.sh -P -y"
+      - "./scripts/qqbc_build.sh -P -y"
     timeout: 180
     
   - label: ":centos: CentOS 7.7 - Build Pinned"
@@ -19,7 +19,7 @@ steps:
     agents:
       queue: "automation-eks-eos-builder-fleet"
     command:
-      - "./scripts/eosio_build.sh -P -y"
+      - "./scripts/qqbc_build.sh -P -y"
     timeout: 180
     
   - label: ":darwin: macOS 10.14 - Build Pinned"
@@ -30,7 +30,7 @@ steps:
     agents: "queue=mac-anka-large-node-fleet"
     command:
       - "git clone git@github.com:EOSIO/eos.git eos && cd eos &&  git checkout -f $BUILDKITE_BRANCH && git submodule update --init --recursive"
-      - "cd eos && ./scripts/eosio_build.sh -P -y"
+      - "cd eos && ./scripts/qqbc_build.sh -P -y"
     plugins:
       - EOSIO/anka#v0.5.7:
           debug: true
@@ -59,7 +59,7 @@ steps:
       queue: "automation-eks-eos-builder-fleet"
     command:
       - "apt update && apt upgrade -y && apt install -y git"
-      - "./scripts/eosio_build.sh -P -y"
+      - "./scripts/qqbc_build.sh -P -y"
     timeout: 180
     
   - label: ":ubuntu: Ubuntu 18.04 - Build Pinned"
@@ -71,7 +71,7 @@ steps:
       queue: "automation-eks-eos-builder-fleet"
     command:
       - "apt update && apt upgrade -y && apt install -y git"
-      - "./scripts/eosio_build.sh -P -y"
+      - "./scripts/qqbc_build.sh -P -y"
     timeout: 180
 
   - label: ":aws: Amazon_Linux 2 - Build UnPinned"
@@ -82,7 +82,7 @@ steps:
     agents:
       queue: "automation-eks-eos-builder-fleet"
     command:
-      - "./scripts/eosio_build.sh -y"
+      - "./scripts/qqbc_build.sh -y"
     timeout: 180
     
   - label: ":centos: CentOS 7.7 - Build UnPinned"
@@ -93,7 +93,7 @@ steps:
     agents:
       queue: "automation-eks-eos-builder-fleet"
     command:
-      - "./scripts/eosio_build.sh -y"
+      - "./scripts/qqbc_build.sh -y"
     timeout: 180
     
   - label: ":darwin: macOS 10.14 - Build UnPinned"
@@ -104,7 +104,7 @@ steps:
     agents: "queue=mac-anka-large-node-fleet"
     command:
       - "git clone git@github.com:EOSIO/eos.git eos && cd eos &&  git checkout -f $BUILDKITE_BRANCH && git submodule update --init --recursive"
-      - "cd eos && ./scripts/eosio_build.sh -y"
+      - "cd eos && ./scripts/qqbc_build.sh -y"
     plugins:
       - EOSIO/anka#v0.5.7:
           debug: true
@@ -133,5 +133,5 @@ steps:
       queue: "automation-eks-eos-builder-fleet"
     command:
       - "apt update && apt upgrade -y && apt install -y git"
-      - "./scripts/eosio_build.sh -y"
+      - "./scripts/qqbc_build.sh -y"
     timeout: 180

@@ -1,8 +1,8 @@
 #!/usr/bin/env bats
 load helpers/general
 
-SCRIPT_LOCATION="scripts/eosio_build.sh"
-TEST_LABEL="[eosio_build]"
+SCRIPT_LOCATION="scripts/qqbc_build.sh"
+TEST_LABEL="[qqbc_build]"
 
 ###################################################################
 # ON MAC YOU NEED TO FULLY UNINSTALL EOSIO BEFORE THESE WILL PASS #
@@ -14,7 +14,7 @@ TEST_LABEL="[eosio_build]"
     if [[ $NAME =~ "Amazon Linux" ]] || [[ $NAME == "CentOS Linux" ]]; then
         # which package isn't installed
         uninstall-package which WETRUN &>/dev/null
-        run bash -c "printf \"y\ny\nn\nn\n\" | ./scripts/eosio_build.sh"
+        run bash -c "printf \"y\ny\nn\nn\n\" | ./scripts/qqbc_build.sh"
         [[ ! -z $(echo "${output}" | grep "EOSIO compiler checks require the 'which'") ]] || exit
     fi
 
@@ -27,7 +27,7 @@ TEST_LABEL="[eosio_build]"
     fi
 
     cd ./scripts # Also test that we can run the script from a directory other than the root
-    run bash -c "./eosio_build.sh -y -P"
+    run bash -c "./qqbc_build.sh -y -P"
     [[ ! -z $(echo "${output}" | grep "PIN_COMPILER: true") ]] || exit
     # Ensure build-essentials is installed so we can compile cmake, clang, boost, etc
     if [[ $NAME == "Ubuntu" ]]; then

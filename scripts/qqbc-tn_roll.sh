@@ -1,16 +1,16 @@
 #!/bin/bash
 #
-# eosio-tn_roll is used to have all of the instances of the EOS daemon on a host brought down
+# qqbc-tn_roll is used to have all of the instances of the EOS daemon on a host brought down
 # so that the underlying executable image file (the "text file") can be replaced. Then
 # all instances are restarted.
-# usage: eosio-tn_roll.sh [arglist]
+# usage: qqbc-tn_roll.sh [arglist]
 # arglist will be passed to the node's command line. First with no modifiers
 # then with --hard-replay-blockchain and then a third time with --delete-all-blocks
 #
 # The data directory and log file are set by this script. Do not pass them on
 # the command line.
 #
-# In most cases, simply running ./eosio-tn_roll.sh is sufficient.
+# In most cases, simply running ./qqbc-tn_roll.sh is sufficient.
 #
 
 if [ -z "$QQBC_HOME" ]; then
@@ -76,16 +76,16 @@ fi
 
 echo DD = $DD
 
-bash $QQBC_HOME/scripts/eosio-tn_down.sh
+bash $QQBC_HOME/scripts/qqbc-tn_down.sh
 
 cp $SDIR/$RD/$prog $RD/$prog
 
 if [ $DD = "all" ]; then
     for QQBC_RESTART_DATA_DIR in `ls -d var/lib/node_??`; do
-        bash $QQBC_HOME/scripts/eosio-tn_up.sh "$*"
+        bash $QQBC_HOME/scripts/qqbc-tn_up.sh "$*"
     done
 else
-    bash $QQBC_HOME/scripts/eosio-tn_up.sh "$*"
+    bash $QQBC_HOME/scripts/qqbc-tn_up.sh "$*"
 fi
 unset QQBC_RESTART_DATA_DIR
 

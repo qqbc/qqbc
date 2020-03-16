@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 load helpers/general
-export SCRIPT_LOCATION="scripts/eosio_build.sh"
-export TEST_LABEL="[eosio_build_amazonlinux]"
+export SCRIPT_LOCATION="scripts/qqbc_build.sh"
+export TEST_LABEL="[qqbc_build_amazonlinux]"
 
 [[ $ARCH == "Linux" ]] || exit 0 # Skip if we're not on linux
 ( [[ $NAME == "Amazon Linux AMI" ]] || [[ $NAME == "Amazon Linux" ]] ) || exit 0 # Exit 0 is required for pipeline
@@ -19,7 +19,7 @@ export TEST_LABEL="[eosio_build_amazonlinux]"
 # Testing MongoDB
 ./tests/bash-bats/modules/mongodb.sh
 
-## Needed to load eosio_build_ files properly; it can be empty
+## Needed to load qqbc_build_ files properly; it can be empty
 @test "${TEST_LABEL} > General" {
     set_system_vars # Obtain current machine's resources and set the necessary variables (like JOBS, etc)
 

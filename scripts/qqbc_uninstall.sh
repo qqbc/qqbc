@@ -53,7 +53,7 @@ export CURRENT_WORKING_DIR=$(pwd) # relative path support
 cd $( dirname "${BASH_SOURCE[0]}" )/..
 
 # Load bash script helper functions
-. ./scripts/helpers/eosio.sh
+. ./scripts/helpers/qqbc.sh
 
 # Support relative paths : https://github.com/QQBC/eos/issues/7560
 ( [[ ! -z $INSTALL_LOCATION ]] && [[ ! $INSTALL_LOCATION =~ ^\/ ]] ) && export INSTALL_LOCATION="${CURRENT_WORKING_DIR}/$INSTALL_LOCATION"
@@ -108,7 +108,7 @@ fi
 
 echo "[Removing QQBC Dependencies]"
 if [[ $ARCH == "Darwin" ]]; then
-   for package in $(cat scripts/eosio_build_darwin_deps | cut -d, -f1 2>/dev/null); do
+   for package in $(cat scripts/qqbc_build_darwin_deps | cut -d, -f1 2>/dev/null); do
       while true; do
          [[ $NONINTERACTIVE == false ]] && read -p "Do you wish to uninstall and unlink all brew installed ${package} versions? (y/n) " DEP_PROCEED
          case $DEP_PROCEED in

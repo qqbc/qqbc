@@ -32,7 +32,7 @@ EOSIO dependencies can be built or installed automatically from the [Build Scrip
 
 ```sh
 $ cd ~/eosio/eos
-$ ./scripts/eosio_build.sh [-P]
+$ ./scripts/qqbc_build.sh [-P]
 ```
 
 ### Unupported Platforms
@@ -41,5 +41,5 @@ EOSIO dependencies can also be built and installed manually by reproducing the s
 
 ```sh
 $ cd ~/eosio/eos
-$ export VERBOSE=true && export DRYRUN=true && ./scripts/eosio_build.sh -y [-P]
+$ export VERBOSE=true && export DRYRUN=true && ./scripts/qqbc_build.sh -y [-P]
 ```
