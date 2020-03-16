@@ -1,8 +1,8 @@
 #!/usr/bin/env bats
 load helpers/general
 
-SCRIPT_LOCATION="scripts/eosio_uninstall.sh"
-TEST_LABEL="[eosio_uninstall]"
+SCRIPT_LOCATION="scripts/qqbc_uninstall.sh"
+TEST_LABEL="[qqbc_uninstall]"
 
 mkdir -p $SRC_DIR
 mkdir -p $OPT_DIR

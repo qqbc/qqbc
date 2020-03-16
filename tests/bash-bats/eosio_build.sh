@@ -43,7 +43,7 @@ TEST_LABEL="[eosio_build]"
     [[ ! -z $(echo "${output}" | grep "ENABLE_MONGO: false") ]] || exit
     [[ ! -z $(echo "${output}" | grep "INSTALL_MONGO: false") ]] || exit
     # lack of -i
-    [[ ! -z $(echo "${output}" | grep "EOSIO_INSTALL_DIR: ${HOME}/eosio/${EOSIO_VERSION}") ]] || exit
+    [[ ! -z $(echo "${output}" | grep "QQBC_INSTALL_DIR: ${HOME}/eosio/${EOSIO_VERSION}") ]] || exit
     ## -o
     run bash -c "printf \"y\ny\nn\nn\n\" | ./$SCRIPT_LOCATION -o Debug -P"
     [[ ! -z $(echo "${output}" | grep "CMAKE_BUILD_TYPE: Debug") ]] || exit
@@ -55,12 +55,12 @@ TEST_LABEL="[eosio_build]"
     [[ ! -z $(echo "${output}" | grep "BOOST_LOCATION: /test") ]] || exit
     ## -i
     run bash -c "printf \"y\ny\nn\nn\n\"| ./$SCRIPT_LOCATION -i /NEWPATH -P"
-    [[ ! -z $(echo "${output}" | grep "EOSIO_INSTALL_DIR: /NEWPATH") ]] || exit
+    [[ ! -z $(echo "${output}" | grep "QQBC_INSTALL_DIR: /NEWPATH") ]] || exit
     [[ ! -z $(echo "${output}" | grep "TEMP_DIR: ${HOME}/tmp") ]] || exit
         ### Relative path support
         cd $TEMP_DIR # Also test that we can run the script from a directory other than the root
         run bash -c "printf \"y\ny\nn\nn\n\"| ${CURRENT_WORKING_DIR}/$SCRIPT_LOCATION -i NEWPATH -P"
-        [[ ! -z $(echo "${output}" | grep "EOSIO_INSTALL_DIR: $TEMP_DIR/NEWPATH") ]] || exit
+        [[ ! -z $(echo "${output}" | grep "QQBC_INSTALL_DIR: $TEMP_DIR/NEWPATH") ]] || exit
         cd $CURRENT_WORKING_DIR
     ## -c
     run bash -c "printf \"y\ny\nn\nn\n\"| ./$SCRIPT_LOCATION -c -P"

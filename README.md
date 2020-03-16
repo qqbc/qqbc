@@ -102,7 +102,7 @@ $ sudo yum remove eosio
 ## Uninstall Script
 To uninstall the EOSIO built/installed binaries and dependencies, run:
 ```sh
-./scripts/eosio_uninstall.sh
+./scripts/qqbc_uninstall.sh
 ```
 
 ## Documentation
