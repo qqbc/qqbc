@@ -104,7 +104,8 @@ def startNode(nodeIndex, account):
     cmd = (
         args.qqbcd +
         '    --max-irreversible-block-age -1'
-        '    --max-transaction-time=6000'
+        '    --max-transaction-time=1000'
+        '    --http-max-response-time-ms=240'
         '    --contracts-console'
         '    --genesis-json ' + os.path.abspath(args.genesis) +
         '    --blocks-dir ' + os.path.abspath(dir) + '/blocks'
@@ -287,7 +288,7 @@ def stepStartWallet():
     importKeys()
 def stepStartBoot():
     startNode(0, {'name': 'eosio', 'pvt': args.private_key, 'pub': args.public_key})
-    sleep(1.5)
+    sleep(10)
 def stepInstallSystemContracts():
     run(args.qqbccli + 'set contract eosio.token ' + args.contracts_dir + '/eosio.token/')
     run(args.qqbccli + 'set contract eosio.msig ' + args.contracts_dir + '/eosio.msig/')
@@ -415,7 +416,7 @@ commands = [
 
 parser.add_argument('--public-key', metavar='', help="EOSIO Public Key", default='EOS8Znrtgwt8TfpmbVpTKvA2oB8Nqey625CLN8bCN3TEbgx86Dsvr', dest="public_key")
 parser.add_argument('--private-Key', metavar='', help="EOSIO Private Key", default='5K463ynhZoCDDa4RDcr63cUwWLTnKqmdcoTKTHBjqoKfv4u5V7p', dest="private_key")
-parser.add_argument('--qqbccli', metavar='', help="QQBCCli command", default='../../build/programs/qqbccli/qqbccli --wallet-url http://127.0.0.1:6666 ')
+parser.add_argument('--qqbccli', metavar='', help="QQBCCli command", default='../../build/programs/cleos/qqbccli --wallet-url http://127.0.0.1:6666 ')
 parser.add_argument('--qqbcd', metavar='', help="Path to QQBCD binary", default='../../build/programs/nodeos/qqbcd')
 parser.add_argument('--kqqbcd', metavar='', help="Path to KQQBCD binary", default='../../build/programs/keosd/kqqbcd')
 parser.add_argument('--contracts-dir', metavar='', help="Path to latest contracts directory", default='../../build/contracts/')
