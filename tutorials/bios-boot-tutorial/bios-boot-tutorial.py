@@ -45,6 +45,7 @@ def retry(args):
         logFile.write(args + '\n')
         if subprocess.call(args, shell=True):
             print('*** Retry')
+            sleep(1)
         else:
             break
 
@@ -70,12 +71,12 @@ def sleep(t):
 def startWallet():
     run('rm -rf ' + os.path.abspath(args.wallet_dir))
     run('mkdir -p ' + os.path.abspath(args.wallet_dir))
-    background(args.keosd + ' --unlock-timeout %d --http-server-address 127.0.0.1:6666 --wallet-dir %s' % (unlockTimeout, os.path.abspath(args.wallet_dir)))
+    background(args.kqqbcd + ' --unlock-timeout %d --http-server-address 127.0.0.1:6666 --wallet-dir %s' % (unlockTimeout, os.path.abspath(args.wallet_dir)))
     sleep(.4)
-    run(args.cleos + 'wallet create --to-console')
+    run(args.qqbccli + 'wallet create --to-console')
 
 def importKeys():
-    run(args.cleos + 'wallet import --private-key ' + args.private_key)
+    run(args.qqbccli + 'wallet import --private-key ' + args.private_key)
     keys = {}
     for a in accounts:
         key = a['pvt']
@@ -83,16 +84,16 @@ def importKeys():
             if len(keys) >= args.max_user_keys:
                 break
             keys[key] = True
-            run(args.cleos + 'wallet import --private-key ' + key)
+            run(args.qqbccli + 'wallet import --private-key ' + key)
     for i in range(firstProducer, firstProducer + numProducers):
         a = accounts[i]
         key = a['pvt']
         if not key in keys:
             keys[key] = True
-            run(args.cleos + 'wallet import --private-key ' + key)
+            run(args.qqbccli + 'wallet import --private-key ' + key)
 
 def startNode(nodeIndex, account):
-    dir = args.nodes_dir + ('%02d-' % nodeIndex) + account['name'] + '/'
+    dir = args.qqbcd_dir + ('%02d-' % nodeIndex) + account['name'] + '/'
     run('rm -rf ' + dir)
     run('mkdir -p ' + dir)
     otherOpts = ''.join(list(map(lambda i: '    --p2p-peer-address localhost:' + str(9000 + i), range(nodeIndex))))
@@ -101,9 +102,9 @@ def startNode(nodeIndex, account):
         '    --plugin eosio::history_api_plugin'
     )
     cmd = (
-        args.nodeos +
+        args.qqbcd +
         '    --max-irreversible-block-age -1'
-        '    --max-transaction-time=1000'
+        '    --max-transaction-time=6000'
         '    --contracts-console'
         '    --genesis-json ' + os.path.abspath(args.genesis) +
         '    --blocks-dir ' + os.path.abspath(dir) + '/blocks'
@@ -133,7 +134,7 @@ def startProducers(b, e):
 
 def createSystemAccounts():
     for a in systemAccounts:
-        run(args.cleos + 'create account eosio ' + a + ' ' + args.public_key)
+        run(args.qqbccli + 'create account eosio ' + a + ' ' + args.public_key)
 
 def intToCurrency(i):
     return '%d.%04d %s' % (i // 10000, i % 10000, args.symbol)
@@ -172,18 +173,18 @@ def createStakedAccounts(b, e):
         stakeCpu = stake - stakeNet
         print('%s: total funds=%s, ram=%s, net=%s, cpu=%s, unstaked=%s' % (a['name'], intToCurrency(a['funds']), intToCurrency(ramFunds), intToCurrency(stakeNet), intToCurrency(stakeCpu), intToCurrency(unstaked)))
         assert(funds == ramFunds + stakeNet + stakeCpu + unstaked)
-        retry(args.cleos + 'system newaccount --transfer eosio %s %s --stake-net "%s" --stake-cpu "%s" --buy-ram "%s"   ' % 
+        retry(args.qqbccli + 'system newaccount --transfer eosio %s %s --stake-net "%s" --stake-cpu "%s" --buy-ram "%s"   ' % 
             (a['name'], a['pub'], intToCurrency(stakeNet), intToCurrency(stakeCpu), intToCurrency(ramFunds)))
         if unstaked:
-            retry(args.cleos + 'transfer eosio %s "%s"' % (a['name'], intToCurrency(unstaked)))
+            retry(args.qqbccli + 'transfer eosio %s "%s"' % (a['name'], intToCurrency(unstaked)))
 
 def regProducers(b, e):
     for i in range(b, e):
         a = accounts[i]
-        retry(args.cleos + 'system regproducer ' + a['name'] + ' ' + a['pub'] + ' https://' + a['name'] + '.com' + '/' + a['pub'])
+        retry(args.qqbccli + 'system regproducer ' + a['name'] + ' ' + a['pub'] + ' https://' + a['name'] + '.com' + '/' + a['pub'])
 
 def listProducers():
-    run(args.cleos + 'system listproducers')
+    run(args.qqbccli + 'system listproducers')
 
 def vote(b, e):
     for i in range(b, e):
@@ -193,27 +194,27 @@ def vote(b, e):
             k = numProducers - 1
         prods = random.sample(range(firstProducer, firstProducer + numProducers), k)
         prods = ' '.join(map(lambda x: accounts[x]['name'], prods))
-        retry(args.cleos + 'system voteproducer prods ' + voter + ' ' + prods)
+        retry(args.qqbccli + 'system voteproducer prods ' + voter + ' ' + prods)
 
 def claimRewards():
-    table = getJsonOutput(args.cleos + 'get table eosio eosio producers -l 100')
+    table = getJsonOutput(args.qqbccli + 'get table eosio eosio producers -l 100')
     times = []
     for row in table['rows']:
         if row['unpaid_blocks'] and not row['last_claim_time']:
-            times.append(getJsonOutput(args.cleos + 'system claimrewards -j ' + row['owner'])['processed']['elapsed'])
+            times.append(getJsonOutput(args.qqbccli + 'system claimrewards -j ' + row['owner'])['processed']['elapsed'])
     print('Elapsed time for claimrewards:', times)
 
 def proxyVotes(b, e):
     vote(firstProducer, firstProducer + 1)
     proxy = accounts[firstProducer]['name']
-    retry(args.cleos + 'system regproxy ' + proxy)
+    retry(args.qqbccli + 'system regproxy ' + proxy)
     sleep(1.0)
     for i in range(b, e):
         voter = accounts[i]['name']
-        retry(args.cleos + 'system voteproducer proxy ' + voter + ' ' + proxy)
+        retry(args.qqbccli + 'system voteproducer proxy ' + voter + ' ' + proxy)
 
 def updateAuth(account, permission, parent, controller):
-    run(args.cleos + 'push action eosio updateauth' + jsonArg({
+    run(args.qqbccli + 'push action eosio updateauth' + jsonArg({
         'account': account,
         'permission': permission,
         'parent': parent,
@@ -230,7 +231,7 @@ def resign(account, controller):
     updateAuth(account, 'owner', '', controller)
     updateAuth(account, 'active', 'owner', controller)
     sleep(1)
-    run(args.cleos + 'get account ' + account)
+    run(args.qqbccli + 'get account ' + account)
 
 def randomTransfer(b, e):
     for j in range(20):
@@ -238,7 +239,7 @@ def randomTransfer(b, e):
         dest = src
         while dest == src:
             dest = accounts[random.randint(b, e - 1)]['name']
-        run(args.cleos + 'transfer -f ' + src + ' ' + dest + ' "0.0001 ' + args.symbol + '"' + ' || true')
+        run(args.qqbccli + 'transfer -f ' + src + ' ' + dest + ' "0.0001 ' + args.symbol + '"' + ' || true')
 
 def msigProposeReplaceSystem(proposer, proposalName):
     requestedPermissions = []
@@ -247,20 +248,20 @@ def msigProposeReplaceSystem(proposer, proposalName):
     trxPermissions = [{'actor': 'eosio', 'permission': 'active'}]
     with open(fastUnstakeSystem, mode='rb') as f:
         setcode = {'account': 'eosio', 'vmtype': 0, 'vmversion': 0, 'code': f.read().hex()}
-    run(args.cleos + 'multisig propose ' + proposalName + jsonArg(requestedPermissions) + 
+    run(args.qqbccli + 'multisig propose ' + proposalName + jsonArg(requestedPermissions) + 
         jsonArg(trxPermissions) + 'eosio setcode' + jsonArg(setcode) + ' -p ' + proposer)
 
 def msigApproveReplaceSystem(proposer, proposalName):
     for i in range(firstProducer, firstProducer + numProducers):
-        run(args.cleos + 'multisig approve ' + proposer + ' ' + proposalName +
+        run(args.qqbccli + 'multisig approve ' + proposer + ' ' + proposalName +
             jsonArg({'actor': accounts[i]['name'], 'permission': 'active'}) +
             '-p ' + accounts[i]['name'])
 
 def msigExecReplaceSystem(proposer, proposalName):
-    retry(args.cleos + 'multisig exec ' + proposer + ' ' + proposalName + ' -p ' + proposer)
+    retry(args.qqbccli + 'multisig exec ' + proposer + ' ' + proposalName + ' -p ' + proposer)
 
 def msigReplaceSystem():
-    run(args.cleos + 'push action eosio buyrambytes' + jsonArg(['eosio', accounts[0]['name'], 200000]) + '-p eosio')
+    run(args.qqbccli + 'push action eosio buyrambytes' + jsonArg(['eosio', accounts[0]['name'], 200000]) + '-p eosio')
     sleep(1)
     msigProposeReplaceSystem(accounts[0]['name'], 'fast.unstake')
     sleep(1)
@@ -270,7 +271,7 @@ def msigReplaceSystem():
 def produceNewAccounts():
     with open('newusers', 'w') as f:
         for i in range(120_000, 200_000):
-            x = getOutput(args.cleos + 'create key --to-console')
+            x = getOutput(args.qqbccli + 'create key --to-console')
             r = re.match('Private key: *([^ \n]*)\nPublic key: *([^ \n]*)', x, re.DOTALL | re.MULTILINE)
             name = 'user'
             for j in range(7, -1, -1):
@@ -279,7 +280,7 @@ def produceNewAccounts():
             f.write('        {"name":"%s", "pvt":"%s", "pub":"%s"},\n' % (name, r[1], r[2]))
 
 def stepKillAll():
-    run('killall keosd nodeos || true')
+    run('killall kqqbcd qqbcd || true')
     sleep(1.5)
 def stepStartWallet():
     startWallet()
@@ -288,12 +289,12 @@ def stepStartBoot():
     startNode(0, {'name': 'eosio', 'pvt': args.private_key, 'pub': args.public_key})
     sleep(1.5)
 def stepInstallSystemContracts():
-    run(args.cleos + 'set contract eosio.token ' + args.contracts_dir + '/eosio.token/')
-    run(args.cleos + 'set contract eosio.msig ' + args.contracts_dir + '/eosio.msig/')
+    run(args.qqbccli + 'set contract eosio.token ' + args.contracts_dir + '/eosio.token/')
+    run(args.qqbccli + 'set contract eosio.msig ' + args.contracts_dir + '/eosio.msig/')
 def stepCreateTokens():
-    run(args.cleos + 'push action eosio.token create \'["eosio", "10000000000.0000 %s"]\' -p eosio.token' % (args.symbol))
+    run(args.qqbccli + 'push action eosio.token create \'["eosio", "10000000000.0000 %s"]\' -p eosio.token' % (args.symbol))
     totalAllocation = allocateFunds(0, len(accounts))
-    run(args.cleos + 'push action eosio.token issue \'["eosio", "%s", "memo"]\' -p eosio' % intToCurrency(totalAllocation))
+    run(args.qqbccli + 'push action eosio.token issue \'["eosio", "%s", "memo"]\' -p eosio' % intToCurrency(totalAllocation))
     sleep(1)
 def stepSetSystemContract():
     # All of the protocol upgrade features introduced in v1.8 first require a special protocol 
@@ -301,50 +302,64 @@ def stepSetSystemContract():
     # contract that makes use of the functionality introduced by that feature to be deployed. 
 
     # activate PREACTIVATE_FEATURE before installing eosio.system
+    print("start set PREACTIVATE_FEATURE active")
+    retry('curl -X POST http://127.0.0.1:%d'% args.http_port+'/v1/producer/get_supported_protocol_features -d '+'\'{}\'')
+    sleep(3)
+
     retry('curl -X POST http://127.0.0.1:%d' % args.http_port + 
         '/v1/producer/schedule_protocol_feature_activations ' +
-        '-d \'{"protocol_features_to_activate": ["0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd"]}\'')
+        '-d \'{"protocol_features_to_activate": ["0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd"]}\' | jq')
+    sleep(3)
+
+    print("wait get PREACTIVATE_FEATURE active")
+    retry('curl -X POST http://127.0.0.1:%d'% args.http_port+'/v1/chain/get_activated_protocol_features -d '+'\'{}\''+' | jq')
     sleep(3)
 
     # install eosio.system the older version first
-    retry(args.cleos + 'set contract eosio ' + args.old_contracts_dir + '/eosio.system/')
+    retry(args.qqbccli + 'set contract eosio ' + args.contracts_dir + '/eosio.boot -p eosio@active')
     sleep(3)
 
     # activate remaining features
     # GET_SENDER
-    retry(args.cleos + 'push action eosio activate \'["f0af56d2c5a48d60a4a5b5c903edfb7db3a736a94ed589d0b797df33ff9d3e1d"]\' -p eosio')
+    retry(args.qqbccli + 'push action eosio activate \'["f0af56d2c5a48d60a4a5b5c903edfb7db3a736a94ed589d0b797df33ff9d3e1d"]\' -p eosio')
     # FORWARD_SETCODE
-    retry(args.cleos + 'push action eosio activate \'["2652f5f96006294109b3dd0bbde63693f55324af452b799ee137a81a905eed25"]\' -p eosio')
+    retry(args.qqbccli + 'push action eosio activate \'["2652f5f96006294109b3dd0bbde63693f55324af452b799ee137a81a905eed25"]\' -p eosio')
     # ONLY_BILL_FIRST_AUTHORIZER
-    retry(args.cleos + 'push action eosio activate \'["8ba52fe7a3956c5cd3a656a3174b931d3bb2abb45578befc59f283ecd816a405"]\' -p eosio')
+    retry(args.qqbccli + 'push action eosio activate \'["8ba52fe7a3956c5cd3a656a3174b931d3bb2abb45578befc59f283ecd816a405"]\' -p eosio')
     # RESTRICT_ACTION_TO_SELF
-    retry(args.cleos + 'push action eosio activate \'["ad9e3d8f650687709fd68f4b90b41f7d825a365b02c23a636cef88ac2ac00c43"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["ad9e3d8f650687709fd68f4b90b41f7d825a365b02c23a636cef88ac2ac00c43"]\' -p eosio@active')
     # DISALLOW_EMPTY_PRODUCER_SCHEDULE
-    retry(args.cleos + 'push action eosio activate \'["68dcaa34c0517d19666e6b33add67351d8c5f69e999ca1e37931bc410a297428"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["68dcaa34c0517d19666e6b33add67351d8c5f69e999ca1e37931bc410a297428"]\' -p eosio@active')
      # FIX_LINKAUTH_RESTRICTION
-    retry(args.cleos + 'push action eosio activate \'["e0fb64b1085cc5538970158d05a009c24e276fb94e1a0bf6a528b48fbc4ff526"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["e0fb64b1085cc5538970158d05a009c24e276fb94e1a0bf6a528b48fbc4ff526"]\' -p eosio@active')
      # REPLACE_DEFERRED
-    retry(args.cleos + 'push action eosio activate \'["ef43112c6543b88db2283a2e077278c315ae2c84719a8b25f25cc88565fbea99"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["ef43112c6543b88db2283a2e077278c315ae2c84719a8b25f25cc88565fbea99"]\' -p eosio@active')
     # NO_DUPLICATE_DEFERRED_ID
-    retry(args.cleos + 'push action eosio activate \'["4a90c00d55454dc5b059055ca213579c6ea856967712a56017487886a4d4cc0f"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["4a90c00d55454dc5b059055ca213579c6ea856967712a56017487886a4d4cc0f"]\' -p eosio@active')
     # ONLY_LINK_TO_EXISTING_PERMISSION
-    retry(args.cleos + 'push action eosio activate \'["1a99a59d87e06e09ec5b028a9cbb7749b4a5ad8819004365d02dc4379a8b7241"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["1a99a59d87e06e09ec5b028a9cbb7749b4a5ad8819004365d02dc4379a8b7241"]\' -p eosio@active')
     # RAM_RESTRICTIONS
-    retry(args.cleos + 'push action eosio activate \'["4e7bf348da00a945489b2a681749eb56f5de00b900014e137ddae39f48f69d67"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["4e7bf348da00a945489b2a681749eb56f5de00b900014e137ddae39f48f69d67"]\' -p eosio@active')
     # WEBAUTHN_KEY
-    retry(args.cleos + 'push action eosio activate \'["4fca8bd82bbd181e714e283f83e1b45d95ca5af40fb89ad3977b653c448f78c2"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["4fca8bd82bbd181e714e283f83e1b45d95ca5af40fb89ad3977b653c448f78c2"]\' -p eosio@active')
     # WTMSIG_BLOCK_SIGNATURES
-    retry(args.cleos + 'push action eosio activate \'["299dcb6af692324b899b39f16d5a530a33062804e41f09dc97e9f156b4476707"]\' -p eosio@active')
+    retry(args.qqbccli + 'push action eosio activate \'["299dcb6af692324b899b39f16d5a530a33062804e41f09dc97e9f156b4476707"]\' -p eosio@active')
     sleep(1)
 
-    run(args.cleos + 'push action eosio setpriv' + jsonArg(['eosio.msig', 1]) + '-p eosio@active')
+    #retry(args.qqbccli + 'push transaction \'{"delay_sec":0,"max_cpu_usage_ms":0,"actions":[{"account":"eosio","name":"activate","data":{"feature_digest":"299dcb6af692324b899b39f16d5a530a33062804e41f09dc97e9f156b4476707"},"authorization":[{"actor":"eosio","permission":"active"}]}]}\'')
+    #sleep(3)
+
+    retry('curl -X POST http://127.0.0.1:%d'% args.http_port+'/v1/chain/get_activated_protocol_features -d '+'\'{}\''+' | jq')
+    sleep(3)
 
     # install eosio.system latest version
-    retry(args.cleos + 'set contract eosio ' + args.contracts_dir + '/eosio.system/')
+    retry(args.qqbccli + 'set contract eosio ' + args.contracts_dir + '/eosio.system/')
+
+    run(args.qqbccli + 'push action eosio setpriv' + jsonArg(['eosio.msig', 1]) + '-p eosio@active')
     sleep(3)
 
 def stepInitSystemContract():
-    run(args.cleos + 'push action eosio init' + jsonArg(['0', '4,' + args.symbol]) + '-p eosio@active')
+    run(args.qqbccli + 'push action eosio init' + jsonArg(['0', '4,' + args.symbol]) + '-p eosio@active')
     sleep(1)
 def stepCreateStakedAccounts():
     createStakedAccounts(0, len(accounts))
@@ -367,18 +382,19 @@ def stepResign():
     for a in systemAccounts:
         resign(a, 'eosio')
 def stepTransfer():
+    run("echo stepTransfer ")
     while True:
         randomTransfer(0, args.num_senders)
 def stepLog():
-    run('tail -n 60 ' + args.nodes_dir + '00-eosio/stderr')
+    run('tail -n 60 ' + args.qqbcd_dir + '00-eosio/stderr')
 
 # Command Line Arguments
 
 parser = argparse.ArgumentParser()
 
 commands = [
-    ('k', 'kill',               stepKillAll,                True,    "Kill all nodeos and keosd processes"),
-    ('w', 'wallet',             stepStartWallet,            True,    "Start keosd, create wallet, fill with keys"),
+    ('k', 'kill',               stepKillAll,                True,    "Kill all qqbcd and kqqbcd processes"),
+    ('w', 'wallet',             stepStartWallet,            True,    "Start kqqbcd, create wallet, fill with keys"),
     ('b', 'boot',               stepStartBoot,              True,    "Start boot node"),
     ('s', 'sys',                createSystemAccounts,       True,    "Create system accounts (eosio.*)"),
     ('c', 'contracts',          stepInstallSystemContracts, True,    "Install system contracts (token, msig)"),
@@ -389,8 +405,8 @@ commands = [
     ('p', 'reg-prod',           stepRegProducers,           True,    "Register producers"),
     ('P', 'start-prod',         stepStartProducers,         True,    "Start producers"),
     ('v', 'vote',               stepVote,                   True,    "Vote for producers"),
-    ('R', 'claim',              claimRewards,               True,    "Claim rewards"),
-    ('x', 'proxy',              stepProxyVotes,             True,    "Proxy votes"),
+    ('R', 'claim',              claimRewards,               False,    "Claim rewards"),
+    ('x', 'proxy',              stepProxyVotes,             False,    "Proxy votes"),
     ('q', 'resign',             stepResign,                 True,    "Resign eosio"),
     ('m', 'msg-replace',        msigReplaceSystem,          False,   "Replace system contract using msig"),
     ('X', 'xfer',               stepTransfer,               False,   "Random transfer tokens (infinite loop)"),
@@ -399,12 +415,12 @@ commands = [
 
 parser.add_argument('--public-key', metavar='', help="EOSIO Public Key", default='EOS8Znrtgwt8TfpmbVpTKvA2oB8Nqey625CLN8bCN3TEbgx86Dsvr', dest="public_key")
 parser.add_argument('--private-Key', metavar='', help="EOSIO Private Key", default='5K463ynhZoCDDa4RDcr63cUwWLTnKqmdcoTKTHBjqoKfv4u5V7p', dest="private_key")
-parser.add_argument('--cleos', metavar='', help="Cleos command", default='../../build/programs/cleos/cleos --wallet-url http://127.0.0.1:6666 ')
-parser.add_argument('--nodeos', metavar='', help="Path to nodeos binary", default='../../build/programs/nodeos/nodeos')
-parser.add_argument('--keosd', metavar='', help="Path to keosd binary", default='../../build/programs/keosd/keosd')
+parser.add_argument('--qqbccli', metavar='', help="QQBCCli command", default='../../build/programs/qqbccli/qqbccli --wallet-url http://127.0.0.1:6666 ')
+parser.add_argument('--qqbcd', metavar='', help="Path to QQBCD binary", default='../../build/programs/nodeos/qqbcd')
+parser.add_argument('--kqqbcd', metavar='', help="Path to KQQBCD binary", default='../../build/programs/keosd/kqqbcd')
 parser.add_argument('--contracts-dir', metavar='', help="Path to latest contracts directory", default='../../build/contracts/')
 parser.add_argument('--old-contracts-dir', metavar='', help="Path to 1.8.x contracts directory", default='../../build/contracts/')
-parser.add_argument('--nodes-dir', metavar='', help="Path to nodes directory", default='./nodes/')
+parser.add_argument('--qqbcd-dir', metavar='', help="Path to QQBCD directory", default='./qqbcd/')
 parser.add_argument('--genesis', metavar='', help="Path to genesis.json", default="./genesis.json")
 parser.add_argument('--wallet-dir', metavar='', help="Path to wallet directory", default='./wallet/')
 parser.add_argument('--log-path', metavar='', help="Path to log file", default='./output.log')
@@ -421,7 +437,7 @@ parser.add_argument('--num-voters', metavar='', help="Number of voters", type=in
 parser.add_argument('--num-senders', metavar='', help="Number of users to transfer funds randomly", type=int, default=10)
 parser.add_argument('--producer-sync-delay', metavar='', help="Time (s) to sleep to allow producers to sync", type=int, default=80)
 parser.add_argument('-a', '--all', action='store_true', help="Do everything marked with (*)")
-parser.add_argument('-H', '--http-port', type=int, default=8000, metavar='', help='HTTP port for cleos')
+parser.add_argument('-H', '--http-port', type=int, default=8000, metavar='', help='HTTP port for qqbccli')
 
 for (flag, command, function, inAll, help) in commands:
     prefix = ''
@@ -434,7 +450,7 @@ for (flag, command, function, inAll, help) in commands:
         
 args = parser.parse_args()
 
-args.cleos += '--url http://127.0.0.1:%d ' % args.http_port
+args.qqbccli += '--url http://127.0.0.1:%d ' % args.http_port
 
 logFile = open(args.log_path, 'a')
 
