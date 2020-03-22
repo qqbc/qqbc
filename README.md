@@ -17,33 +17,41 @@ QQBC currently supports the following operating systems:
 
 ---
 ## QQBC Document
-[Docment](./docs/index.md)
-## Code Download
+The Document of QQBC can be found [here](./docs/index.md)
+
+---
+
+## Software Installation
+
+### 1. Code Download
 ```sh
 git clone  --recursive https://github.com/qqbc/qqbc.git
 ```
 
-## Software Compilation
+### 2.  Compilation
 ```sh
 ./scripts/qqbc_build.sh -y
 ```
 
-## Installation
+### 3. Installation
 ```sh
 ./scripts/qqbc_install.sh
 ```
 
 
-## Uninstall Script
+### 4. Uninstall
 To uninstall the QQBC built/installed binaries and dependencies, run:
 ```sh
 ./scripts/qqbc_uninstall.sh
 ```
 
+---
 
 ## License
 
 QQBC is released under the open source [MIT](./LICENSE) license and is offered “AS IS” without warranty of any kind, express or implied. Any security provided by the QQBC software depends in part on how it is used, configured, and deployed. QQBC is built upon many third-party libraries such as WABT (Apache License) and WAVM (BSD 3-clause) which are also provided “AS IS” without warranty of any kind. Without limiting the generality of the foregoing, Block.one makes no representation or guarantee that QQBC or any third-party libraries will perform as intended or will be free of errors, bugs or faulty code. Both may fail in large or small ways that could completely or partially limit functionality or compromise computer systems. If you use or implement QQBC, you do so at your own risk. In no event will QQBC  be liable to any party for any damages whatsoever, even if it had been advised of the possibility of damage.  
+
+---
 
 ## Important
 
