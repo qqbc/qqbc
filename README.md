@@ -17,14 +17,18 @@ QQBC currently supports the following operating systems:
 
 ---
 
-## Software Compilation
+## Code Download
+```sh
+git clone  --recursive https://github.com/qqbc/qqbc.git
 ```
-cd scripts
+
+## Software Compilation
+```sh
 ./scripts/qqbc_build.sh -y
 ```
 
 ## Installation
-```
+```sh
 ./scripts/qqbc_install.sh
 ```
 
