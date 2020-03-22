@@ -14,7 +14,7 @@ This section describes how to set up a single-node blockchain configuration runn
 
 * [Install the QQBC software](../../../00_install/index.md) before starting this section.
 * It is assumed that `qqbcd`, `qqbccli`, and `kqqbcd` are accessible through the path. If you built QQBC using shell scripts, make sure to run the [Install Script](../../../00_install/01_build-from-source/01_shell-scripts/03_install-qqbc-binaries.md).
-* Know how to pass [Qqbcd options](../../02_usage/00_qqbcd-options.md) to enable or disable functionality.
+* Know how to pass [qqbcd options](../../02_usage/00_qqbcd-options.md) to enable or disable functionality.
 
 ## Steps
 
@@ -31,7 +31,7 @@ Start your own single-node blockchain with this single command:
 qqbcd -e -p eosio --plugin eosio::chain_api_plugin --plugin eosio::history_api_plugin
 ```
 
-[[info | Qqbcd Minimal Options]]
+[[info | qqbcd Minimal Options]]
 | A minimal `qqbcd` instance setup for block production requires both `chain_api_plugin` and `history_api_plugin` with the `-e` option (enable stale production) and `-p eosio` option (producer name `eosio`). Alternatively, you can also setup and specify your own account as the producer name.
 
 After running `qqbcd`, you should get log messages similar as below. It means the blocks are successfully produced.

@@ -12,7 +12,7 @@ Connect to a specific `qqbcd` or `kqqbcd` host to send COMMAND
 * Install the currently supported version of `qqbccli`
 
 ## Steps
-### Connecting to Qqbcd
+### Connecting to qqbcd
 
 ```sh
 qqbccli -url http://qqbcd-host:8888 COMMAND

@@ -1,5 +1,5 @@
 ---
-content_title: Qqbcd Troubleshooting
+content_title: qqbcd Troubleshooting
 ---
 
 ### "Database dirty flag set (likely due to unclean shutdown): replay required"
@@ -46,4 +46,4 @@ qqbccli --url http://localhost:8888 get info | grep server_version
 
 ### Error 3070000: WASM Exception Error
 
-If you try to deploy the `eosio.bios` contract or `eosio.system` contract in an attempt to boot an QQBC-based blockchain and you get the following error or similar: `Publishing contract... Error 3070000: WASM Exception Error Details: env.set_proposed_producers_ex unresolveable`, it is because you have to activate the `PREACTIVATE_FEATURE` protocol first. More details about it and how to enable it can be found in the [Bios Boot Sequence Tutorial](https://developers.eos.io/welcome/latest/tutorials/bios-boot-sequence/#112-set-the-eosiosystem-contract). For more information, you may also visit the [Qqbcd Upgrade Guides](https://developers.eos.io/manuals/eos/latest/qqbcd/upgrade-guides/).
+If you try to deploy the `eosio.bios` contract or `eosio.system` contract in an attempt to boot an QQBC-based blockchain and you get the following error or similar: `Publishing contract... Error 3070000: WASM Exception Error Details: env.set_proposed_producers_ex unresolveable`, it is because you have to activate the `PREACTIVATE_FEATURE` protocol first. More details about it and how to enable it can be found in the [Bios Boot Sequence Tutorial](https://developers.eos.io/welcome/latest/tutorials/bios-boot-sequence/#112-set-the-eosiosystem-contract). For more information, you may also visit the [qqbcd Upgrade Guides](https://developers.eos.io/manuals/eos/latest/qqbcd/upgrade-guides/).

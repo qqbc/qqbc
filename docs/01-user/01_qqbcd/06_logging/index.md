@@ -1,5 +1,5 @@
 ---
-content_title: Qqbcd Logging
+content_title: qqbcd Logging
 ---
 
 Logging for `qqbcd` is controlled by the `logging.json` file. CLI options can be passed to `qqbcd` to [setup `logging.json`](00_setup-logging.json.md). The logging configuration file can be used to define [appenders](#appenders) and tie them to [loggers](#loggers) and [logging levels](01_logging-levels.md).

@@ -15,4 +15,4 @@ make test
 
 [下一条]
 
-| [Qqbcd](../../../01_qqbcd/index.md)的配置和使用
+| [qqbcd](../../../01_qqbcd/index.md)的配置和使用

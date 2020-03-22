@@ -1,5 +1,5 @@
 ---
-content_title: Qqbcd Plugins
+content_title: qqbcd Plugins
 ---
 
 ## Overview
@@ -25,5 +25,5 @@ For information on specific plugins, just select from the list below:
 * [`test_control_plugin`](test_control_plugin/index.md)
 * [`txn_test_gen_plugin`](txn_test_gen_plugin/index.md)
 
-[[info | Qqbcd is modular]]
+[[info | qqbcd is modular]]
 | Plugins add incremental functionality to `qqbcd`. Unlike runtime plugins, `qqbcd` plugins are built at compile-time.

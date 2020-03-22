@@ -1,5 +1,5 @@
 ---
-content_title: Qqbcd Implementation
+content_title: qqbcd Implementation
 ---
 
 The QQBC platform stores blockchain information in various data structures at various stages of a transaction's lifecycle. Some of these are described below. The producing node is the `qqbcd` instance run by the block producer who is currently creating blocks for the blockchain (which changes every 6 seconds, producing 12 blocks in sequence before switching to another producer.)
@@ -14,7 +14,7 @@ Every `qqbcd` instance creates some internal files to housekeep the blockchain s
 * The `pending block` is an in memory block containing transactions as they are processed into a block, this will/may eventually become the head block. If this instance of `qqbcd` is the producing node then the pending block is distributed to other `qqbcd` instances.
 * The head block is the last block written to the blockchain, stored in `reversible_blocks`.
 
-## Qqbcd Read Modes
+## qqbcd Read Modes
 
 QQBC provides a set of [services and interfaces](https://developers.eos.io/eosio-cpp/docs/db-api) that enable contract developers to persist state across action, and consequently transaction, boundaries. Contracts may use these services and interfaces for different purposes. For example, `eosio.token` contract keeps balances for all users in the database.
 

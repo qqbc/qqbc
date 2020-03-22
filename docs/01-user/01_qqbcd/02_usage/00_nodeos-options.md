@@ -1,12 +1,12 @@
 ---
-content_title: Qqbcd Options
+content_title: qqbcd Options
 ---
 
-`Qqbcd` is a command line interface (CLI) application. As such, it can be started manually from the command line or through an automated script. The behavior of `qqbcd` is determined mainly by which plugins are loaded and which plugin options are used. The `qqbcd` application features two main option categories: *qqbcd-specific* options and *plugin-specific* options.
+`qqbcd` is a command line interface (CLI) application. As such, it can be started manually from the command line or through an automated script. The behavior of `qqbcd` is determined mainly by which plugins are loaded and which plugin options are used. The `qqbcd` application features two main option categories: *qqbcd-specific* options and *plugin-specific* options.
 
-## Qqbcd-specific Options
+## qqbcd-specific Options
 
-Qqbcd-specific options are used mainly for housekeeping purposes, such as setting the directory where the blockchain data resides, specifying the name of the `qqbcd` configuraton file, setting the name and path of the logging configuration file, etc. A sample output from running  `qqbcd --help` is displayed below, showing the qqbcd-specific options (Note: the plugin-specific options have been excluded for clarity):
+qqbcd-specific options are used mainly for housekeeping purposes, such as setting the directory where the blockchain data resides, specifying the name of the `qqbcd` configuraton file, setting the name and path of the logging configuration file, etc. A sample output from running  `qqbcd --help` is displayed below, showing the qqbcd-specific options (Note: the plugin-specific options have been excluded for clarity):
 
 ```console
 Application Config Options:

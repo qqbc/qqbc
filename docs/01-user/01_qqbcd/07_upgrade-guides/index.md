@@ -1,5 +1,5 @@
 ---
-content_title: Qqbcd Upgrade Guides
+content_title: qqbcd Upgrade Guides
 ---
 
 This section contains important instructions for node operators and other QQBC stakeholders to transition an QQBC network successfully through an QQBC version or protocol upgrade.

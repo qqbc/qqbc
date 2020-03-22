@@ -13,7 +13,7 @@
 
 * [安装QQBC软件](../../../00_install/index.md)。
 * 确认`qqbcd`, `qqbccli`, and `kqqbcd`具有访问路径。如果用户使用Shell脚本构建QQBC，那么确认运行[安装脚本](../../../00_install/01_build-from-source/01_shell-scripts/03_install-qqbc-binaries.md)。
-* 了解如何使用[Qqbcd配置选项](../../02_usage/00_qqbcd-options.md)启用或禁用特定功能。
+* 了解如何使用[qqbcd配置选项](../../02_usage/00_qqbcd-options.md)启用或禁用特定功能。
 
 ## 配置步骤
 

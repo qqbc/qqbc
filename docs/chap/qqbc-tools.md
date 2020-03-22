@@ -1,7 +1,7 @@
 # 程序与工具
 
 * 程序 
-  * Qqbcd
+  * qqbcd
   * qqbccli
   * kqqbcd
   * launcher
@@ -11,7 +11,7 @@
 
 ## 程序
 
-### Qqbcd
+### qqbcd
 
 这部分是运行一个由多个插件配置的节点的 QQBC 核心守护进程，实例的用途主要是生产区块、专用 API 端、和本地部署。
 

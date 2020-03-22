@@ -23,6 +23,6 @@ sudo make install
 
 [下一条]
 
-| [Qqbcd](../../../01_qqbcd/index.md)的配置和使用。
+| [qqbcd](../../../01_qqbcd/index.md)的配置和使用。
 
 | （可选）[测试QQBC二进制文件](04_test-qqbc-binaries.md)。

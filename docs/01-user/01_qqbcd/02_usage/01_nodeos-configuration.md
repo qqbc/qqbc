@@ -1,8 +1,8 @@
 ---
-content_title: Qqbcd Configuration
+content_title: qqbcd Configuration
 ---
 
-The plugin-specific options can be configured using either CLI options or a configuration file, `config.ini`. Qqbcd-specific options can only be configured from the command line. All CLI options and `config.ini` options can be found by running `qqbcd --help` as shown above.
+The plugin-specific options can be configured using either CLI options or a configuration file, `config.ini`. qqbcd-specific options can only be configured from the command line. All CLI options and `config.ini` options can be found by running `qqbcd --help` as shown above.
 
 Each `config.ini` option has a corresponding CLI option. However, not all CLI options are available in `config.ini`. For instance, most plugin-specific options that perform actions are not available in `config.ini`, such as `--delete-state-history` from `state_history_plugin`.
 
@@ -16,7 +16,7 @@ The default `config.ini` can be found in the following folders:
 
 A custom `config.ini` file can be set by passing the `qqbcd` option `--config path/to/config.ini`.
 
-## Qqbcd Example
+## qqbcd Example
 
 The example below shows a typical usage of `qqbcd` when starting a block producing node:
 

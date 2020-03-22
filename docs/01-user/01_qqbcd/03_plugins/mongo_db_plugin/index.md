@@ -16,7 +16,7 @@ The optional `eosio::mongo_db_plugin` provides archiving of blockchain data into
 ## Recommendations
 
 * It is recommended that a large `--abi-serializer-max-time-ms` value be passed into the `qqbcd` running the `mongo_db_plugin` as the default ABI serializer time limit is not large enough to serialize large blocks.
-* Read-only mode should be used to avoid speculative execution. See [Qqbcd Read Modes](../../02_usage/05_qqbcd-implementation.md#qqbcd-read-modes). Forked data is still recorded (data that never becomes irreversible) but speculative transaction processing and signaling is avoided, minimizing the transaction_traces/action_traces stored.
+* Read-only mode should be used to avoid speculative execution. See [qqbcd Read Modes](../../02_usage/05_qqbcd-implementation.md#qqbcd-read-modes). Forked data is still recorded (data that never becomes irreversible) but speculative transaction processing and signaling is avoided, minimizing the transaction_traces/action_traces stored.
 
 ## Options
 
