@@ -45,7 +45,7 @@
 
 qqbccli 包含所有命令的文档。有关 qqbccli 已知的所有命令的列表，只需简单地运行它，不带任何参数：
 
-`
+```
 $ qqbccli
 ERROR: RequiredError: Subcommand required
 Command Line Interface to QQBC Client
