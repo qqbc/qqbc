@@ -16,7 +16,8 @@ QQBC currently supports the following operating systems:
 5. MacOS 10.14 (Mojave)
 
 ---
-
+## QQBC Document
+[Docment](./docs/index.md)
 ## Code Download
 ```sh
 git clone  --recursive https://github.com/qqbc/qqbc.git
