@@ -490,9 +490,9 @@ $ qqbccli set account permission test active '{"threshold" : 1, "keys" : [], "ac
 
 * 第三个示例：演示如何设置多签权限
 
-``
+```
 $ qqbccli set account permission test active '{"threshold" : 100, "keys" : [{"permission":{"key":"EOS8X7Mp7apQWtL6T2sfSZzBcQNUqZB7tARFEm9gA9Tn9nbMdsvBB","permission":"active"},"weight":25}], "accounts" : [{"permission":{"actor":"@sandwich","permission":"active"},"weight":75}]}' owner
-``` 
+```
 
 此命令中使用的 JSON 对象实际上由两种不同类型的对象组成 权限 JSON 对象...
 
