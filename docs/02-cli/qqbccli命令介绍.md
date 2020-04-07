@@ -1,6 +1,4 @@
-# qqbccli命令使用指南
-
-## 命令参考
+# qqbccli命令使用指南 ## 命令参考
 
 操作 | 语法 
 -----|-----
@@ -10,10 +8,9 @@
 查询区块链状态 | `$ qqbccli get info`
 通过`transaction_id`获取交易 | `$ qqbccli get transaction ${transaction_id}`
 通过帐户获取交易 | `$ qqbccli get transaction ${account}`
-转账 EOS | `$ qqbccli transfer ${from_account} ${to_account} ${quantity}`
+转账 q| `$ qqbccli transfer ${from_account} ${to_account} ${quantity}`
 钱包 - 创建钱包 | `$ qqbccli wallet create {-n} ${wallet_name}`
-钱包 - 钱包列表 | `$ qqbccli wallet list`
-钱包 - 导入密钥 | `$ qqbccli wallet import ${key}`
+转账 QQBC| `$ qqbccli transfer ${from_account} ${to_account} ${quantity}` 钱包 - 导入密钥 | `$ qqbccli wallet import ${key}`
 钱包 - key 列表 | `$ qqbccli wallet keys`
 钱包 - 锁 | `$ qqbccli wallet lock -n ${wallet_name}`
 钱包 - 解锁钱包 | `$ qqbccli wallet unlock -n ${wallet_name} --password ${password}`
@@ -67,7 +64,7 @@ Options:
   create                      在区块链上和区域外创建数据
   get                         从区块链中检索各种数据和信息
   set                         设置或更新区块链状态
-  transfer                    从账户到账户转移EOS
+  transfer                    从账户到账户转移QQBC
   net                         与本地p2p网络连接进行交互
   wallet                      与本地钱包互动
   sign                        签署交易
@@ -113,7 +110,7 @@ $ qqbccli --url localhost:8889 <subcommand>
 您还可以调整节点参数以连接到其他节点，例如公共测试网
 
 ```
-$ qqbccli -H test1.eos.io -p 80 <subcommand>
+$ qqbccli -H test1.qqbc.io -p 80 <subcommand>
 ```
 
 注意 你需要在每个请求中包含-H和-p参数来解决问题 
@@ -216,7 +213,7 @@ $ qqbccli get transactions inita
 ]
 ```
 
-### 转账 EOS
+### 转账 QQBC 
 
 ```
 $ qqbccli transfer inita tester 1000
@@ -390,7 +387,7 @@ private: 5Hv22aPcjnENBv6X9o9nKGdkfrW44En6z4zJUt2PobAvbQXrT9z
 
 ### 创建帐号
 
-您将需要您的 EOS 密钥才能创建帐户，您必须在 Ethereum 网络上注册您的 EOS 密钥，或者您可以使用创建密钥功能创建一组新密钥
+您将需要您的 QQBC 密钥才能创建帐户，您可以使用创建密钥功能创建一组新密钥
 
 ```
 $ qqbccli create account inita tester EOS4toFS3YXEQCkuuw1aqDLrtHim86Gz9u3hBdcBw5KNPZcursVHq EOS7d9A3uLe6As66jzN8j44TXJUqJSK3bFjjEEqR4oTvNAB3iM9SA
@@ -499,8 +496,8 @@ $ qqbccli set account permission test active '{"threshold" : 100, "keys" : [{"pe
 ```
 {
   "threshold"       : 100,    /*An integer that defines cumulative signature weight required for authorization*/
-  "keys"            : [],     /*An array made up of individual permissions defined with an EOS PUBLIC KEY*/
-  "accounts"        : []      /*An array made up of individual permissions defined with an EOS ACCOUNT*/
+  "keys"            : [],     /*An array made up of individual permissions defined with an QQBC PUBLIC KEY*/
+  "accounts"        : []      /*An array made up of individual permissions defined with an QQBC ACCOUNT*/
 }
 ```
 

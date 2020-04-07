@@ -55,7 +55,7 @@ producer-name = youraccount
 配置项`signature-provider`定义包括如下三项：
 * `public-key`：以字符串形式的可用QQBC公钥。
 * `provider-spec`：字符串，形式为<provider-type>:<data>
-* `provider-type`：KEY或KEOSD
+* `provider-type`：KEY或KQQBCD
 
 
 #### 使用KEY：
@@ -76,10 +76,10 @@ signature-provider = PUBLIC_SIGNING_KEY=KEY:PRIVATE_SIGNING_KEY
 ```console
 # config.ini:
 
-signature-provider = KEOSD:<data>   
+signature-provider = KQQBCD:<data>   
 
 //Example
-//EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV=KEOSD:https://127.0.0.1:88888
+//EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV=KQQBCD:https://127.0.0.1:88888
 ```
 
 <span id="4-define-a-peers-list"></span>

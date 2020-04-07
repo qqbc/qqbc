@@ -35,7 +35,7 @@ Subcommands:
  create                        创建链上或链下条目
  get                           返回链上对应变量信息
  set                           设置或更改链状态
- transfer                      从一个账户向另一个账户发送EOS
+ transfer                      从一个账户向另一个账户发送QQBC
  net                           与P2P网络交互
  wallet                        与本地钱包交互
  benchmark                     配置并执行基准

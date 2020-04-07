@@ -69,7 +69,7 @@ QQBC的生态应用主要是围绕支付业务展开的，具体包括：通过Q
 # API
 * [Account API](03-api/Account-API.md) - 查询账户数据的api.
 * [Chain API](03-api/Chain-API.md) - 查询链内部状态的api.
-* [Database API](03-api/Database-API.md) - 存储和检索EOS.IO区块链的数据API根据以下广泛结构来组织数据.
+* [Database API](03-api/Database-API.md) - 存储和检索QQBC区块链的数据API根据以下广泛结构来组织数据.
 * [Math API](03-api/Math-API.md) - 定义常用的数学函数.
 * [Action API](03-api/Account-API.md) - 定义用于查询操作属性的API.
 <!--* [Memory API]() - 定义常用的记忆功能.-->
