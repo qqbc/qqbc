@@ -1,72 +1,71 @@
+# 钱包规格说明
 ---
-content_title: EOS Wallet Specification
----
 
-## EOS Wallet Import Format (WIF)
+## 钱包导入格式（WIF，Wallet Import Format）
 
-Wallet Import Format is an encoding for a private EDSA key.  EOS uses the same version, checksum, and encoding scheme as the Bitcoin WIF addresses and should be compatible with existing libraries [1].
+WIF编码用于EDSA私钥。区块链使用与比特币WIF地址相同的版本、校验和编码模式，与现有软件库兼容[1]。
 
-This is an example of a WIF Private Key:
+下面给出一个WIF私钥的示例：
 
 ```
 5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAbuatmU
 ```
 
-This encoding is good for:
+该编码方式的适用于：
 
-* Copy and Pasting private keys (ensures the entire key is copied)
-* Including keys in text or user editable file formats
-* Shortening the key-length
+* 密钥可复制粘贴（需确保内容完整拷贝）；
+* 密钥是文本或其它用户可编辑文件格式；
+* 密钥长度缩短。
 
-This encoding is not good for:
+该编码方式不适用于：
 
-* Writing keys down by hand (even a single upper / lowercase mistake can cause a major problem)
-* Binary or computer storage where code handles the key and data is already checked
+* 手工书写密钥。即便是错了一个大小写，也会导致整个密钥不可用。
+* 对其中数据做预先检查的二进制文件或计算机存储。
 
-Considerations:
+考虑：
 
-* If a key could be written down or re-keyed, the BIP39 Mnemonic Code standard is a better option to use.
-* It is a good idea to always label a WIF key using the word "Private" or "Private Key".
+* 如果密钥可以写出或是重新生成，推荐使用BIP39编码。
+* 最好使用“Private”或“Private Key”标记WIF密钥。
 
-## Private key to WIF
+## 私钥生成WIF
 
-1. A fake private key of all zeros is used.  This is 32 bytes long (shown here as hex).
+1. 无效的私钥全为0。下面以8进制显示了32位长度密钥：
 
 ```
 0000000000000000000000000000000000000000000000000000000000000000
 ```
 
-2. Add a 0x80 byte in front.  This byte represents the Bitcoin mainnet.  EOS uses the same version byte.  When encoded the version byte helps to identify this as a private key.  Unlike Bitcoin, EOS always uses compressed public keys (derived from a private key) and therefore does not suffix the private key with a 0x01 byte.
+1. 在前面添加“0x80”字节，表示比特币主链。版本字节编码有助于识别私钥，因此QQBC同样使用了版本字节。但不同于比特币，QQBC通常使用由私钥生成的压缩公钥，因此不会对私钥添加“0x01”前缀字节。
 
 ```
 800000000000000000000000000000000000000000000000000000000000000000
 ```
 
-3. Perform a binary SHA-256 hash on the versioned key.
+3. 对带版本的密钥执行二进制SHA-256哈希，生成：
 
 ```
 ce145d282834c009c24410812a60588c1085b63d65a7effc2e0a5e3a2e21b236
 ```
 
-4. Perform a binary SHA-256 hash on result of SHA-256 hash.
+4. 对生成的SHA-256哈希执行二进制SHA-256哈希，生成：
 
 ```
 0565fba7ebf8143516e0222d7950c28589a34c3ee144c3876ceb01bfb0e9bb70
 ```
 
-5. Take the first 4 bytes of the second SHA-256 hash, this is the checksum.
+5. 取第二次生成的SHA-256哈希的前4位字节，作为校验码：
 
 ```
 0565fba7
 ```
 
-6. Add the 4 checksum bytes to the versioned key from step 2.
+6. 在第2步生成的带版本密钥中，添加4位校验码：
 
 ```
 8000000000000000000000000000000000000000000000000000000000000000000565fba7
 ```
 
-7. [Base58](http://npmjs.com/package/bs58) encode the binary data from step 6.
+7. 对第6步生成结果进行[Base58](http://npmjs.com/package/bs58)编码，得到：
 
 ```
 5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAbuatmU
@@ -74,61 +73,63 @@ ce145d282834c009c24410812a60588c1085b63d65a7effc2e0a5e3a2e21b236
 
 ---
 
-## WIF to private key (checksum checking)
+## WIF生成私钥（检查校验）
 
-1. Start with the Wallet Import Private Key.
+1. 获取WIF密钥，如下：
 
 ```
 5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAbuatmU
 ```
 
-2. [Base58](http://npmjs.com/package/bs58) decode the WIF string (shown as HEX here).
+1. 对WIF字符串做[Base58](http://npmjs.com/package/bs58)解码，8进制表示为：
 
 ```
 8000000000000000000000000000000000000000000000000000000000000000000565fba7
 ```
 
-3. Slice the decoded WIF into the versioned key and the checksum (last 4 bytes).
+3. 按位分割解码后WIF字符串为校验码（最后4个字节）和加版本的密钥两部分。
 
 ```
 800000000000000000000000000000000000000000000000000000000000000000
 0565fba7
 ```
 
-4. Perform a binary SHA-256 hash on the versioned key.
+1. 在加版本密钥部分执行二进制SHA-256哈希：
 
 ```
 ce145d282834c009c24410812a60588c1085b63d65a7effc2e0a5e3a2e21b236
 ```
 
-5. Perform a binary SHA-256 hash on result of SHA-256 hash.
+5. 对生成的SHA-256哈希再次执行二进制SHA-256哈希：
+
 
 ```
 0565fba7ebf8143516e0222d7950c28589a34c3ee144c3876ceb01bfb0e9bb70
 ```
 
-6. Take the first 4 bytes of the second SHA-256 hash, this is the checksum.
+6. 取生成的SHA-256的前4位字节，作为校验码：
 
 ```
 0565fba7
 ```
 
-7. Make sure the checksum in steps 3 and 6 match.
+7. 检查步骤3和步骤6分别得到的校验码是否匹配。
 
-8. Slice the versioned private key from step 3 into the version and private key.
+8. 将第3步获得的加版本密钥切分为版本号和私钥两部分：
 
 ```
 80
 0000000000000000000000000000000000000000000000000000000000000000
 ```
 
-9. If the version is 0x80 then there is no error.
+9. 如果版本号为“0x80”，那么操作正确无误。
 
 ---
 
 ## [Base58check](https://www.npmjs.com/package/base58check)
 
-Base58Check is a JavaScript implementation of this algorithm and may be used to encode and decode EOS WIF private keys.
+
+Base58Check是上述算法的一种JavaScript实现，可用于编码和解码WIF私钥。代码如下：
 
 ```sh
 base58check = require('base58check')

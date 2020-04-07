@@ -1,24 +1,26 @@
-## Goal
+## 目标
 
-Create a `kqqbcd` wallet
+创建`kqqbcd`钱包。
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
 
-* Understand the following:
-  * What is an account
-  * What is a public and private key pair
+* 理解以下概念：
+  * 什么是账户？
+  * 什么是密钥对？
 
-## Steps
 
-Create a wallet and save the password to a file:
+## 操作步骤：
+
+创建钱包，并将密码保存到文件中。
 
 ```sh
 qqbccli wallet create --file password.pwd
 ```
 
-This should produce similar output as below. Note the wallet is named `default` if no name is provided.
+上面命令输出示例如下。注意：如果没有指定钱包名称，默认为`default`。
+
 
 ```console
 Creating wallet: default
@@ -27,13 +29,15 @@ Without password imported keys will not be retrievable.
 saving password to password.pwd
 ```
 
-Alternatively, you can name a wallet with `-n` option:
+用户也可以使用`-n`选项指定钱包名称。
+
 
 ```sh
 qqbccli wallet create -n named_wallet -f passwd
 ```
 
-You should see something like the output below:
+输出示例如下：
+
 
 ```console
 Creating wallet: named_wallet

@@ -1,27 +1,28 @@
-## Description
+## schedule子命令功能
 
-Retrieve the producer schedule
-
-
-## Options
-- `-h` - --help                   Print this help message and exit
-
-- `-j`- --json                   Output in JSON format
+获取生产者的计划任务。
 
 
-## Example
+## 选项说明
+
+- `-h` - --help：输出帮助信息并退出。
+
+- `-j`- --json：以JSON格式输出。
+
+
+## 示例
 
 ```sh
 qqbccli get schedule
 ```
 
-This command simply returns the current producer schedule. 
+命令返回生产者当前状态。
 
 ```console
 active schedule version 0
     Producer      Producer key
     ============= ==================
-    eosio         EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+    QQBC         QQBC6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
 
 pending schedule empty
 

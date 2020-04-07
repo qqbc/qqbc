@@ -1,52 +1,54 @@
-# net_api_plugin
+# net_api_plugin插件
 
-## Description
+## 描述
 
-The `net_api_plugin` exposes functionality from the `net_plugin` to the RPC API interface managed by the `http_plugin`.
+ `net_api_plugin`插件将`net_plugin`插件功能暴露给`http_plugin`插件管理的RPC API。
 
-The `net_api_plugin` provides four RPC API endpoints:
+`net_api_plugin`插件提供下列四种RPC API端点：
 
 * connect
 * disconnect
 * connections
 * status
 
-See [Net section of RPC API](https://developers.eos.io/eosio-qqbcd/reference).
+<!--参见“[Net section of RPC API](https://developers.QQBC.io/QQBC-qqbcd/reference).-->
 
-[[caution | Caution]]
-| This plugin exposes endpoints that allow management of p2p connections. Running this plugin on a publicly accessible node is not recommended as it can be exploited.
+[注意]]
+| 该插件暴露的端口支持对p2p连接的管理。不推荐在公网可访问的节点上运行该插件，会导致安全问题。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::net_api_plugin
+plugin = qqbc::net_api_plugin
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::net_api_plugin
+qqbcd ... --plugin qqbc::net_api_plugin
 ```
 
-## Options
+## 选项
 
-None
+无
 
-## Dependencies
+## 依赖关系
 
 * [`net_plugin`](../net_plugin/index.md)
 * [`http_plugin`](../http_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖示例
 
 ```console
 # config.ini
-plugin = eosio::net_plugin
+plugin = qqbc::net_plugin
 [options]
-plugin = eosio::http_plugin
+plugin = qqbc::http_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::net_plugin [options]  \
-           --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::net_plugin [options]  \
+           --plugin qqbc::http_plugin [options]
 ```

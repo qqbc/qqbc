@@ -1,21 +1,20 @@
+# 如何重播或重新同步完整历史？
 ---
-content_title: How to replay or resync with full history
----
 
-## Goal
+## 目标
 
-This procedure records the entire chain history.
+激励完整的区块链历史
 
-## Before you begin
+## 准备工作
 
-* Make sure [QQBC is installed](../../../00_install/index.md).
-* Learn about [Using qqbcd](../../02_usage/index.md).
-* Get familiar with [state_history_plugin](../../03_plugins/state_history_plugin/index.md).
+* 确保[安装区块链](../../../00_install/index.md)；
+* 掌握[使用qqbcd](../../02_usage/index.md)；
+* 了解[state_history_plugin插件](../../03_plugins/state_history_plugin/index.md)。
 
-## Steps
+## 操作步骤
 
-1. Get a block log and place it in `data/blocks`, or get a genesis file and use the `--genesis-json` option
+1. 获取单个区块的日志，置于`data/blocks`文件夹。或者获取创世文件，并使用`--genesis-json`选项；
 
-2. Make sure `data/state` does not exist, or use the `--replay-blockchain` option
+2. 确保目录`data/state`尚不存在。否则使用`--replay-blockchain`选项；
 
-3. Start `qqbcd` with the options listed in the [`state_history_plugin`](index.md)
+3. 使用[`state_history_plugin`](index.md)列出的选项启动`qqbcd`。

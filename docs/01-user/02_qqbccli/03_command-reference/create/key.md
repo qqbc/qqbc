@@ -1,8 +1,8 @@
-## Description
+## key子命令功能
 
-Creates a new keypair and prints the public and private keys
+创建新的密钥对，并输出公钥和私钥内容。
 
-## Usage
+## 使用
 
 ```console
 Usage: qqbccli create key [OPTIONS]
@@ -14,15 +14,15 @@ Options:
   --to-console                Print private/public keys to console.
 ```
 
-## Command
+## 命令
 
 ```sh
 qqbccli create key -f passwd
 ```
 
-## Output
+## 输出
 
 ```console
 Private key: 5KCkcSxYKZfh5Cr8CCunS2PiUKzNZLhtfBjudaUnad3PDargFQo
-Public key: EOS5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
+Public key: QQBC5uHeBsURAT6bBXNtvwKtWaiDSDJSdSmc96rHVws5M1qqVCkAm6
 ```

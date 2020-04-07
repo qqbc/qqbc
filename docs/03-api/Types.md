@@ -5,7 +5,7 @@ Builtin Types
 
 模块
 ---
-> [fixed size key sorted lexicographically(固定大小的按键按字典顺序排序)]()  
+> [fixed size key sorted lexicographically(按字典顺序排序固定大小键值)]()  
 
 > [Variable Length Integer(可变长度整数)]()
 
@@ -27,7 +27,7 @@ Builtin Types
 
 > struct [account_permission]()
 
-> struct [eosio::name]()   
+> struct [qqbc::name]()   
 封装一个[uint64_t]()以确保它只传递给期望Name的方法.
 
 
@@ -35,7 +35,7 @@ Builtin Types
 ---
 > \#define [PACKED(X)](#PACKED) __attribute((packed)) X
 
-> \#define [N(X)](#N) ::eosio::string_to_name(#X)   
+> \#define [N(X)](#N) ::qqbc::string_to_name(#X)   
 用于从X的base32编码的字符串解释中生成一个编译时间[uint64_t]()
 
 类型定义

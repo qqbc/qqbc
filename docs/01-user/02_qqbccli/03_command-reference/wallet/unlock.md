@@ -1,19 +1,27 @@
-## Description
-Unlocks a wallet
+## wallet unlock子命令功能
 
-## Positionals
-None
-## Options
-- `-n, --name` _TEXT_ - The name of the wallet to unlock.
-- `--password` _TEXT_ - The password returned by wallet create.
-## Usage
-To unlock a wallet, specify the password provided when it was created.
+解锁一个钱包。
+
+
+## 顺位项说明
+
+无
+
+## 选项说明
+
+- `-n, --name` _TEXT_：需解锁钱包的名称。
+
+`--password` _TEXT_ ：给出`wallet create`命令返回的密码。
+
+## 使用
+
+解锁钱包，需提供创建钱包时生成的密码。
 
 ```sh
 qqbccli wallet unlock -n second-wallet --password PW5Ji6JUrLjhKAVn68nmacLxwhvtqUAV18J7iycZppsPKeoGGgBEw
 ```
 
-## Outputs
+## 输出
 
 
 ```console

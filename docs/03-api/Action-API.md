@@ -59,7 +59,7 @@
  	
 ### 详细描述
 
-EOS.IO的action具有以下抽象结构：    
+QQBC.IO的action具有以下抽象结构：    
 
 ```c++
 struct action {
@@ -69,14 +69,14 @@ struct action {
   bytes data; // opaque data processed by code
 };
 ```
-    该API使您的合同能够检查当前操作的字段并相应采取行动。
+    该API使用户的合同能够检查当前操作的字段并相应采取行动。
 
 例子：
 
 ```c++
 // Assume this action is used for the following examples:
 // {
-//  "code": "eos",
+//  "code": "QQBC",
 //  "type": "transfer",
 //  "authorization": [{ "account": "inita", "permission": "active" }],
 //  "data": {
@@ -208,33 +208,33 @@ print(now()); // Output: timestamp of last accepted block
 
 
 ### 类
-##### struct  [eosio::permission_level]()
+##### struct  [qqbc::permission_level]()
  
-##### struct  [eosio::action]()
+##### struct  [qqbc::action]()
  
-##### struct  [eosio::action_meta< Account, Name >]()
+##### struct  [qqbc::action_meta< Account, Name >]()
  
 ### 函数
 
 ###### template< typename T \>
-> T 	eosio::[current_action_data](#current_action_data) ()
+> T 	qqbc::[current_action_data](#current_action_data) ()
  	
  	将行动主体解释为T型。
  
 ###### template< typename T \>
-T 	eosio::[unpack_action_data](#unpack_action_data) ()
+T 	qqbc::[unpack_action_data](#unpack_action_data) ()
  
 ###### template< typename... accounts \>
 
-void eosio::[require_recipient](#require_recipient) (account_name name, accounts... remaining_accounts)
+void qqbc::[require_recipient](#require_recipient) (account_name name, accounts... remaining_accounts)
  	
  	验证指定的帐户是否存在于一组通知帐户中。
  
-void 	eosio::[require_auth](#require_auth) (const permission_level &level)
+void 	qqbc::[require_auth](#require_auth) (const permission_level &level)
  
 ###### template< typename T , typename... Args \>
 
-void 	eosio::[dispatch_inline](#dispatch_inline) (permission_level perm, account_name code, action_name act, void(T::*)(Args...), std::tuple< Args... > args)
+void 	qqbc::[dispatch_inline](#dispatch_inline) (permission_level perm, account_name code, action_name act, void(T::*)(Args...), std::tuple< Args... > args)
  
 
 详细描述
@@ -246,7 +246,7 @@ void 	eosio::[dispatch_inline](#dispatch_inline) (permission_level perm, account
 
 <h5 id="current_action_data">current_action_data()</h5>
 > template< typename T \>    
-> T eosio::current_action_data()	
+> T qqbc::current_action_data()	
 
     此方法尝试将操作主体重新解释为T类型。这仅在操作没有动态字段且T类型的结构包装已正确定义时才起作用。
 
@@ -262,18 +262,18 @@ dummy_action msg = current_action_data<dummy_action>();
 
 <h5 id="dispatch_inline">dispatch_inline()</h5>
 > template< typename T,typename... Args \>   
-> void eosio::dispatch_inline(permission_level perm,account_name code, action_name act, void(T::*)(Args...) ,std::tuple<Args... >args )		
+> void qqbc::dispatch_inline(permission_level perm,account_name code, action_name act, void(T::*)(Args...) ,std::tuple<Args... >args )		
 
 <h5 id="require_auth">require_auth()</h5>
-> void eosio::require_auth(const permission_level& level)	
+> void qqbc::require_auth(const permission_level& level)	
 
 <h5 id="require_recipient">require_recipient()</h5>
 > template<typename... accounts \>    
-> void eosio::require_recipient(account_name name, accounts... remaining_accounts)
+> void qqbc::require_recipient(account_name name, accounts... remaining_accounts)
 		
     所有列出的账户将被添加到要通知的账户集合中
 
-    这种辅助方法使您能够通过一次调用将多个账户添加到要通知列表的账户，而不必多次调用类似的C API。
+    这种辅助方法使用户能够通过一次调用将多个账户添加到要通知列表的账户，而不必多次调用类似的C API。
 
 > 注意
 action.code也被视为通知帐户集的一部分
@@ -285,4 +285,4 @@ require_recipient(N(Account1), N(Account2), N(Account3)); // throws exception if
 
 <h5 id="unpack_action_data">unpack_action_data()</h5>
 > template<typename T \>
-> T eosio::unpack_action_data()
+> T qqbc::unpack_action_data()

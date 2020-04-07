@@ -1,5 +1,4 @@
----
-content_title: Kqqbcd How-to Guides
+# kqqbcd操作指南
 ---
 
-* [How to attach a YubiHSM hard wallet](how-to-attach-a-yubihsm-hard-wallet.md)
+* [如何添加YubiHSM硬件钱包](how-to-attach-a-yubihsm-hard-wallet.md)

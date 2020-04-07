@@ -1,13 +1,13 @@
-# db_size_api_plugin
+# db_size_api_plugin插件
 
-## Description
+## 描述
 
-The `db_size_api_plugin` retrieves analytics about the blockchain.
+`db_size_api_plugin`插件实现区块链上分析情况检索，包括：
 
-* free_bytes
-* used_bytes
-* size
-* indices
+* 可用字节数（free_bytes）；
+* 已用字节数（used_bytes）；
+* 大小；
+* 索引。
 
 <!--
 ## Usage
@@ -17,26 +17,27 @@ The `db_size_api_plugin` retrieves analytics about the blockchain.
 ```
 -->
 
-## Options
+## 选项
 
-None
+无
 
-## Dependencies
+## 依赖关系
 
 * [`chain_plugin`](../chain_plugin/index.md)
 * [`http_plugin`](../http_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖插件的示例：
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin
+plugin = qqbc::chain_plugin
 [options]
-plugin = eosio::http_plugin
+plugin = qqbc::http_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_plugin [operations] [options]  \
-           --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::chain_plugin [operations] [options]  \
+           --plugin qqbc::http_plugin [options]
 ```

@@ -1,34 +1,36 @@
-## Goal
+## 目标
 
-List all key pairs
+列出所有的密钥对。
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
 
-* Understand the following:
-  * What is a public and private key pair
+  
+* 理解以下概念：
+  * 账户；
+  * 密钥对。
+  
+## 操作步骤
 
-## Steps
-
-Unlock your wallet
+解锁钱包：
 
 ```sh
 qqbccli wallet unlock
 ```
 
-List all public keys:
+列出所有公钥：
 
 ```sh
 qqbccli wallet keys
 ```
 
-List all private keys:
+列出所有私钥：
 
 ```sh
 qqbccli wallet private_keys
 
 ```
 
-[[warning]]
-| Be careful never real your private keys in a production enviroment
+[[警告]]
+| 永远不要在生产环境中展示自己的私钥。

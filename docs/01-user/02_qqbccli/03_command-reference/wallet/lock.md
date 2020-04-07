@@ -1,24 +1,30 @@
-## Description
+## wallet lock子命令
 
-Locks a wallet
+锁定一个钱包。
 
-## Positionals
-None
 
-## Options
-- `-n, --name` _TEXT_ - The name of the wallet to lock
-## Usage
+## 顺位项说明
+
+无
+
+## 选项说明
+
+- `-n, --name` _TEXT_ ：指定需锁定钱包名称。
+
+## 使用
 
 
 ```sh
 qqbccli wallet lock
 ```
-or
+
+或
+
 ```sh
 qqbccli wallet lock -n second-wallet
 ```
 
-## Outputs
+## 输出
 
 ```console
 Locked: 'default'

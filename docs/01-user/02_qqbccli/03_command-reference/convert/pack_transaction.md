@@ -1,17 +1,17 @@
-## Description
+## 命令功能
 
-From plain signed json to packed form
+将签名JSON文本打包
 
-## Positionals
+## 顺位项说明选项
 
-- `transaction` _TEXT_ - The plain signed json (string)
+- `transaction` _TEXT_：字符串形式的签名JSNO文本。
 
 ## Options
 
-- `-h,--help` - Print this help message and exit
-- `--pack-action-data` - Pack all action data within transaction, needs interaction with `qqbcd`
+- `-h,--help`：输出帮助信息并推出。
+- `--pack-action-data`：打包交易内所有操作数据，需要与`qqbcd`交互。
 
-## Usage
+## 使用
 
 
 ```sh
@@ -24,10 +24,10 @@ qqbccli convert pack_transaction '{
   "delay_sec": 0,
   "context_free_actions": [],
   "actions": [{
-      "account": "eosio",
+      "account": "QQBC",
       "name": "newaccount",
       "authorization": [{
-          "actor": "eosio",
+          "actor": "QQBC",
           "permission": "active"
         }
       ],
@@ -38,7 +38,7 @@ qqbccli convert pack_transaction '{
 }'
 ```
 
-## Output
+## 输出
 
 ```json
 {

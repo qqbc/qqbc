@@ -1,19 +1,23 @@
-## Goal
+## 目标
 
-Unlink a linked permission level
+解除许可的链接
 
-## Before you begin
+将许可链接到合约操作。
 
-* Install the currently supported version of `qqbccli`
+## 准备工作
 
-* Understand the following:
-  * What is an account
-  * What is permission level
-  * What is an action
+* 安装了适用版本的`qqbccli`。
 
-## Steps
+  
+* 理解以下概念：
+  * 账户；
+  * 许可等级；
+  * 操作。
 
-Remove a linked permission level from an action `transfer` of contract `hodlcontract`
+## 操作步骤
+
+取消链接到合约`hodlcontract`动作`transfer`上的许可等级：
+
 
 ```sh
 qqbccli set action permission alice hodlcontract transfer NULL

@@ -1,23 +1,24 @@
----
-content_title: qqbccli Troubleshooting
+# qqbccli故障排查
 ---
 
 ## Cannot connect to RPC endpoint
 
-Check if your local `qqbcd` is running by visiting the following URL in your browser:
+检查本地`qqbcd`是否在运行。通过在浏览器中输入如下URL： 
 
 ```sh
 curl http://localhost:8888/v1/chain/get_info
 ```
 
-If you are trying to connect a remote `qqbcd` API endpoint, try to visit the API endpoint with the following suffix:
+如果尝试访问远端`qqbcd` API端点，使用下面访问路径：
+
 
 ```sh
 http://API_ENDPOINT:PORT/v1/chain/get_info
 ```
 
-Replace API_ENDPOINT and PORT with your remote `qqbcd` API endpoint detail
+将上面命令中的`API_ENDPOINT`和`PORT`替换为远端`qqbcd` API端点的相应配置。
 
 ## "Missing Authorizations"
 
-That means you are not using the required authorizations. Most likely you are not using correct QQBC account or permission level to sign the transaction
+这说明用户并未使用相应的权限。很多情况下，用户在签名交易时使用了错误的账户和许可等级。
+

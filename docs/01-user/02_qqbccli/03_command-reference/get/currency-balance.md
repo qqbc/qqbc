@@ -1,23 +1,27 @@
-## Description
+## currency-balance子命令功能
 
-Retrieve the balance of an account for a given currency
+获取指定账户持有的标准通证信息。
 
-## Positional Parameters
-`contract` _TEXT_ - The contract that operates the currency
+## 顺位项说明
 
-`account` _TEXT_ - The account to query balances for
+`contract` _TEXT_ ：指定操作通证的账户名。
 
-`symbol` _TEXT_ - The symbol for the currency if the contract operates multiple currencies
+`account` _TEXT_：需查询的账户名。
 
-## Options
-There are no options for this subcommand
+`symbol` _TEXT_ ：如果账户支持持有多种通证，指定通证代码。
 
-## Example
-Get balance of eosio from eosio.token contract for SYS symbol. 
+## 选项说明
+
+该子命令不支持任何选项。
+
+## 示例
+
+从QQBC.token合约获取账户QQBC持有的SYS通证情况。 
 
 ```sh
-qqbccli get currency balance eosio.token eosio SYS
+qqbccli get currency balance QQBC.token QQBC SYS
 ```
+
 ```console
 999999920.0000 SYS
 ```

@@ -1,52 +1,48 @@
-## Description
-Creates or updates the contract on an account.
-## Positional Parameters
- `account` _TEXT_ - The account to publish a contract for
-  `wast-file`  _TEXT_ - The file containing the contract WAST or WASM
-  `abi-file`  _TEXT_ - The ABI for the contract
-## Options
+## set contract子命令功能
 
-`-h,--help` Print this help message and exit
+创建或更新账户上的合约。
 
-`-a,--abi` _TEXT_ - The ABI for the contract
+## 顺位项说明
 
-`-c,--clear` Remove contract on an account
+- `account` _TEXT_：发布合约的账户名。
+-  `wast-file`  _TEXT_ - 包含WAST或WASM合约的文件名。
+-  `abi-file`  _TEXT_ ：合约的ABI。
 
-`--suppress-duplicate-check`  Don't check for duplicate
 
-`-x,--expiration` _TEXT_ - set the time in seconds before a transaction expires, defaults to 30s
+## 选项说明
 
-`-f,--force-unique` - force the transaction to be unique. this will consume extra bandwidth and remove any protections against accidently issuing the same transaction multiple times
+- `-h,--help`：输出帮助信息并退出。
+- `-a,--abi` _TEXT_：合约的API。
+- `-c,--clear`：移除账户上的合约。
+- `--suppress-duplicate-check`：不检查重复情况。
+- `-x,--expiration` _TEXT_：设定交易过期的时间限（秒数）。默认为30秒。
+- `-f,--force-unique`：强制交易唯一。设置将耗费额外带宽，并去除所有防止多次意外发出同一交易的保护措施。
+- `-s,--skip-sign`：指定交易签名是否可以使用解锁的钱包密钥。
+- `-j,--json`：以JSON格式输出结果。
+- `-d,--dont-broadcast`：禁止将交易广播到网络中（只是输出到stdout）。
+- `--return-packed`：与`--dont-broadcast`选项一并使用，获取打包的交易。
+- `-r,--ref-block` _TEXT_ ：设置用于TAPOS的参考区块号（或区块ID）。
+- `-p,--permission`  _TEXT_：指定认证的账户和权限，格式为“account@permission”（默认值为“account@active”）。
+- `--max-cpu-usage-ms` _UINT_：设置用于执行交易的CPU使用配额上限（微秒数）。默认为0，表示不设置任何限额。
+- `--max-net-usage` _UINT_ ：-设置用于执行交易的网络使用配额上限（字节数。默认为0，表示不设置任何限额。
+- `--delay-sec` _UINT_：设置延迟时间。默认为0。
 
-`-s,--skip-sign` Specify if unlocked wallet keys should be used to sign transaction
+## 示例
 
-`-d,--dont-broadcast` - Don't broadcast transaction to the network (just print to stdout)
-
-`--return-packed`             used in conjunction with --dont-broadcast to get the packed transaction
-
-`-r,--ref-block` _TEXT_         set the reference block num or block id used for TAPOS (Transaction as Proof-of-Stake)
-
-`-p,--permission`  _TEXT_ - An account and permission level to authorize, as in 'account@permission' (defaults to 'account@active')
-
-`--max-cpu-usage-ms` _UINT_ - set an upper limit on the milliseconds of cpu usage budget, for the execution of the transaction (defaults to 0 which means no limit)
-
-`--max-net-usage` _UINT_ - set an upper limit on the net usage budget, in bytes, for the transaction (defaults to 0 which means no limit)
-
-`--delay-sec` _UINT_ - set the delay_sec seconds, defaults to 0s
-
-## Example
-Here we deploy the standard currency contract. 
+区块链上部署的标准通证合约。
 
 ```sh
 qqbccli set contract currency ../../../contracts/currency/currency.wast ../../../contracts/currency/currency.abi
 ```
-This will output something similar to...
+
+输出示例为：
 
 ```console
 Reading WAST...
 Assembling WASM...
 Publishing contract...
 ```
+
 ```json
 {
   "transaction_id": "9990306e13f630a9c5436a5a0b6fb8fe2c7f3da2f342b4898a39c4a2c17dcdb3",
@@ -56,11 +52,11 @@ Publishing contract...
     "expiration": "2017-08-24T18:29:52",
     "scope": [
       "currency",
-      "eos"
+      "QQBC"
     ],
     "signatures": [],
     "messages": [{
-        "code": "eos",
+        "code": "QQBC",
         "type": "setcode",
         "authorization": [{
             "account": "currency",

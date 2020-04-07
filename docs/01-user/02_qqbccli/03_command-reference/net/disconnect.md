@@ -1,13 +1,14 @@
-## Description
-close an existing connection
+## disconnect子命令功能
 
-**Command**
+关闭现有连接。
+
+**命令**
 
 ```sh
 qqbccli net disconnect
 ```
 
-**Output**
+**输出**
 
 ```console
 Usage: qqbccli net disconnect host

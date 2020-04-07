@@ -1,12 +1,13 @@
-## Description
+## system listproducers子命令功能
 
-List producers
+列出生产者。
 
-## Positional Arguments
+## 顺位项说明
 
-## Options
 
-`-h,--help`                   Print this help message and exit
-`-j,--json`                   Output in JSON format
-`-l,--limit` _UINT_             The maximum number of rows to return
-`-L,--lower` _TEXT_             lower bound value of key, defaults to first
+## 选项说明
+
+- `-j,--json`：以JSON格式输出结果。
+- `-h,--help`：输出帮助信息并退出。
+- `-l,--limit` _UINT_：设置最大返回行数。 
+- `-L,--lower` _TEXT_：键值的下限，默认为首个键值。 

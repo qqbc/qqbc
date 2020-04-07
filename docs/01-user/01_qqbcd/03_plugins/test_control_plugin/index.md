@@ -1,38 +1,40 @@
-# test_control_plugin
+# test_control_plugin插件
 
-## Description
+## 描述
 
-The `test_control_plugin` is designed to cause a graceful shutdown when reaching a particular block in a sequence of blocks produced by a specific block producer. It can be invoked to either shutdown on the **head block** or the **last irreversible block**.
+`test_control_plugin`插件设计用于在指定区块生产者连续生成区块达到特定区块高度后正常关闭区块链。可指定“头部区块”或“最新不可逆区块”高度为关闭条件。
 
-This is intended for testing, to determine exactly when a `qqbcd` instance will shutdown.
+该插件设计用于测试，确定关闭`qqbcd`实例时刻。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::test_control_plugin
+plugin = qqbc::test_control_plugin
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::test_control_plugin
+qqbcd ... --plugin qqbc::test_control_plugin
 ```
 
-## Options
+## 选项
 
-None
+无
 
-## Dependencies
+## 依赖关系
 
 * [`chain_plugin`](../chain_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖示例
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin
+plugin = qqbc::chain_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_plugin [operations] [options]
+qqbcd ... --plugin qqbc::chain_plugin [operations] [options]
 ```

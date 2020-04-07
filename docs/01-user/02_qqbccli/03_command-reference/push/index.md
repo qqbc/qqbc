@@ -1,10 +1,11 @@
-## Description
-Pushes arbitrary transactions to the blockchain.
+## push命令功能
 
-## Commands
+将任一交易推送到区块链上。
 
-[push action](push-action.md)  Push a transaction with a single action
+## 子命令列表
 
-[push transaction](push-transaction.md) Push an arbitrary JSON transaction
+[push action](push-action.md) ：推送具有单个操作的交易。
 
-[push transactions](push-transactions.md) Push an array of arbitrary JSON transactions
+[push transaction](push-transaction.md) ：推送任一JSON交易。
+
+[push transactions](push-transactions.md)：推送一组任意JSON交易。

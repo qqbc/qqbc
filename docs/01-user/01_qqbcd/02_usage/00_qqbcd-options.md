@@ -1,12 +1,11 @@
+# qqbcd命令行选项
 ---
-content_title: qqbcd Options
----
 
-`qqbcd` is a command line interface (CLI) application. As such, it can be started manually from the command line or through an automated script. The behavior of `qqbcd` is determined mainly by which plugins are loaded and which plugin options are used. The `qqbcd` application features two main option categories: *qqbcd-specific* options and *plugin-specific* options.
+`qqbcd`是命令行（CLI）应用。用户可从命令行手工启动`qqbcd`实例，或是编写脚本自动运行。`qqbcd`的操作主要取决于其所加载的插件和使用的插件选项。因此，`qqbcd`应用特性分为两类，即`qqbcd`指定选项和插件指定选项。
 
-## qqbcd-specific Options
+## qqbcd指定选项
 
-qqbcd-specific options are used mainly for housekeeping purposes, such as setting the directory where the blockchain data resides, specifying the name of the `qqbcd` configuraton file, setting the name and path of the logging configuration file, etc. A sample output from running  `qqbcd --help` is displayed below, showing the qqbcd-specific options (Note: the plugin-specific options have been excluded for clarity):
+qqbcd指定选项主要用于用于维护实例运行，例如设置区块链数据存放目录、指定`qqbcd`配置文件名称、设置日志配置文件名称和存储位置等。下面给出运行`qqbcd --help`后的输出，其中列举了qqbcd指定选项。注意：为避免混淆，该命令并不显示插件特定选项。
 
 ```console
 Application Config Options:
@@ -28,8 +27,8 @@ Application Command Line Options:
                                         for library users
 ```
 
-## Plugin-specific Options
+## 插件特定选项
 
-Plugin-specific options control the behavior of the qqbcd plugins. Every plugin-specific option has a unique name, so it can be specified in any order within the command line or `config.ini` file. When specifying one or more plugin-specific option(s), the applicable plugin(s) must also be enabled using the `--plugin` option or else the corresponding option(s) will be ignored.
+插件特定选项用于控制qqbcd插件的行为。每个插件特定选项名称是唯一的，因此在命令行和`config.ini`配置文件中的出现顺序没有要求。如果用户指定了一个或多个插件特定选择，那么相应的应用插件也必须使用`--plugin`选项指定。否则相应插件特定选项将不起作用。
 
-For more information on each plugin-specific option, just visit the [Plugins](../03_plugins/index.md) section.
+详细信息，请访问“[插件](../03_plugins/index.md)”一章内容。

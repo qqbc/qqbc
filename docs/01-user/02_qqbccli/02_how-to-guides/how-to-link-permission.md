@@ -1,19 +1,20 @@
-## Goal
+## 目标
 
-Link a permission to an action of a contract
+将许可链接到合约操作。
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
 
-* Understand the following:
-  * What is an account
-  * What is permission level
-  * What is an action
+  
+* 理解以下概念：
+  * 账户；
+  * 许可等级；
+  * 操作。
 
-## Steps
+## 操作步骤
 
-Link a permission level `permlvl` to the action `transfer` of contract `hodlcontract`
+将许可等级`permlvl`链接到合约`hodlcontract`的动作`transfer`上：
 
 ```sh
 qqbccli set action permission alice hodlcontract transfer permlvl

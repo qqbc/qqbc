@@ -1,27 +1,28 @@
-# chain_plugin
+# chain_plugin插件
 
-## Description
+## 描述
 
-The `chain_plugin` is a core plugin required to process and aggregate chain data on an QQBC node.
+`chain_plugin`是QQBC节点的核心插件，用于处理和聚合链上数据。 
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin
+plugin = qqbc::chain_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_plugin [operations] [options]
+qqbcd ... --plugin qqbc::chain_plugin [operations] [options]
 ```
 
-## Operations
+## 操作
 
-These can only be specified from the `qqbcd` command-line:
+下列选项只能从`qqbcd`命令行指定。
 
 ```console
-Command Line Options for eosio::chain_plugin:
+Command Line Options for qqbc::chain_plugin:
 
   --genesis-json arg                    File to read Genesis State from
   --genesis-timestamp arg               override the initial timestamp in the 
@@ -57,12 +58,12 @@ Command Line Options for eosio::chain_plugin:
   --snapshot arg                        File to read Snapshot State from
 ```
 
-## Options
+## 选项
 
-These can be specified from both the `qqbcd` command-line or the `config.ini` file:
+下列选项可以从`qqbcd`命令行指定，也可以在`config.ini`文件中设置：
 
 ```console
-Config Options for eosio::chain_plugin:
+Config Options for qqbc::chain_plugin:
 
   --blocks-dir arg (="blocks")          the location of the blocks directory 
                                         (absolute path or relative to 
@@ -73,8 +74,8 @@ Config Options for eosio::chain_plugin:
                                         application config dir)
   --checkpoint arg                      Pairs of [BLOCK_NUM,BLOCK_ID] that 
                                         should be enforced as checkpoints.
-  --wasm-runtime eos-vm|eos-vm-jit      Override default WASM runtime (wabt)
-  --eos-vm-oc-enable                    Enable optimized compilation in WASM
+  --wasm-runtime QQBC-vm|QQBC-vm-jit      Override default WASM runtime (wabt)
+  --QQBC-vm-oc-enable                    Enable optimized compilation in WASM
   --abi-serializer-max-time-ms arg (=15000)
                                         Override default maximum ABI 
                                         serialization time allowed in ms
@@ -171,6 +172,6 @@ Config Options for eosio::chain_plugin:
                                         multiple times)
 ```
 
-## Dependencies
+## 依赖关系
 
-None
+无。

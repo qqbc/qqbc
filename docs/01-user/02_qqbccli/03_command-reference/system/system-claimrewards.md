@@ -1,20 +1,24 @@
-## Description
+## system claimrewards子命令功能
 
-Claim producer rewards
+申请发放生产者奖励。
 
-## Positional Arguments
-- `owner` _TEXT_ - The account to claim rewards for
-## Options
-- `-h,--help` Print this help message and exit
-- `-x,--expiration` _TEXT_ - set the time in seconds before a transaction expires, defaults to 30s
-- `-f,--force-unique` - force the transaction to be unique. this will consume extra bandwidth and remove any protections against accidently issuing the same transaction multiple times
-- `-s,--skip-sign` Specify if unlocked wallet keys should be used to sign transaction
-- `-d,--dont-broadcast` - Don't broadcast transaction to the network (just print to stdout)
-- `-r,--ref-block` _TEXT_         set the reference block num or block id used for TAPOS (Transaction as Proof-of-Stake)
-- `-p,--permission`  _TEXT_ - An account and permission level to authorize, as in 'account@permission' (defaults to 'account@active')
-- `--max-cpu-usage-ms` _UINT_ - set an upper limit on the milliseconds of cpu usage budget, for the execution of the transaction (defaults to 0 which means no limit)
-- `--max-net-usage` _UINT_ - set an upper limit on the net usage budget, in bytes, for the transaction (defaults to 0 which means no limit)
-- `--delay-sec` _UINT_            set the delay_sec seconds, defaults to 0s
-- `-j,--json` print result as json
+## 顺位项说明
 
-## Examples
+- `owner` _TEXT_：申请发放奖励的账户名。
+
+
+## 选项说明
+
+- `-h,--help`：输出帮助信息并退出。
+- `-x,--expiration` _TEXT_：设定交易过期的时间限（秒数）。默认为30秒。
+- `-f,--force-unique`：强制交易唯一。设置将耗费额外带宽，并去除所有防止多次意外发出同一交易的保护措施。
+- `-s,--skip-sign`：指定交易签名是否可以使用解锁的钱包密钥。
+- `-j,--json`：以JSON格式输出结果。
+- `-d,--dont-broadcast`：禁止将交易广播到网络中（只是输出到stdout）。
+- `--return-packed`：与`--dont-broadcast`选项一并使用，获取打包的交易。
+- `-r,--ref-block` _TEXT_ ：设置用于TAPOS的参考区块号（或区块ID）。
+- `-p,--permission`  _TEXT_：指定认证的账户和权限，格式为“account@permission”（默认值为“account@active”）。
+- `--max-cpu-usage-ms` _UINT_：设置用于执行交易的CPU使用配额上限（微秒数）。默认为0，表示不设置任何限额。
+- `--max-net-usage` _UINT_ ：-设置用于执行交易的网络使用配额上限（字节数。默认为0，表示不设置任何限额。
+- `--delay-sec` _UINT_：设置延迟时间。默认为0。
+

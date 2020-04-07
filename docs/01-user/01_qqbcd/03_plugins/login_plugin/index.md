@@ -1,49 +1,52 @@
-# login_plugin
+# login_plugin插件
 
-## Description
+## 描述
 
-The `login_plugin` supports the concept of applications authenticating with the QQBC blockchain. The `login_plugin` API allows an application to verify whether an account is allowed to sign in order to satisfy a specified authority.
+`login_plugin`为QQBC区块链应用提供认证功能。为满足用户验证需求，`login_plugin` API支持应用验证账户是否可登录。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::login_plugin
+plugin = qqbc::login_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::login_plugin [options]
+qqbcd ... --plugin qqbc::login_plugin [options]
 ```
 
 ## Options
 
-These can be specified from both the `qqbcd` command-line or the `config.ini` file:
+
+下列选项可以从`qqbcd`命令行指定，也可以配置在`config.ini`文件中：
 
 ```console
-Config Options for eosio::login_plugin:
+Config Options for qqbc::login_plugin:
   --max-login-requests arg (=1000000)   The maximum number of pending login 
                                         requests
   --max-login-timeout arg (=60)         The maximum timeout for pending login 
                                         requests (in seconds)
 ```
 
-## Dependencies
+## 依赖关系
 
 * [`chain_plugin`](../chain_plugin/index.md)
 * [`http_plugin`](../http_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖示例
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin
+plugin = qqbc::chain_plugin
 [options]
-plugin = eosio::http_plugin 
+plugin = qqbc::http_plugin 
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_plugin [options]  \
-           --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::chain_plugin [options]  \
+           --plugin qqbc::http_plugin [options]
 ```

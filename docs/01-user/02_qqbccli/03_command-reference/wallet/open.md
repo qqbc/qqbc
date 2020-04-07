@@ -1,23 +1,31 @@
-## Description
+## wallet open子命令功能
 
-Opens an existing wallet
+打开一个现有钱包。
 
-## Positionals
-None
-## Options
-- `-n, --name` _TEXT_ - The name of the wallet to open.
-## Usage
+
+
+## 顺位项说明
+
+无
+
+## 选项说明
+
+- `-n, --name` _TEXT_ ：指定要打开钱包名称。
+
+## 使用
 
 
 ```sh
 qqbccli wallet open
 ```
-or
+
+或
+
 ```sh
 qqbccli wallet open -n second-wallet
 ```
 
-## Outputs
+## 输出
 
 
 ```console

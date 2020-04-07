@@ -1,13 +1,12 @@
+# kqqbcd故障排除
 ---
-content_title: Kqqbcd Troubleshooting
----
 
-## How to solve the error "Failed to lock access to wallet directory; is another `kqqbcd` running"?
+## 如何解决错误"Failed to lock access to wallet directory; is another `kqqbcd` running"?
 
-Since `qqbccli` may auto-launch an instance of `kqqbcd`, it is possible to end up with multiple instances of `kqqbcd` running. That can cause unexpected behavior or the error message above.
+由于可以使用`qqbccli`加载`kqqbcd`实例，这样有可能最终会运行多个`kqqbcd`实例，进而导致操作异常，并给出如上错误信息。
 
-To fix this issue, you can terminate all running `kqqbcd` instances and restart `kqqbcd`. The following command will find and terminate all instances of `kqqbcd` running on the system:
+解决该问题，用户可中止所有在运行的`kqqbcd`实例，然后重启`kqqbcd`。下面命令将查找并终止系统中所有运行中的`kqqbcd`实例：
+
 
 ```sh
-pkill kqqbcd
-```
+pkill kqqbcd```

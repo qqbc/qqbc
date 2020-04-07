@@ -1,39 +1,40 @@
----
-content_title: Local Multi-Node Testnet
+# 本地多节点测试网
 ---
 
-## Goal
+## 目标
 
-This section describes how to set up a multi-node blockchain configuration running on a single host.  This is referred to as a _**single host, multi-node testnet**_.  We will set up two nodes on your local computer and have them communicate with each other.  The examples in this section rely on three command-line applications, `qqbcd`, `kqqbcd`, and `qqbccli`.  The following diagram depicts the desired testnet configuration.
+本节介绍如何在单机上配置运行多节点区块链，该方式称为“单机多节点测试网”。配置目标是在单机上建立两个节点，并实现节点间的相互通信。下面给出一个配置实例，结构如图所示，其中涉及`qqbcd`、`kqqbcd`和`qqbccli`这三个命令行应用。
 
 ![Single host multi node testnet](single-host-multi-node-testnet.png)
 
-## Before you begin
+## 准备工作
 
-* [Install the QQBC software](../../../00_install/index.md) before starting this section.
-* It is assumed that `qqbcd`, `qqbccli`, and `kqqbcd` are accessible through the path. If you built QQBC using shell scripts, make sure to run the [Install Script](../../../00_install/01_build-from-source/01_shell-scripts/03_install-qqbc-binaries.md).
-* Know how to pass [qqbcd options](../../02_usage/00_qqbcd-options.md) to enable or disable functionality.
+* [安装QQBC软件](../../../00_install/index.md)。
+* 提供可执行的`qqbcd`、`qqbccli`和`kqqbcd`。如果使用Shell脚本构建QQBC，确保运行[安装脚本](../../../00_install/01_build-from-source/01_shell-scripts/03_install-QQBC-binaries.md)。
+* 掌握如何设置[qqbcd选项](../../02_usage/00_qqbcd-options.md)启停特定功能。
 
-## Steps
+## 操作步骤
 
+打开四个命令行终端窗口，执行如下步骤
 Open four "terminal" windows and perform the following steps:
 
-1. [Start the Wallet Manager](#1-start-the-wallet-manager)
-2. [Create a Default Wallet](#2-create-a-default-wallet)
-3. [Loading the QQBC Key](#3-loading-the-eosio-key)
-4. [Start the First Producer Node](#4-start-the-first-producer-node)
-5. [Start the Second Producer Node](#5-start-the-second-producer-node)
-6. [Get Nodes Info](#6-get-nodes-info)
+1. [启动钱包管理器](#1-start-the-wallet-manager)
+2. [创建默认钱包](#2-create-a-default-wallet)
+3. [加载QQBC密钥](#3-loading-the-QQBC-key)
+4. [启动第一个生产者节点]](#4-start-the-first-producer-node)
+5. [启动第二个生产者节点](#5-start-the-second-producer-node)
+6. [获取节点信息](#6-get-nodes-info)
 
-### 1. Start the Wallet Manager
+<span id="1-start-the-wallet-manager"></span>
+### 1. 启动钱包管理器
 
-In the first terminal window, start `kqqbcd`, the wallet management application:
+在第一个命令行终端内启动钱包管理应用`kqqbcd`：
 
 ```sh
 kqqbcd --http-server-address 127.0.0.1:8899
 ```
 
-If successful, `kqqbcd` will display some information, starting with:
+成功执行`kqqbcd`后将会显示如下信息：
 
 ```console
 2493323ms thread-0   wallet_plugin.cpp:39          plugin_initialize    ] initializing wallet plugin
@@ -43,19 +44,20 @@ If successful, `kqqbcd` will display some information, starting with:
 2493324ms thread-0   wallet_api_plugin.cpp:70      plugin_startup       ] starting wallet_api_plugin
 ```
 
-Look for a line saying the wallet is listening on 127.0.0.1:8899. This will indicate that `kqqbcd` started correctly and is listening on the correct port. If you see anything else, or you see some error report prior to "starting wallet_api_plugin", then you need to diagnose the issue and restart.
+在输出信息中查找提示说钱包已经启动监听在127.0.0.1:8899。这表明`kqqbcd`已正确启动，并在设定端口监听。如果在`starting wallet_api_plugin`信息前输出其它信息甚至是报错，需要确诊问题并重启。
 
-When `kqqbcd` is running correctly, leave that window open with the wallet app running and move to the next terminal window.
+一旦`kqqbcd`正常运行，保持命令行窗口运行钱包应用，转向操作下一个窗口。
 
-### 2. Create a Default Wallet
+<span id="2-create-a-default-wallet"></span>
+### 2. 创建默认钱包
 
-In the next terminal window, use `qqbccli`, the command-line utility, to create the default wallet.
+转向下一个命令行窗口，运行`qqbccli`创建默认钱包。命令如下：
 
 ```sh
 qqbccli --wallet-url http://127.0.0.1:8899  wallet create --to-console
 ```
 
-`qqbccli` will indicate that it created the "default" wallet, and will provide a password for future wallet access. As the message says, be sure to preserve this password for future use. Here is an example of this output:
+正常运行后，`qqbccli`将显示创建了“默认”钱包，并给出访问钱包应用的密码，提示保存好密码以便使用钱包。输出示例如下：
 
 ```console
 Creating wallet: default
@@ -64,88 +66,96 @@ Without password imported keys will not be retrievable.
 "PW5JsmfYz2wrdUEotTzBamUCAunAA8TeRZGT57Ce6PkvM12tre8Sm"
 ```
 
-`kqqbcd` will generate some status output in its window. We will continue to use this second window for subsequent `qqbccli` commands.
+`kqqbcd`将在该窗口中生成运行状态输出。该窗口将在随后用于执行`qqbccli`命令。
 
-### 3. Loading the QQBC Key
+<span id="3-loading-the-QQBC-key"></span>
+### 3. 加载QQBC密钥
 
-The private blockchain launched in the steps above is created with a default initial key which must be loaded into the wallet.
+上面步骤运行的私有区块链将生成一个默认的初始密钥。该密钥需要加载到钱包中，命令如下：
 
 ```sh
 qqbccli --wallet-url http://127.0.0.1:8899 wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 ```
 
 ```console
-imported private key for: EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+imported private key for: QQBC6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
 ```
 
-### 4. Start the First Producer Node
+<span id="4-start-the-first-producer-node"></span>
+### 4. 启动第一个生产者节点
 
-We can now start the first producer node. In the third terminal window run:
+现在可以启动第一个生产者节点。在第三个命令行窗口中运行如下命令：
 
 ```sh
-qqbcd --enable-stale-production --producer-name eosio --plugin eosio::chain_api_plugin --plugin eosio::net_api_plugin
+qqbcd --enable-stale-production --producer-name QQBC --plugin qqbc::chain_api_plugin --plugin qqbc::net_api_plugin
 ```
 
-This creates a special producer, known as the "bios" producer. Assuming everything has executed correctly to this point, you should see output from the `qqbcd` process reporting block creation.
+该命令生成一个称为“bios”的特殊生产者。如果至此一切运行正常，`qqbcd`输出将显示区块成功生成。
 
-### 5. Start the Second Producer Node
+<span id="4-start-the-second-producer-node"></span>
+### 5. 启动第二个生产者节点
 
-The following commands assume that you are running this tutorial from the `eos\build` directory, from which you ran `./qqbc_build.sh` to build the QQBC binaries.
+假定用户在`QQBC\build`目录中运行上述命令，并在此目录中运行`./QQBC_build.sh`脚本构建QQBC二进制文件。
 
-To start additional nodes, you must first load the `eosio.bios` contract. This contract enables you to have direct control over the resource allocation of other accounts and to access other privileged API calls. Return to the second terminal window and run the following command to load the contract:
+要启动第二个节点，用户必须首先加载`QQBC.bios`智能合约。该智能合约用于直接控制分配给用户账户的资源，并访问其它授权API调用。现在回到第二个命令行窗口，运行如下命令加载智能合约：
 
 ```sh
-qqbccli --wallet-url http://127.0.0.1:8899 set contract eosio build/contracts/eosio.bios
+qqbccli --wallet-url http://127.0.0.1:8899 set contract QQBC build/contracts/QQBC.bios
 ```
 
-We will create an account to become a producer, using the account name `inita`.  To create the account, we need to generate keys to associate with the account, and import those into our wallet.
+羡慕创建一个用于生产者的账户，名称为`inita`。为创建账户，首先需要生成该账户关联的密钥，并将生成密钥导入钱包中。
 
-Run the create key command:
+创建密钥的命令如下：
 
 ```sh
 qqbccli create key
 ```
 
-[[caution | Caution]]
-| The command line instructions that follow use the private/public keys shown below. In order to be able to cut-and-paste the command line instructions directly from this tutorial, use those keys instead of the ones generated from your `qqbccli create key` command. If you still want to use your newly generated keys, you need to replace the key values with yours in the commands that follow.
+[[提示| 注意事项]]
+| 本节后面给出的命令行操作将使用如下私钥/公钥。为了方便用户直接从本节内容中中剪切并粘贴命令，请使用所给出的密钥，而不要使用用户命令`qqbccli create key`生成的密钥。如果用户需要使用新生成的密钥，请在随后给出的命令中将密钥值替换为新生成的密钥。
 
-This will report newly generated public and private keypairs that will look similar to the following.
+上面命令将提示生成公钥和私钥对，输入示例为：
+
 
 ```console
 Private key: 5JgbL2ZnoEAhTudReWH1RnMuQS6DBeLZt4ucV6t8aymVEuYg7sr
-Public key: EOS6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg
+Public key: QQBC6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg
 ```
 
-Now import the private key portion into your wallet. If successful, the matching public key will be reported. This should match the previously generated public key:
+下面将私钥导入钱包。如果导入成功，将生成相匹配的公钥。该公钥与上面生成的公钥一致。
+
 
 ```sh
 qqbccli --wallet-url http://127.0.0.1:8899 wallet import 5JgbL2ZnoEAhTudReWH1RnMuQS6DBeLZt4ucV6t8aymVEuYg7sr
 ```
 
 ```console
-imported private key for: EOS6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg
+imported private key for: QQBC6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg
 ```
 
-Create the `inita` account that we will use to become a producer. The `create account` command requires two public keys, one for the account's owner key and one for its active key.  In this example, the newly created public key is used twice, as both the owner key and the active key. Example output from the create command is shown:
+为创建第二个生产者，需要创建名为`inita`的账户。使用`create account`命令需指定两个公钥，一个是账户自身的密钥，另一个是在用密钥。在本例中，均使用新创建的公钥作为账户自身密钥和在用密钥。命令示例如下：
+
 
 ```sh
-qqbccli --wallet-url http://127.0.0.1:8899 create account eosio inita EOS6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg EOS6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg
+qqbccli --wallet-url http://127.0.0.1:8899 create account QQBC inita QQBC6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg QQBC6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg
 ```
 
 ```console
 executed transaction: d1ea511977803d2d88f46deb554f5b6cce355b9cc3174bec0da45fc16fe9d5f3  352 bytes  102400 cycles
-#         eosio <= eosio::newaccount            {"creator":"eosio","name":"inita","owner":{"threshold":1,"keys":[{"key":"EOS6hMjoWRF2L8x9YpeqtUEcsDK...
+#         QQBC <= qqbc::newaccount            {"creator":"QQBC","name":"inita","owner":{"threshold":1,"keys":[{"key":"QQBC6hMjoWRF2L8x9YpeqtUEcsDK...
 ```
 
-We now have an account that is available to have a contract assigned to it, enabling it to do meaningful work. In other tutorials, the account has been used to establish simple contracts. In this case, the account will be designated as a block producer.
+生成的账户可指派智能合约并执行有意义的工作。在本教程其它部分内容中，将使用该账户创建简单合约合同。这时，需指定该帐户为区块生产者。
 
-In the fourth terminal window, start a second `qqbcd` instance. Notice that this command line is substantially longer than the one we used above to create the first producer. This is necessary to avoid collisions with the first `qqbcd` instance. Fortunately, you can just cut and paste this command line and adjust the keys:
+此后，在第四个命令行窗口中启动第二个`qqbcd`实例。注意，命令长度显著长于创建第一个生产者时使用的命令。这是为了避免于第一个`qqbcd`产生冲突。用户可以复制粘贴如下命令，只需修改其中指定的密钥：
+
 
 ```sh
-qqbcd --producer-name inita --plugin eosio::chain_api_plugin --plugin eosio::net_api_plugin --http-server-address 127.0.0.1:8889 --p2p-listen-endpoint 127.0.0.1:9877 --p2p-peer-address 127.0.0.1:9876 --config-dir node2 --data-dir node2 --private-key [\"EOS6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg\",\"5JgbL2ZnoEAhTudReWH1RnMuQS6DBeLZt4ucV6t8aymVEuYg7sr\"]
+qqbcd --producer-name inita --plugin qqbc::chain_api_plugin --plugin qqbc::net_api_plugin --http-server-address 127.0.0.1:8889 --p2p-listen-endpoint 127.0.0.1:9877 --p2p-peer-address 127.0.0.1:9876 --config-dir node2 --data-dir node2 --private-key [\"QQBC6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg\",\"5JgbL2ZnoEAhTudReWH1RnMuQS6DBeLZt4ucV6t8aymVEuYg7sr\"]
 ```
 
-The output from this new node will show a little activity but will stop reporting until the last step in this tutorial, when the `inita` account is registered as a producer account and activated. Here is some example output from a newly started node. Your output might look a little different, depending on how much time you took entering each of these commands. Furthermore, this example is only the last few lines of output:
+新节点的输出内容不多，并将在本节最后一步操作后终止，即将`inita`注册为生产者节点并激活后。下面给出新节点启动后的部分输出：
+
 
 ```console
 2393147ms thread-0   producer_plugin.cpp:176       plugin_startup       ] producer plugin:  plugin_startup() end
@@ -156,31 +166,32 @@ The output from this new node will show a little activity but will stop reportin
 2395680ms thread-0   net_plugin.cpp:1385           recv_notice          ] sync_manager got last irreversible block notice
 2395680ms thread-0   net_plugin.cpp:1271           start_sync           ] Catching up with chain, our last req is 8248, theirs is 8255 peer dhcp15.ociweb.com:9876 - 295f5fd
 2396002ms thread-0   producer_plugin.cpp:226       block_production_loo ] Previous result occurred 5 times
-2396002ms thread-0   producer_plugin.cpp:244       block_production_loo ] Not producing block because it isn't my turn, its eosio
+2396002ms thread-0   producer_plugin.cpp:244       block_production_loo ] Not producing block because it isn't my turn, its QQBC
 ```
 
-At this point, the second `qqbcd` is an idle producer. To turn it into an active producer, `inita` needs to be registered as a producer with the bios node, and the bios node needs to perform an action to update the producer schedule.
+输出显示第二个`qqbcd`实例是一个空闲的生产者。要将其转变为活跃生产者，需将`inita`注册为`bios`节点的生产者，并且需操作`bios`节点以更新其生产者计划。
 
 ```sh
-qqbccli --wallet-url http://127.0.0.1:8899 push action eosio setprods "{ \"schedule\": [{\"producer_name\": \"inita\",\"block_signing_key\": \"EOS6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg\"}]}" -p eosio@active
+qqbccli --wallet-url http://127.0.0.1:8899 push action QQBC setprods "{ \"schedule\": [{\"producer_name\": \"inita\",\"block_signing_key\": \"QQBC6hMjoWRF2L8x9YpeqtUEcsDKAyxSuM1APicxgRU1E3oyV5sDEg\"}]}" -p QQBC@active
 ```
 
 ```console
 executed transaction: 2cff4d96814752aefaf9908a7650e867dab74af02253ae7d34672abb9c58235a  272 bytes  105472 cycles
-#         eosio <= eosio::setprods              {"version":1,"producers":[{"producer_name":"inita","block_signing_key":"EOS6hMjoWRF2L8x9YpeqtUEcsDKA...
+#         QQBC <= qqbc::setprods              {"version":1,"producers":[{"producer_name":"inita","block_signing_key":"QQBC6hMjoWRF2L8x9YpeqtUEcsDKA...
 ```
 
-Congratulations, you have now configured a two-node testnet! You can see that the original node is no longer producing blocks but it is receiving them. You can verify this by running the `get info` commmand against each node.
+至此，成功配置双节点测试网。这时能看到第一个节点不再生成区块，而是在接收区块。可通过运行`get info`命令查看节点运行情况。
 
-### 6. Get Nodes Info
+<span id="6-get-nodes-info"></span>
+### 6. 获取节点信息
 
-Get info about the first node:
+获取第一个节点信息：
 
 ```sh
 qqbccli get info
 ```
 
-This should produce output that looks similar to this:
+输出结果示例如下：
 
 ```json
 {
@@ -193,13 +204,13 @@ This should produce output that looks similar to this:
 }
 ```
 
-Now for the second node:
+获取第二个节点信息：
 
 ```sh
 qqbccli --url http://127.0.0.1:8889 get info
 ```
 
-This should produce output that looks similar to this:
+输出结果示例如下：
 
 ```json
 {
@@ -212,4 +223,5 @@ This should produce output that looks similar to this:
 }
 ```
 
-In a later tutorial we will explore how to use more advanced tools to run a multi-host, multi-node testnet.
+本教程随后将介绍如何进一步使用命令运行多机多节点测试网。
+

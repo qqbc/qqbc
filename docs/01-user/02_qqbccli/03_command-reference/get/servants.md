@@ -1,14 +1,13 @@
-## Description
-Retrieve accounts which are servants of a given account 
+## servants子命令功能
 
-## Info
+获取指定账户的控制账户信息。
 
-**Command**
-
+## 操作
 ```sh
 qqbccli get servants
 ```
-**Output**
+
+**output**
 
 ```console
 Usage: qqbccli get servants account
@@ -17,13 +16,13 @@ Positionals:
   account TEXT                The name of the controlling account
 ```
 
-## Command
+## 命令
 
 ```sh
 qqbccli get servants inita
 ```
 
-## Output
+## 输出
 
 ```json
 {

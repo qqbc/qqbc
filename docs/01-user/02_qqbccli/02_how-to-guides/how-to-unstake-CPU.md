@@ -1,32 +1,34 @@
-## Goal
+## 目标
 
-Unstake resource from your account
 
-Beware that only the account which originally delegated resource can undelegate
+取消账户抵押的CPU资源。
 
-## Before you begin
+注意：只有代理了资源的账户，才能执行取消代理操作。
 
-* Install the currently supported version of `qqbccli`
+## 准备工作
 
-* Ensure the reference system contracts from `eosio.contracts` repository is deployed and used to manage system resources
+* 安装了适用版本的`qqbccli`。
 
-* Understand the following:
-  * What is an account
-  * What is network bandwidth
-  * What is CPU bandwidth
+* 确保来自`QQBC.contracts`库中的系统合约已部署，并用于管理系统资源。
+  
+* 理解以下概念：
+  * 账户；
+  * 网络带宽
+  * CPU带宽
 
-## Steps
+## 操作步骤
 
-Unstake 0.01 SYS CPU bandwidth form account `alice`:
+为`alice`账户取消0.01 SYS CPU带宽的抵押：
+
 
 ```sh
 qqbccli system undelegatebw alice alice "0.01 SYS" "0 SYS"
 ```
 
-You should see something below:
+输出示例为：
 
 ```console
 executed transaction: e7e7edb6c5556de933f9d663fea8b4a9cd56ece6ff2cebf056ddd0835efa6606  184 bytes  452 us
-#         eosio <= eosio::undelegatebw          {"from":"alice","receiver":"alice","unstake_net_quantity":"0.0000 EOS","unstake_cpu_qu...
+#         QQBC <= qqbc::undelegatebw          {"from":"alice","receiver":"alice","unstake_net_quantity":"0.0000 QQBC","unstake_cpu_qu...
 warning: transaction executed locally, but may not be confirmed by the network yet         ]
 ```

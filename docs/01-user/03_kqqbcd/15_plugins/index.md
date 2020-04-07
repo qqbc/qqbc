@@ -1,14 +1,14 @@
----
-content_title: Kqqbcd Plugins
+# kqqbcd插件
 ---
 
-## Overview
+## 概述
 
-Plugins extend the core functionality implemented in `kqqbcd`. For information on specific plugins, just select from the list below:
+插件扩展了`kqqbcd`的核心功能。插件详细信息列出如下：
+
 
 * [`http_plugin`](../../01_qqbcd/03_plugins/http_plugin/index.md)
 * [`wallet_api_plugin`](wallet_api_plugin/index.md)
 * [`wallet_plugin`](wallet_plugin/index.md)
 
-[[info | Kqqbcd is modular]]
-| Plugins add incremental functionality to `kqqbcd`. Unlike runtime plugins, `kqqbcd` plugins are built at compile-time.
+[[提示 | kqqbcd是模块化的]]
+| 插件可不断增加`kqqbcd`的功能。`kqqbcd`插件并非运行时插件，而是在编译时构建的。

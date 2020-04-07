@@ -1,8 +1,7 @@
----
-content_title: How to generate a blocks.log file
+# 如何生成blocks.log文件
 ---
 
-The `blocks.log` file is used by `qqbcd` to persist irreversible blocks. This is the actual local copy of the immutable blockchain maintained by the node. The default location of the `blocks.log` file is in the `data/blocks` directory. However the default data directory can be overridden with the `-d [ --data-dir ]` option on the `qqbcd` command line.
+`qqbcd`使用`blocks.log`文件持久化不可篡改区块。该文件是由节点维护的不可篡改区块链的本地拷贝。`blocks.log`文件默认位于`data/blocks`目录中，可使用`qqbcd`命令行的`-d [ --data-dir ]`选项指定替代目录。
 
-[[info | Other `blocks.log` files]]
-| You can also download a `blocks.log` file from third party providers.
+[[提示 | 第三方`blocks.log`文件]]
+| 用户可从第三方提供商下载`blocks.log`文件。

@@ -1,37 +1,38 @@
-# state_history_plugin
+# state_history_plugin插件
 
-## Description
+## 描述
 
-The `state_history_plugin` is useful for capturing historical data about the blockchain state. The plugin receives blockchain data from other connected nodes and caches the data into files. The plugin listens on a socket for applications to connect and sends blockchain data back based on the plugin options specified when starting `qqbcd`.
+`state_history_plugin`插件用于获取区块链状态的历史数据。插件从其它连接节点上获取区块链数据，并缓存数据到文件中。插件以socket方式监听，基于`qqbcd`启动时的插件选项设置，实现应用连接并送回区块链数据。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::state_history_plugin
+plugin = qqbc::state_history_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::state_history_plugin [operations] [options]
+qqbcd ... --plugin qqbc::state_history_plugin [operations] [options]
 ```
 
-## Operations
+## 操作
 
-These can only be specified from the `qqbcd` command-line:
+下面选项只能在`qqbcd`命令行指定：
 
 ```console
-Command Line Options for eosio::state_history_plugin:
+Command Line Options for qqbc::state_history_plugin:
 
   --delete-state-history                clear state history files
 ```
 
-## Options
+## 选项
 
-These can be specified from both the `qqbcd` command-line or the `config.ini` file:
+下列选项可以从`qqbcd`命令行指定，也可以在`config.ini`文件中设置：
 
 ```console
-Config Options for eosio::state_history_plugin:
+Config Options for qqbc::state_history_plugin:
 
   --state-history-dir arg (="state-history")
                                         the location of the state-history 
@@ -47,31 +48,32 @@ Config Options for eosio::state_history_plugin:
   --trace-history-debug-mode            enable debug mode for trace history
 ```
 
-## Examples
+## 示例
 
-### history-tools
+<!--### history-tools
 
   * [Source code](https://github.com/QQBC/history-tools/)
-  * [Documentation](https://eosio.github.io/history-tools/)
+  * [Documentation](https://QQBC.github.io/history-tools/)-->
 
-## Dependencies
+## 依赖关系
 
 * [`chain_plugin`](../chain_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖示例
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin --disable-replay-opts
+plugin = qqbc::chain_plugin --disable-replay-opts
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_plugin --disable-replay-opts
+qqbcd ... --plugin qqbc::chain_plugin --disable-replay-opts
 ```
 
-## How-To Guides
+## 操作指南
 
-* [How to fast start without history on existing chains](10_how-to-fast-start-without-old-history.md)
-* [How to replay or resync with full history](20_how-to-replay-or-resync-with-full-history.md)
-* [How to create a portable snapshot with full state history](30_how-to-create-snapshot-with-full-history.md)
-* [How to restore a portable snapshot with full state history](40_how-to-restore-snapshot-with-full-history.md)
+* [如何不考虑过往区块链历史而快速启动插件？](10_how-to-fast-start-without-old-history.md)
+* [如何重播或重新同步完整历史？](20_how-to-replay-or-resync-with-full-history.md)
+* [如何创建完整历史的可移植快照？](30_how-to-create-snapshot-with-full-history.md)
+* [如何存储完整历史的可移植快照？](40_how-to-restore-snapshot-with-full-history.md)

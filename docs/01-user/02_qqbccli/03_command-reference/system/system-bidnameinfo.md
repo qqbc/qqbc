@@ -1,15 +1,17 @@
-## Description
+## system bidnameinfo子命令功能
 
-Returns data about a particular name and it's bidding status
+返回指定命名的相关数据，以及绑定状态信息。
 
-## Positionals
-* `name` _TEXT_  - The name to lookup
+## 顺位项说明
 
-## Options
-* `-h,--help` - Print this help message and exit
-* `-j,--json` - Print result as json
+* `name` _TEXT_ ：指定需查询的命名。
 
-## Usage
+## 选项说明
+
+* `-h,--help`：输出帮助信息并退出。 
+* `-j,--json`：以JSON格式打印输出。
+
+## 使用
 
 ```sh
 qqbccli system bidnameinfo bob

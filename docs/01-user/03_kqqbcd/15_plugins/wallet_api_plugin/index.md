@@ -1,41 +1,41 @@
-# wallet_api_plugin
+# wallet_api_plugin插件
 
-## Description
+## 功能描述
 
-The `wallet_api_plugin` exposes functionality from the [`wallet_plugin`](../wallet_plugin/index.md) to the RPC API interface managed by the [`http_plugin`](../http_plugin/index.md).
+`wallet_api_plugin`向[`http_plugin`](../http_plugin/index.md)插件管理的RPC API接口提供[`wallet_plugin`](../wallet_plugin/index.md)功能。
 
-[[caution | Caution]]
-| This plugin exposes wallets. Therefore, running this plugin on a publicly accessible node is not recommended. As of 1.2.0, `qqbcd` will no longer allow the `wallet_api_plugin`.
+[[注意]]
+| 该插件提供钱包操作，因此不建议在公开可访问网络上运行该插件。`qqbcd` 1.2.0不再支持`wallet_api_plugin`插件。
 
-## Usage
+## 使用
 
 ```sh
 # config.ini
-plugin = eosio::wallet_api_plugin
+plugin = qqbc::wallet_api_plugin
 
 # command-line
-qqbcd ... --plugin eosio::wallet_api_plugin
+qqbcd ... --plugin qqbc::wallet_api_plugin
 ```
 
-## Options
+## 选项说明
 
-None
+无
 
-## Dependencies
+## 依赖关系
 
 * [`wallet_plugin`](../wallet_plugin/index.md)
 * [`http_plugin`](../http_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖示例
 
 ```sh
 # config.ini
-plugin = eosio::wallet_plugin
+plugin = qqbc::wallet_plugin
 [options]
-plugin = eosio::http_plugin
+plugin = qqbc::http_plugin
 [options]
 
 # command-line
-qqbcd ... --plugin eosio::wallet_plugin [options]  \
-           --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::wallet_plugin [options]  \
+           --plugin qqbc::http_plugin [options]
 ```

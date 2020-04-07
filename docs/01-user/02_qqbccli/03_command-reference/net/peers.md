@@ -1,12 +1,14 @@
-## Description
-status of all existing peers
+## peers子命令功能
 
-**Command**
+显示所有现有对等节点状态。
+
+**命令**
 
 ```sh
 qqbccli net status
 ```
-**Output**
+
+**输出**
 
 ```console
 Usage: qqbccli net status host

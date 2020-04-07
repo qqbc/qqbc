@@ -1,23 +1,24 @@
-## Description
+## wallet create_key子命令功能
 
-Creates a key pair within the wallet so that you don't need to manually import it like you would with `qqbccli create key`. By default, this will create a key with the type \"favored\" by the wallet, which is a K1 key. But this command also lets you create a key in R1 format.
+在钱包中创建密钥对，无需用户手工导入密钥，例如`qqbccli create key`生成的密钥。默认情况下，创建密钥的类型是钱包最易于管理的，一般是K1密钥。命令也支持创建R1格式密钥对。
 
-## Positionals
 
-`key_type` _TEXT_ - "K1" or "R1" Key type to create
+## 顺位项说明
 
-## Options
+`key_type` _TEXT_：指定创建密钥对类型，“K1”或“R1”。
 
--n,--name TEXT=default The name of the wallet to create key into
+## 选项说明
 
-## Usage
+-n,--name TEXT=default。指定其中创建密钥对的钱包名。
+
+## 使用
 
 ```sh
 qqbccli wallet create_key K1
 ```
 
-## Outputs
+## 输出
 
 ```console
-Created new private key with a public key of: "EOS67xHKzQArkWZN6rKLCq7NLvaj8kurwxzRxoTVz6cgDJkiWdGug"
+Created new private key with a public key of: "QQBC67xHKzQArkWZN6rKLCq7NLvaj8kurwxzRxoTVz6cgDJkiWdGug"
 ```

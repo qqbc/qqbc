@@ -237,32 +237,32 @@ printi128(self); // Output: 10000
     带有基本操作符的实数数据类型。 封装double类Math C API.
 
 <h2>类</h2>
-<h5>struct  	eosio::uint128</h5>
+<h5>struct  	qqbc::uint128</h5>
         
     封装了uint128整数并定义常见运算符重载的结构。
 
 <h2>函数</h2>
 
-##### void [eosio::multeq](#multeq) (uint128_t& self, const uint128_t& other)
+##### void [qqbc::multeq](#multeq) (uint128_t& self, const uint128_t& other)
  	封装了multeq_i128　Math C API。
 
-##### void [eosio::diveq](#diveq) (uint128_t& self, const uint128_t& other)
+##### void [qqbc::diveq](#diveq) (uint128_t& self, const uint128_t& other)
  	封装了diveq_i128 Math C API。
 
 <h5>template<typename T ></h5>
-T 	[eosio::min](#min) (const T& a, const T& b)
+T 	[qqbc::min](#min) (const T& a, const T& b)
  	
  	定义了类似std::min()函数。
 
 <h5>template<typename T ></h5>
-T 	[eosio::max](#max) (const T& a, const T& b)
+T 	[qqbc::max](#max) (const T& a, const T& b)
  	
  	定义了类似std::max()函数。
 
 <h2>函数文档</h2>
 
 <h5 id="diveq">diveq()</h5>
-  > void eosio::diveq	(uint128_t& self,const uint128_t& other) | inline      
+  > void qqbc::diveq	(uint128_t& self,const uint128_t& other) | inline      
 
     将两个128位无符号整数相除，并将该值赋给第一个参数。 如果other值为零，它将抛出异常。 封装了Math C API的diveq_i128      
   - Parameters
@@ -278,7 +278,7 @@ std::cout << self; // Output: 1
 
 <h5 id="max">max()</h5>
   > template<typename T \>    
-  > T eosio::max(const T& a,const T& b )		
+  > T qqbc::max(const T& a,const T& b )		
         
         获取最大值。
   - 参数
@@ -295,7 +295,7 @@ std::cout << max(a, b); // Output: 2
 
 <h5 id="min">min()</h5>
    > template<typename T >   
-   > T eosio::min(const T& a, const T& b)		
+   > T qqbc::min(const T& a, const T& b)		
 
     获取更小的一个值
    - 参数
@@ -311,7 +311,7 @@ std::cout << min(a, b); // Output: 1
 ```
 
 <h5 id="multeq">multeq()</h5>
-   > void eosio::multeq	(uint128_t& self, const uint128_t& other )	 <span class="mlabel">inline</span>
+   > void qqbc::multeq	(uint128_t& self, const uint128_t& other )	 <span class="mlabel">inline</span>
 
     将两个128位无符号整数相乘，并将该值赋给第一个参数。 这是对multeq_i128 Math C API的封装.
    - 参数

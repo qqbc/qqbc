@@ -1,8 +1,12 @@
-## Description
-Push an array of arbitrary JSON transactions
+## push transactions子命令功能
 
-## Positional Arguments
-Pushes an array of arbitrary JSON transactions.
-## Options
-This command has no options
-## Examples
+推送一组任意JSON交易。
+
+## 顺位项说明
+无顺位项
+
+## 选项
+
+无选项
+
+

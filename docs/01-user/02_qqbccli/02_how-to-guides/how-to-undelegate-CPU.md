@@ -1,32 +1,33 @@
-## Goal
+## 目标
 
-Undelegate resource for an account or application
+取消对账户或应用的资源代理。
 
-Beware that only the account which originally delegated resource can undelegate
+注意：只有已经代理资源的账户，才能做取消代理。
 
-## Before you begin
 
-* Install the currently supported version of `qqbccli`
+## 准备工作
 
-* Ensure the reference system contracts from `eosio.contracts` repository is deployed and used to manage system resources
+* 安装了适用版本的`qqbccli`。
 
-* Understand the following:
-  * What is an account
-  * What is network bandwidth
-  * What is CPU bandwidth
+* 确保来自`QQBC.contracts`库中的系统合约已部署，并用于管理系统资源。
+  
+* 理解以下概念：
+  * 账户；
+  * 网络带宽
+  * CPU带宽
 
-## Steps
+## 操作步骤
 
-Undelegate 0.01 SYS CPU bandwidth form from account `alice` back to account `bob`:
+取消账户`alice`代理的0.01 SYS CPU带宽资源，返回到账户`bob`：
 
 ```sh
 qqbccli system undelegatebw bob alice "0 SYS" "0.01 SYS"
 ```
 
-You should see something below:
+输出示例如下：
 
 ```console
 executed transaction: e7e7edb6c5556de933f9d663fea8b4a9cd56ece6ff2cebf056ddd0835efa6606  184 bytes  452 us
-#         eosio <= eosio::undelegatebw          {"from":"alice","receiver":"bob","unstake_net_quantity":"0.0000 SYS","unstake_cpu_qu...
+#         QQBC <= qqbc::undelegatebw          {"from":"alice","receiver":"bob","unstake_net_quantity":"0.0000 QQBC","unstake_cpu_qu...
 warning: transaction executed locally, but may not be confirmed by the network yet         ]
 ```

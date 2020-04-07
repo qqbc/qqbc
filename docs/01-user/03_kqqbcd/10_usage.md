@@ -1,34 +1,30 @@
+# kqqbcd的使用
 ---
-content_title: Kqqbcd Usage
----
 
-[[info | Recommended Usage]]
-| For most users, the easiest way to use `kqqbcd` is to have `qqbccli` launch it automatically. Wallet files will be created in the default directory (`~/eosio-wallet`).
+[[提示| 推荐使用 ]]
+| 对于大部分用户而言，`kqqbcd`最简便的用法是使用`qqbccli`自动加载。钱包文件默认创建到`~/QQBC-wallet`目录中。
 
-## Launching kqqbcd manually
-
-`kqqbcd` can be launched manually from the terminal by running:
+## 手工启动kqqbcd
+可使用如下命令，从终端手工启动`kqqbcd`：
 
 ```sh
-kqqbcd
-```
+kqqbcd```
 
-By default, `kqqbcd` creates the folder `~/eosio-wallet` and populates it with a basic `config.ini` file.  The location of the config file can be specified on the command line using the `--config-dir` argument.  The configuration file contains the HTTP server endpoint for incoming HTTP connections and other parameters for cross-origin resource sharing.
+默认情况下，`kqqbcd` 将创建文件夹`~/QQBC-wallet`，并生成一个基础的`config.ini`配置文件。可使用命令行参数`--config-dir`指定配置文件位置。配置文件中定义了接收HTTP连接的HTTP服务器端点，以及资源相互交换相关的配置项。
 
-[[info | Wallet Location]]
-| The location of the wallet data folder can be specified on the command line with the `--data-dir` option.
+[[提示 | 钱包位置]]
+| 钱包数据文件夹位置可使用命令行参数`--data-dir`指定。
 
-## Auto-locking
+## 自锁定
 
-By default, `kqqbcd` is set to lock your wallet after 15 minutes of inactivity. This is configurable in the `config.ini` by setting the timeout seconds in `unlock-timeout`. Setting it to 0 will cause `kqqbcd` to always lock your wallet.
+默认情况下，`kqqbcd`会在用户无操作15分钟后自动锁定钱包。具体配置在`config.ini`文件的`unlock-timeout`选项，设置值为超时秒数。如果设置为0，那么`kqqbcd`将维持钱包处于锁定状态。
 
-## Stopping kqqbcd
+## 停止kqqbcd
+最有效的停止`kqqbcd`进程方法，是确定`kqqbcd`进程号，并发送SIGTERM信号。
 
-The most effective way to stop `kqqbcd` is to find the kqqbcd process and send a SIGTERM signal to it.
+## 其它选项
 
-## Other options
-
-For a list of all commands known to `kqqbcd`, simply run it with no arguments:
+列出`kqqbcd`的全部选项，运行以下命令：
 
 ```sh
 kqqbcd --help
@@ -37,8 +33,8 @@ kqqbcd --help
 ```console
 Application Options:
 
-Config Options for eosio::http_plugin:
-  --unix-socket-path arg (=keosd.sock)  The filename (relative to data-dir) to
+Config Options for qqbc::http_plugin:
+  --unix-socket-path arg (=kqqbcd.sock)  The filename (relative to data-dir) to
                                         create a unix socket for HTTP RPC; set
                                         blank to disable.
   --http-server-address arg             The local IP and port to listen for
@@ -81,7 +77,7 @@ Config Options for eosio::http_plugin:
   --http-threads arg (=2)               Number of worker threads in http thread
                                         pool
 
-Config Options for eosio::wallet_plugin:
+Config Options for qqbc::wallet_plugin:
   --wallet-dir arg (=".")               The path of the wallet files (absolute
                                         path or relative to application data
                                         dir)

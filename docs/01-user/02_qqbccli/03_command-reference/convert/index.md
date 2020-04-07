@@ -1,8 +1,9 @@
-## Description
-Pack and unpack transactions
+## 命令功能
 
-## subcommands
-- [pack_transaction](pack_transaction) - From plain signed json to packed form
-- [unpack_transaction](unpack_transaction) - From packed to plain signed json form
-- [pack_action_data](pack_action_data) - From json action data to packed form
-- [unpack_action_data](unpack_action_data) - From packed to json action data form
+实现交易的打包和解包操作
+
+## 子命令
+- [pack_transaction](pack_transaction)：将签名JSON文本打包；
+- [unpack_transaction](unpack_transaction)：解包为签名JSON文本；
+- [pack_action_data](pack_action_data)：将JSON操作数据打包；
+- [unpack_action_data](unpack_action_data)：解包为JSON操作数据。

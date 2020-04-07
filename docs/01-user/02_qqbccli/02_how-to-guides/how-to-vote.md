@@ -1,30 +1,30 @@
-## Goal
+## 目标
 
-Vote for a block producer
+对区块生产者投票。
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
 
-* Ensure the reference system contracts from `eosio.contracts` repository is deployed and used to manage system resources
+* 确保来自`QQBC.contracts`库中的系统合约已部署，并用于管理系统资源。
+  
+* 理解以下概念：
+  * 区块生产者；
+  * 投票的工作机制。
 
-* Understand the following:
-  * What is a block producer
-  * How does voting works
+* 钱包已经解锁。
 
-* Unlock your wallet
+## 操作步骤
 
-## Steps
-
-Assume you are going to vote for blockproducer1 and blockproducer2 from an account called `eosiotestts2`, execute the following:
+用户从账户`QQBCtestts2`给`blockproducer1`和`blockproducer2`投票，命令如下：
 
 ```sh
-qqbccli system voteproducer prods eosiotestts2 blockproducer1 blockproducer2
+qqbccli system voteproducer prods QQBCtestts2 blockproducer1 blockproducer2
 ```
 
-This should produce similar output as below:
+输出示例如下：
 
 ```console
 executed transaction: 2d8b58f7387aef52a1746d7a22d304bbbe0304481d7751fc4a50b619df62676d  128 bytes  374 us
-#         eosio <= eosio::voteproducer          {"voter":"eosiotestts2","proxy":"","producers":["blockproducer1","blockproducer2"]}
+#         QQBC <= qqbc::voteproducer          {"voter":"QQBCtestts2","proxy":"","producers":["blockproducer1","blockproducer2"]}
 ```

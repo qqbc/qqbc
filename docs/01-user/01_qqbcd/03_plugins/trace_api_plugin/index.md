@@ -1,27 +1,28 @@
-# trace_api_plugin
+# trace_api_plugin插件
 
-## Description
+## 描述
 
-The `trace_api_plugin` provides a consumer-focused long-term API for retrieving retired actions and related metadata from a specified block. The plugin defines a new HTTP endpoint accessible (see the [API reference](api-reference/index.md) for more information).
+`trace_api_plugin`插件为用户提供了从指定区块获取已完成动作和相关元数据的稳定可用API。插件新定义了可访问的HTTP端点。（具体细节参见“[API参考](api-reference/index.md)”一节)。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::trace_api_plugin
+plugin = qqbc::trace_api_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::trace_api_plugin [options]
+qqbcd ... --plugin qqbc::trace_api_plugin [options]
 ```
 
-## Options
+## 选项
 
-These can be specified from both the `qqbcd` command-line or the `config.ini` file:
+下列选项可以从`qqbcd`命令行指定，也可以在`config.ini`文件中设置：
 
 ```console
-Config Options for eosio::trace_api_plugin:
+Config Options for qqbc::trace_api_plugin:
 
   --trace-dir (="traces")               the location of the trace directory
                                         (absolute path or relative to
@@ -57,65 +58,68 @@ Config Options for eosio::trace_api_plugin:
                                         trace-rpc-api
 ```
 
-## Dependencies
+## 依赖关系
 
 * [`chain_plugin`](../chain_plugin/index.md)
 * [`http_plugin`](../http_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖示例
 
-The following plugins are loaded with default settings if not specified on the command line or `config.ini`:
+如果命令行或`config.ini`没有指定选项，那么将默认加载下列插件：
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin
+plugin = qqbc::chain_plugin
 [options]
-plugin = eosio::http_plugin 
+plugin = qqbc::http_plugin 
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_plugin [options]  \
-           --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::chain_plugin [options]  \
+           --plugin qqbc::http_plugin [options]
 ```
 
-## Purpose
+## 目的
 
-While integrating applications such as block explorers and exchanges with an QQBC blockchain, the user might require a complete transcript of actions that are processed by the blockchain, including those spawned from the execution of smart contracts and scheduled transactions. The `trace_api_plugin` aims to serve this need. The purpose of the plugin is to provide:
+用户在将应用（例如区块浏览器和交易所）集成到QQBC区块链时，可能会需要区块链处理的动作的完整记录，包括从执行智能合约和预定交易中产生的动作。 `trace_api_plugin`意在实现上述功能，目的包括：
 
-* A transcript of retired actions and related metadata
-* A consumer focused long-term API to retrieve blocks
-* Maintainable resource commitments at the QQBC nodes
+* 已完成动作的记录和相关元数据；
+* 以消费者为中心的稳定可用API，实现区块检索；
+* 在节点实现可维护的资源提交。
 
-Therefore, one crucial goal of the `trace_api_plugin` is to have better maintenance of node resources (file system, disk, memory, etc.). This goal is different from the existing `history_plugin` which provides far more configurable filtering and querying capabilities, or the existing `state_history_plugin` which provides a binary streaming interface to access structural chain data, action data, as well as state deltas.
+由此，`trace_api_plugin`的关键目标之一就是更好地维护节点资源，包括文件系统，磁盘，内存等。该目标不同于已有的`history_plugin`插件，用于提供更多可配置的过滤和查询功能，也不同于已有的`state_history_plugin`插件，用于提供二进制流接口以访问结构链数据、操作数据以及状态增量。
 
-## Examples
+## 示例
 
 Below it is a `qqbcd` configuration example for the `trace_api_plugin` when tracing some QQBC reference contracts:
 
 ```sh
 qqbcd --data-dir data_dir --config-dir config_dir --trace-dir traces_dir
---plugin eosio::trace_api_plugin 
---trace-rpc-abi=eosio=abis/eosio.abi 
---trace-rpc-abi=eosio.token=abis/eosio.token.abi 
---trace-rpc-abi=eosio.msig=abis/eosio.msig.abi 
---trace-rpc-abi=eosio.wrap=abis/eosio.wrap.abi
+--plugin qqbc::trace_api_plugin 
+--trace-rpc-abi=QQBC=abis/QQBC.abi 
+--trace-rpc-abi=QQBC.token=abis/QQBC.token.abi 
+--trace-rpc-abi=QQBC.msig=abis/QQBC.msig.abi 
+--trace-rpc-abi=QQBC.wrap=abis/QQBC.wrap.abi
 ```
 
-## Maintenance Note
+## 维护指南
 
-To reduce the disk space consummed by the `trace_api_plugin`, you can configure the following option: 
+为减低`trace_api_plugin`插件占用的磁盘空间，可做如下配置：
 
 ```console
   --trace-minimum-irreversible-history-blocks N (=-1) 
 ```
 
-Once the value is no longer `-1`, only `N` number of blocks before the current LIB block will be kept on disk.
+只要该值不设置为`-1`，那么将在磁盘上保留当前LIB区块的前`N`个区块。
 
-If resource usage cannot be effectively managed via the `trace-minimum-irreversible-history-blocks` configuration option, then there might be a need for ongoing maintenance. In that case, the user may prefer to manage resources with an external system or process.
+如果不能通过`trace-minimum-irreversible-history-blocks`选项有效管理资源，那么需要建立持续维护机制。在这种情况下，推荐借助于外部系统或进程去实现资源管理。
 
-### Manual Filesystem Management
 
-The `trace-dir` configuration option defines a location on the filesystem where all artefacts created by the `trace_api_plugin` are stored. These files are stable once the LIB block has progressed past that slice and then can be deleted at any time to reclaim filesystem space. The conventions regarding these files are to-be-determined. However, the remainder of the system will tolerate any out-of-process management system that removes some or all of these files in this directory regardless of what data they represent, or whether there is a running `qqbcd` instance accessing them or not.  Data which would nominally be available, but is no longer so due to manual maintenance, will result in a HTTP 404 response from the appropriate API endpoint(s).
+### 手动文件系统管理
 
-In conjunction with the `trace-minimum-irreversible-history-blocks=-1` option, administrators can take full control over the lifetime of the data available via the `trace-api-plugin` and the associated filesystem resources. 
+`trace-dir`配置选项定义了`trace_api_plugin`插件创建的所有构件在文件系统上的存储位置。一旦LIB区块经处理生成，那么这些文件就保持不变，并且可以在任何时刻进行清理以腾出文件系统存储空间。目前，文件的存储格式尚待约定，但是其它系统组件可使用任何进程外管理系统删除该目录中的某些或所有文件，无论文件所管理的数据内容，或是否有正在运行的`qqbcd`实例正在访问或者没有访问这些文件。系统认为可用的数据，但是由于手动维护而不再可用时，将导致相应的API端点给出HTTP 404响应。
+
+管理者可与`trace-minimum-irreversible-history-blocks=-1`选项设置一并使用，完全管控`trace-api-plugin`插件生成数据及相关联文件系统资源的全生命周期。
+

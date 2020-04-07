@@ -1,17 +1,17 @@
-## Description
+## 子命令功能
 
-From packed to plain signed json form
+解包为签名JSON文本。
 
-## Positionals
+## 顺位项说明
 
-- `transaction` _TEXT_ - The packed transaction json (string containing packed_trx and optionally compression fields.)
+- `transaction` _TEXT_：打包交易JSON，即包含packed_trx的字符串，可包含压缩字段。
 
-## Options
+## 选项
 
-- `-h,--help` - Print this help message and exit
-- `--unpack-action-data` - Unpack all action data within transaction, needs interaction with `qqbcd`
+- `-h,--help`：打印帮助信息并退出。
+- `--unpack-action-data`：解包交易内所有操作数据，需要与`qqbcd`交互。
 
-## Usage
+## 使用
 
 ```sh
 qqbccli convert unpack_transaction '{
@@ -24,7 +24,7 @@ qqbccli convert unpack_transaction '{
 }'
 ```
 
-## Output
+## 输出
 
 
 ```json
@@ -37,10 +37,10 @@ qqbccli convert unpack_transaction '{
   "delay_sec": 0,
   "context_free_actions": [],
   "actions": [{
-      "account": "eosio",
+      "account": "QQBC",
       "name": "newaccount",
       "authorization": [{
-          "actor": "eosio",
+          "actor": "QQBC",
           "permission": "active"
         }
       ],

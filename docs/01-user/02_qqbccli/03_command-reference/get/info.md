@@ -1,19 +1,23 @@
-## Description
+## info子命令功能
 
-Gets current blockchain information
+获取当前区块链信息。
 
-## Position Parameters
-This command does not accept any parameters. 
-## Options
-- `-h` - --help                   Print this help message and exit
-## Example
+## 顺位项说明
+
+目前不支持任何顺位项。
+
+## 选项说明
+
+- `-h` - --help：输出帮助信息并退出。
+  
+## 示例
 
 
 ```sh
 qqbccli get info
 ```
 
-This command simply returns the current blockchain state information. 
+命令返回当前区块链信息。
 
 ```json
 {

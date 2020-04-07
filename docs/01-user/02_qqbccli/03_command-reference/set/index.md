@@ -1,8 +1,9 @@
-## Description
-Sets or updates the blockchain state.
-## Commands
+## set命令功能
 
-Set or update blockchain state
+设置或更新区块链状态
+
+## 命令
+
 
 ```console
 Usage: qqbccli set [OPTIONS] SUBCOMMAND
@@ -11,10 +12,10 @@ Options:
   -h,--help                   Print this help message and exit
 ```
 
-## Subcommands
+## 子命令列表
   
-- [code](set-code) - create or update the code on an account
-- [abi](set-abi) - create or update the abi on an account
-- [contract](set-contract) - create or update the contract on an account
-- [account](set-account) - set or update blockchain account state
-- [action](set-action) - set or update blockchain action state
+- [code](set-code)：创建或更新账户的代码。
+- [abi](set-abi) ：创建或更新账户上的ABI。
+- [contract](set-contract) ：创建或更新账户上的合约。
+- [account](set-account) ：设置或更新区块链账户许可。
+- [action](set-action)：设置或更新区块链操作状态。

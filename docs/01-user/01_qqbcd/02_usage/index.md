@@ -8,4 +8,4 @@
 * [节点设置](02_qqbcd-setups/index.md)：生产节点和非生产节点的设置。
 * [开发环境](03_development-environment/index.md) ：设置开发和测试环境。
 * [qqbcd实现](05_qqbcd-implementation.md)：区块链状态和存储，`qqbcd`读取模式。
-<!--* [Deprecation Notices](https://github.com/QQBC/eos/issues/7597) - Lists `qqbcd` deprecated functionality.-->
+<!--* [Deprecation Notices](https://github.com/QQBC/QQBC/issues/7597) - Lists `qqbcd` deprecated functionality.-->

@@ -1,28 +1,29 @@
-## Description
-From packed to json action data form
+## 子命令功能
+解包为JSON操作数据
 
-## Positionals
-- `account` _TEXT_ - The name of the account that hosts the contract
-- `name` _TEXT_ - The name of the function that's called by this action
-- `packed_action_data` _TEXT_ - The action data expressed as packed hex string 
-## Options
+## 顺位项说明
+- `account` _TEXT_： 部署合约的账户名；
+- `name` _TEXT_：操作调用的功能名称；
+- `packed_action_data` _TEXT_：以打包八进制串表示的操作数据。
+  
+## 选项
 
-- `-h,--help` - Print this help message and exit
+- `-h,--help`：打印帮助信息并退出。
 
-## Usage
+## 使用
 
 
 ```sh
- qqbccli convert unpack_action_data eosio unlinkauth 000000008090b1ca000000000091b1ca000075982aea3055
+ qqbccli convert unpack_action_data QQBC unlinkauth 000000008090b1ca000000000091b1ca000075982aea3055
 ```
 
-## Output
+## 输出
 
 
 ```json
 {
   "account": "test1",
   "code": "test2",
-  "type": "eosioeosio"
+  "type": "QQBCQQBC"
 }
 ```

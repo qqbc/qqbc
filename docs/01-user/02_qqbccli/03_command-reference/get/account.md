@@ -1,25 +1,28 @@
-## Description
-Retrieves an account from the blockchain
+## account子命令功能
 
-## Positional Parameters
-- `name` _TEXT_ - The name of the account to retrieve
-- `core-symbol` _TEXT_ - The expected core symbol of the chain you are querying
+从区块链获取账户信息。
 
-## Options
-- `-j,--json` - Output in JSON format
+## 顺位项说明
 
-## Examples
+- `name` _TEXT_：需检索的账户名。
+- `core-symbol` _TEXT_ ：查询区块链的核心标识名。
 
-### Get formatted data for user **eosio**
+## 选项说明
+
+- `-j,--json`：以JSON格式输出。
+
+## 示例
+
+### 以格式化数据获取用户**QQBC**的信息
 
 ```sh
-qqbccli get account eosio
+qqbccli get account QQBC
 ```
 ```console
 privileged: true
 permissions: 
-     owner     1:    1 EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-        active     1:    1 EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+     owner     1:    1 QQBC6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+        active     1:    1 QQBC6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
 memory: 
      quota:        -1 bytes  used:      1.22 Mb   
 
@@ -35,14 +38,15 @@ cpu bandwidth: (averaged over 3 days)
 
 producers:     <not voted>
 ```
-### Get JSON data for user **eosio**
+### 以JSON格式获取用户**QQBC**的信息
+
 
 ```sh
-qqbccli get account eosio --json
+qqbccli get account QQBC --json
 ```
 ```json
 {
-  "account_name": "eosio",
+  "account_name": "QQBC",
   "privileged": true,
   "last_code_update": "2018-05-23T18:00:25.500",
   "created": "2018-03-02T12:00:00.000",
@@ -66,7 +70,7 @@ qqbccli get account eosio --json
       "required_auth": {
         "threshold": 1,
         "keys": [{
-            "key": "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
+            "key": "QQBC6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
             "weight": 1
           }
         ],
@@ -79,7 +83,7 @@ qqbccli get account eosio --json
       "required_auth": {
         "threshold": 1,
         "keys": [{
-            "key": "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
+            "key": "QQBC6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
             "weight": 1
           }
         ],
@@ -91,7 +95,7 @@ qqbccli get account eosio --json
   "total_resources": null,
   "delegated_bandwidth": null,
   "voter_info": {
-    "owner": "eosio",
+    "owner": "QQBC",
     "proxy": "",
     "producers": [],
     "staked": 0,

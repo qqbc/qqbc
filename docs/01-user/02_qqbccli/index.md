@@ -1,22 +1,28 @@
+# qqbccli
 ---
-content_title: qqbccli
----
+## 本章索引
 
-## Introduction
+* [CLI命令选项](03_command-reference\index.md)
+* [操作指南](02_how-to-guides\index.md)
+* [故障排除](04_troubleshooting.md)
+* [常见问题](05_FAQ.md)
 
-`qqbccli` is a command line tool that interfaces with the REST API exposed by `qqbcd`. Developers can also use `qqbccli` to deploy and test QQBC smart contracts.
 
-## Installation
+## 引言
 
-`qqbccli` is distributed as part of the [QQBC software suite](https://github.com/qqbc/qqbc/blob/master/README.md). To install `qqbccli` just visit the [QQBC Software Installation](../00_install/index.md) section.
+`qqbccli`是操作`qqbcd`所提供REST API的命令行工具。开发者可使用`qqbccli`部署QQBC智能合约。
 
-## Using qqbccli
+## 安装
 
-To use `qqbccli`, you need the end point (IP address and port number) of a running `qqbcd` instance. Also, the `qqbcd` instance must be configured to load the `eosio::chain_api_plugin` when launched. This allows `qqbcd` to respond to the RPC requests coming from `qqbccli`.
+`qqbccli`作为[QQBC软件](https://github.com/QQBC/QQBC/README.md)组成部分提供。安装`qqbccli`，请参阅“[QQBC软件安装](../00_install/index.md)”一章。
 
-### qqbccli Commands
+## 使用qqbccli
 
-For a list of all `qqbccli` commands, run:
+使用`qqbccli`，用户需知悉`qqbcd`运行实例的端点信息，即IP地址和端口号。此外，`qqbcd`必须配置运行时加载`qqbc::chain_api_plugin` 插件。该插件支持`qqbcd`响应来自`qqbccli`的RPC请求。
+
+### qqbccli命令
+
+列举`qqbccli`所有选项，运行如下命令：
 
 ```sh
 qqbccli --help
@@ -30,7 +36,7 @@ Options:
   -h,--help                   Print this help message and exit
   -u,--url TEXT=http://127.0.0.1:8888/
                               the http/https URL where qqbcd is running
-  --wallet-url TEXT=unix:///Users/username/qqbcio-wallet/kqqbcd.sock
+  --wallet-url TEXT=unix:///Users/username/QQBC-wallet/kqqbcd.sock
                               the http/https URL where kqqbcd is running
   -r,--header                 pass specific HTTP header; repeat this option to pass multiple headers
   -n,--no-verify              don't verify peer certificate when using HTTPS
@@ -52,12 +58,12 @@ Subcommands:
   push                        Push arbitrary transactions to the blockchain
   multisig                    Multisig contract commands
   wrap                        Wrap contract commands
-  system                      Send eosio.system contract action to the blockchain.
+  system                      Send QQBC.system contract action to the blockchain.
 ```
 
-### qqbccli Subcommands
+### qqbccli子命令
 
-To get help with any particular subcommand, run `qqbccli SUBCOMMAND --help`. For instance:
+查询任何子命令，运行`qqbccli SUBCOMMAND --help`。例如：
 
 ```sh
 qqbccli create --help
@@ -106,9 +112,9 @@ Options:
   --delay-sec UINT            set the delay_sec seconds, defaults to 0s
 ```
 
-## qqbccli Example
+## qqbccli示例
 
-The following `qqbccli` command creates a local wallet named `mywallet` and displays the password to the screen:
+如下`qqbccli`命令创建名称为`mywallet`的本地钱包，并显示密码：
 
 ```sh
 qqbccli wallet create -n mywallet --to-console

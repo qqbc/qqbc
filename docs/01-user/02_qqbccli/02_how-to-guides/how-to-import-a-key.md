@@ -1,22 +1,24 @@
-## Goal
+## 目标
 
-Import an key pair
+导入密钥对
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
 
-* Understand the following:
-  * What is a public and private key pair
+* 确保来自`QQBC.contracts`库中的系统合约已部署，并用于管理系统资源。
+  
+* 理解以下概念：
+  * 密钥对。
 
-## Steps
+## 操作步骤
 
 ```sh
 qqbccli wallet import
 ```
 
-Type your private key. You should see something like this:
+输入私钥，输入示例如下：
 
 ```console
-private key: imported private key for: EOS8FBXJUfbANf3xeDWPoJxnip3Ych9HjzLBr1VaXRQFdkVAxwLE7
+private key: imported private key for: QQBC8FBXJUfbANf3xeDWPoJxnip3Ych9HjzLBr1VaXRQFdkVAxwLE7
 ```

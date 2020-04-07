@@ -1,7 +1,6 @@
----
-content_title: qqbcd Upgrade Guides
+# qqbcd升级指南
 ---
 
-This section contains important instructions for node operators and other QQBC stakeholders to transition an QQBC network successfully through an QQBC version or protocol upgrade.
+本节内容适用于节点操作者和QQBC链所有者，所给出的命令通过版本升级或协议升级实现QQBC网络的成功移植。
 
-* [1.8 Upgrade Guide](1.8-upgrade-guide.md)
+* [1.8升级指南](1.8-upgrade-guide.md)

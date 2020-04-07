@@ -1,13 +1,14 @@
-## Description
-Start a new connection to a peer
+## connect子命令功能
 
-**Command**
+启动一个到对等节点的新连接。
+
+**命令**
 
 ```sh
 qqbccli net connect
 ```
 
-**Output**
+**输出**
 
 ```console
 Usage: qqbccli net connect host

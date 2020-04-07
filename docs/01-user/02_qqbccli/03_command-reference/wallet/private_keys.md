@@ -1,16 +1,20 @@
-## Description 
+## wallet private_keys子命令功能
 
-It is possible to query for the public and private key pairs of an individual wallet. The wallet must already be unlocked and you must give the password again
+用于列出单个钱包中的密钥对。钱包必需处于解锁状态，并且需要重新输入钱包密码。
 
-## Positionals
-None
 
-## Options
-`-n,--name` _TEXT_ - The name of the wallet to list keys from, otherwise - default
 
-`--password` _TEXT_ - The password returned by wallet create
+## 顺位项说明
 
-## Usage
+无
+
+## 选项说明
+
+`-n,--name` _TEXT_：需列出密钥对的钱包名词，否则为“default”钱包。
+
+`--password` _TEXT_ ：给出wallet create命令返回的密码。
+
+## 使用
 
 
 ```javascript

@@ -1,54 +1,54 @@
-## Goal
+## 目标
 
-Attach a YubiHSM as a hard wallet
+添加一个YubiHSM硬件钱包
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `kqqbcd`
+* 成功安装当前适用的`kqqbcd`版本；
 
-* Install YubiHSM2 Software Toolkit (YubiHSM2 SDK)
+* 已成功安装YubiHSM2软件包（即YubiHSM2 SDK）；
 
-* Create an AuthKey with at least the following Capabilities:
+* 已创建至少具有下列功能之一的AuthKey：
 
    * sign-ecdsa
    * generate-asymmetric-key
    * export-wrapped
 
-* **Delete the default AuthKey**
+* **删除缺省AuthKey**
 
-[[warning | Security]]
-| It is extremely important to create a new AuthKey and remove the default AuthKey before proceed to the following steps.
+[[重要安全警告]]
+| 执行下列步骤前，一定要删除缺省AuthKey，并创建新的AuthKey。
 
-## Steps
+## 操作步骤
 
-### Configure `kqqbcd`
+### 配置`kqqbcd`
 
-   There are two options to connect `kqqbcd` to YubiHSM:
+   有两种将`kqqbcd`连接到YubiHSM的方式：
 
-   #### Using a YubiHSM connector
+   #### 使用YubiHSM connector
 
-   By default, `kqqbcd` will connect to the YubiHSM connector on the default host and port. If a non-default URL is used, set the `--yubihsm-url` option or `yubihsm-url` in `config.ini` with the correct connector URL
+   默认情况下，`kqqbcd`将使用默认主机和端口连接到YubiHSM connector。如果使用自定义URL，需在使用选项`--yubihsm-url`或在`config.ini`配置文件中设置`yubihsm-url`指定connector的正确URL。
 
-   #### Directly connect via USB
+   #### 通过USB直接连接
 
-   `kqqbcd` also can directly connect to YubiHSM via USB protocol
+   `kqqbcd`支持直接使用USB协议连接到YubiHSM。
 
-   If this option is used, set `kqqbcd` startup option as the below:
+   这种情况下，需要设置`kqqbcd`启动选项如下：
 
    ```sh
    --yubihsm-url=ysb://
    ```
 
-### Start `kqqbcd` with AuthKey:
+### 使用AuthKey启动`kqqbcd`：
 
    ```sh
    --yubihsm-authkey Your_AuthKey_Object_Number
    ```
 
-   if a YubiHSM connector is used, check the YubiHSM connector is up and running by visiting YubiHSM URL:
-      http://YubiHSM_HOST:YubiHSM_PORT/connector/status ((Default HOST and Port: http://127.0.0.1:12345)
+   如果使用YubiHSM connecto，需检查YubiHSM connector是否已经启动。访问YubiHSM URL：
+      http://YubiHSM_HOST:YubiHSM_PORT/connector/status。默认主机和端口是http://127.0.0.1:12345。
 
-   You should see something like this:
+   输出示例如下：
 
    ```console
    status=OK
@@ -59,10 +59,10 @@ Attach a YubiHSM as a hard wallet
    port=12345
    ```
 
-### Unlock YubiHSM wallet with the password of AuthKey using the following option:
+### 使用AuthKey密码解锁YubiHSM钱包，选项如下：
 
    ```sh
    qqbccli wallet unlock -n YubiHSM --password YOUR_AUTHKEY_PASSWORD
    ```
 
-After unlocking the wallet, you can use `qqbccli wallet` commands as usual. Beware as a part of security mechanism, some wallet subcommands, such as retrieve private keys, or remove a key, are not supported when a YubiHSM is used
+钱包解锁后，就可正常使用`qqbccli wallet`。注意考虑到安全机制，YubiHSM不支持部分wallet子命令，包括检索私钥，移除密钥等。

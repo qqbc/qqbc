@@ -1,15 +1,16 @@
 # Transaction API
 
 定义用于发送事务和内联消息的API
+
 ## Transaction C API
-定义用于发送事务的API
+定义用于发送事务的C API
 
 ## Transaction CPP API  
 类型安全的Trasaction C API的C++封装
 
 ### 详细描述
 
-A qqbc事务具有以下抽象结构：
+A QQBC.IO事务具有以下抽象结构：
 ```C++
 struct transaction {
   Name scope[]; 
@@ -18,7 +19,7 @@ struct transaction {
 };
 ```
 
-该API使您的合约能够构建并且发送交易.
+该API使用户的合约能够构建并且发送交易.
 
 延期交易直到未来的区块才会被处理。因此，只要它们看起来形成良好，它们就可以不影响其父交易的成功。如果任何其他情况导致父事务被标记为失败，那么延期事务将永远不会被处理。
 

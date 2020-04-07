@@ -1,21 +1,22 @@
-## Description
+## version命令功能
 
-Retrieve version information
+获取版本信息
 
-## Command
+## 命令
 
 ```sh
 qqbccli version
 ```
 
-## Subcommands
-[client](client) - Retrieve version information of the client
+## 子命令
+
+[client](client) ：获取指定客户的版本信息。
 
 ```sh
 qqbccli version client
 ```
 
-## Output
+## 输出
 
 
 ```console

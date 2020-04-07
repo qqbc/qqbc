@@ -1,12 +1,12 @@
-## Description
+## system listbw子命令功能
 
-List delegated bandwidth
+列出带宽代理情况。
 
-## Positional Arguments
-- `account` _TEXT_ - The account delegated bandwidth
+## 顺位项说明
 
-## Options
-`-j,--json` - Output in JSON format
-`-h,--help` - Print this help message and exit
+- `account` _TEXT_ ：代理带宽的账户名。
 
-## Examples
+## 选项说明
+
+- `-j,--json`：以JSON格式输出结果。
+- `-h,--help`：输出帮助信息并退出。

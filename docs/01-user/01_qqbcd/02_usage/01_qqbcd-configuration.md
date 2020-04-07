@@ -1,43 +1,43 @@
+# qqbcd配置
 ---
-content_title: qqbcd Configuration
----
 
-The plugin-specific options can be configured using either CLI options or a configuration file, `config.ini`. qqbcd-specific options can only be configured from the command line. All CLI options and `config.ini` options can be found by running `qqbcd --help` as shown above.
+插件特定配置可使用命令行选项或`config.ini`配置文件设置，而qqbcd特定选项只能使用命令行设置。`qqbcd --help`给出了所有命令行选项和`config.ini`配置文件选项信息。
 
-Each `config.ini` option has a corresponding CLI option. However, not all CLI options are available in `config.ini`. For instance, most plugin-specific options that perform actions are not available in `config.ini`, such as `--delete-state-history` from `state_history_plugin`.
+每个`config.ini`配置文件选项对于与一个命令行选项。但是，并非所有命令行选项都可设置在`config.ini`配置文件中。大部分只需操作的插件特定选项不能设置在`config.ini`配置文件中。例如，`state_history_plugin`的`--delete-state-history`选项。
 
-For example, the CLI option `--plugin eosio::chain_api_plugin` can also be set by adding `plugin = eosio::chain_api_plugin` in `config.ini`.
+例如，CLI选项`--plugin qqbc::chain_api_plugin`可通过在`config.ini`配置文件中添加`plugin = qqbc::chain_api_plugin`进行设置。
 
-## `config.ini` location
+## `config.ini`配置文件的位置
 
-The default `config.ini` can be found in the following folders:
-- Mac OS: `~/Library/Application Support/eosio/qqbcd/config`
-- Linux: `~/.local/share/eosio/qqbcd/config`
+`config.ini`配置文件的默认位置是：
 
-A custom `config.ini` file can be set by passing the `qqbcd` option `--config path/to/config.ini`.
+- Mac OS: `~/Library/Application Support/QQBC/qqbcd/config`
+- Linux: `~/.local/share/QQBC/qqbcd/config`
 
-## qqbcd Example
+可通过指定`qqbcd`的`--config path/to/config.ini`选项，设置`config.ini`配置文件位置。
 
-The example below shows a typical usage of `qqbcd` when starting a block producing node:
+## qqbcd示例
+
+下例给出了`qqbcd`的一个典型应用，即启动要给区块生成节点：
 
 ```sh
 qqbcd --replay-blockchain \
-  -e -p eosio \
-  --plugin eosio::producer_plugin  \
-  --plugin eosio::chain_api_plugin \
-  --plugin eosio::http_plugin      \
+  -e -p QQBC \
+  --plugin qqbc::producer_plugin  \
+  --plugin qqbc::chain_api_plugin \
+  --plugin qqbc::http_plugin      \
   >> qqbcd.log 2>&1 &
 ```
 
 ```sh
 qqbcd \
-  -e -p eosio \
-  --data-dir /users/mydir/eosio/data     \
-  --config-dir /users/mydir/eosio/config \
-  --plugin eosio::producer_plugin      \
-  --plugin eosio::chain_plugin         \
-  --plugin eosio::http_plugin          \
-  --plugin eosio::state_history_plugin \
+  -e -p QQBC \
+  --data-dir /users/mydir/QQBC/data     \
+  --config-dir /users/mydir/QQBC/config \
+  --plugin qqbc::producer_plugin      \
+  --plugin qqbc::chain_plugin         \
+  --plugin qqbc::http_plugin          \
+  --plugin qqbc::state_history_plugin \
   --contracts-console   \
   --disable-replay-opts \
   --access-control-allow-origin='*' \
@@ -49,15 +49,15 @@ qqbcd \
   >> qqbcd.log 2>&1 &
 ```
 
-The above `qqbcd` command starts a producing node by:
+上面的`qqbcd`启动生产者节点时指定的选项分别为：
 
-* enabling block production (`-e`)
-* identifying itself as block producer "eosio" (`-p`)
-* setting the blockchain data directory (`--data-dir`)
-* setting the `config.ini` directory (`--config-dir`)
-* loading plugins `producer_plugin`, `chain_plugin`, `http_plugin`, `state_history_plugin` (`--plugin`)
-* passing `chain_plugin` options (`--contracts-console`, `--disable-replay-opts`)
-* passing `http-plugin` options (`--access-control-allow-origin`, `--http-validate-host`, `--verbose-http-errors`)
-* passing `state_history` options (`--state-history-dir`, `--trace-history`, `--chain-state-history`)
-* redirecting both `stdout` and `stderr` to the `qqbcd.log` file
-* returning to the shell by running in the background (&)
+* 启用区块生成(`-e`)；
+* 识别"QQBC"自身为区块链生产者 (`-p`)；
+* 设置区块链数据存放目录(`--data-dir`)；
+* 设置`config.ini`配置文件目录 (`--config-dir`)；
+* 加载插件`producer_plugin`、`chain_plugin`、`http_plugin`和`state_history_plugin` (`--plugin`)
+* 传递`chain_plugin`选项(`--contracts-console`, `--disable-replay-opts`)；
+* 传递`http-plugin`选项(`--access-control-allow-origin`, `--http-validate-host`, `--verbose-http-errors`)；
+* 传递`state_history`选项(`--state-history-dir`, `--trace-history`, `--chain-state-history`)；
+* 将`stdout`和`stderr`重定向到`qqbcd.log`日志文件；
+* 后台运行命令(&)。

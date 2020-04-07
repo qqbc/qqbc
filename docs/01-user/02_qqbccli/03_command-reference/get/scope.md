@@ -1,12 +1,15 @@
-## Description
-Retrieves a list of scopes and tables owned by a contract
+## scope子命令功能
 
-## Positional Parameters
-- `contract` _TEXT_ - The contract who owns the table
+获取合约作用范围和数据不信息。
 
-## Options
-- `-t,--table` _TEXT_ - The name of the table as filter
-- `-l,--limit` _UINT_ - The maximum number of rows to return
-- `-L,--lower` _TEXT_ - lower bound of scope
-- `-U,--upper` _TEXT_ - upper bound of scope
-- `-r,--reverse` - Iterate in reverse order
+## 顺位项说明
+
+- `contract` _TEXT_ ：指定数据表所属合约名。
+
+## 选项说明
+
+- `-t,--table` _TEXT_：指定数据表作为过滤。
+- `-l,--limit` _UINT_ ：返回最大行数。
+- `-L,--lower` _TEXT_：作用范围的下限。
+- `-U,--upper` _TEXT_ ：作用范围的上限。
+- `-r,--reverse`：指定逆序迭代。

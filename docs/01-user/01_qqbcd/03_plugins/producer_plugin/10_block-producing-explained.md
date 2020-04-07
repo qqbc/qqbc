@@ -1,35 +1,34 @@
+# 区块生成
 ---
-content_title: Block Production Explained
----
 
-For simplicity of the explanation let's consider the following notations:
+下列概念简要描述了区块生成：
 
-m = max_block_cpu_usage
+$m = max\_block\_cpu\_usage$
 
-t = block-time
+$t =$ block-time
 
-e = last-block-cpu-effort-percent
+$e =$ last-block-cpu-effort-percent
 
-w = block_time_interval = 500ms
+$w = $block_time_interval = 500 毫秒
 
-a = produce-block-early-amount = (w - w*e/100) ms
+$a =$ produce-block-early-amount $= (w - w*e/100)$ 毫秒
 
-p = produce-block-time; p = t - a
+$p =$ produce-block-time。 $p = t - a$
 
-c = billed_cpu_in_block = minimum(m, w - a)
+$c = billed\_cpu\_in\_block = minimum(m, w - a)$
 
-n = network tcp/ip latency
+$n = network tcp/ip latency$
 
-peer validation for similar hardware/eosio-version/config will be <= m
+相似硬件、区块链版本和配置的对端验证一般 $<= m$。
 
-**Let's consider for exemplification the following four BPs and their network topology as depicted in below diagram**
+**让我们考虑以下四个BP及其网络拓扑的示例，如下所示**
 
 
 ```dot-svg
 #p2p_local_chain_prunning.dot - local chain prunning
 #
 #notes: * to see image copy/paste to https://dreampuf.github.io/GraphvizOnline
-#       * image will be rendered by gatsby-remark-graphviz plugin in eosio docs.
+#       * image will be rendered by gatsby-remark-graphviz plugin in QQBC docs.
 
 digraph {
     newrank=true  #allows ranks inside subgraphs (important!)
@@ -51,40 +50,39 @@ digraph {
 } //digraph
 ```
 
-`BP-A` will send block at `p` and,
+`BP-A`在`p`时刻发送区块，`BP-B`需要在`t`时刻接收到区块，否则将丢弃区块。
 
-`BP-B` needs block at time `t` or otherwise will drop it.
+如果`BP-A`正在生成如下12个区块：`b(lock) at t(ime) 1`, `bt 1.5`, `bt 2`, `bt 2.5`, `bt 3`, `bt 3.5`, `bt 4`, `bt 4.5`, `bt 5`, `bt 5.5`, `bt 6`, `bt 6.5`，那么`BP-B`到`6.5`时刻需要`bt 6.5`，因此还有`.5` 时刻生成`bt 7`。
 
-If `BP-A`is producing 12 blocks as follows `b(lock) at t(ime) 1`, `bt 1.5`, `bt 2`, `bt 2.5`, `bt 3`, `bt 3.5`, `bt 4`, `bt 4.5`, `bt 5`, `bt 5.5`, `bt 6`, `bt 6.5` then `BP-B` needs `bt 6.5` by time `6.5` so it has `.5` to produce `bt 7`.
+注意，`bt 7`的时刻减去`.5`等于`bt 6.5`的时刻，因此`t`是`BP-A`的最后区块时刻，`BP-B`启动其首个区块。 
 
-Please notice that the time of `bt 7` minus `.5` equals the time of `bt 6.5` therefore time `t` is the last block time of `BP-A` and when `BP-B` needs to start its first block.
+## 例1
 
-## Example 1
-`BP-A` has 50% e, m = 200ms, c = 200ms, n = 0ms, a = 250ms:
-`BP-A` sends at (t-250ms) <-> `BP-A-Peer` processes for 200ms and sends at (t - 50ms) <-> `BP-B-Peer` processes for 200ms and sends at (t + 150ms) <-> arrive at `BP-B` 150ms too late.
+`BP-A`具有50% e, m = 200ms, c = 200ms, n = 0ms, a = 250ms:
+`BP-A`发送时刻(t-250ms) <-> `BP-A-Peer`处理200ms，发送时刻为(t - 50ms) <-> `BP-B-Peer`处理200ms，发送时刻为(t + 150ms) <-> `BP-B`接收晚了150ms。
 
-## Example 2
-`BP-A` has 40% e and m = 200ms, c = 200ms, n = 0ms, a = 300ms:
-(t-300ms) <-> (+200ms) <-> (+200ms) <-> arrive at `BP-B` 100ms too late.
+## 例2
+`BP-A` 具有40\% e, m = 200ms, c = 200ms, n = 0ms, a = 300ms：
+(t-300ms) <-> (+200ms) <-> (+200ms) <-> `BP-B`接收晚了100ms。
 
-## Example 3
-`BP-A` has 30% e and m = 200ms, c = 150ms, n = 0ms, a = 350ms:
-(t-350ms) <-> (+150ms) <-> (+150ms) <-> arrive at `BP-B` with 50ms to spare.
+## 例3
+`BP-A`具有30% e， m = 200ms, c = 150ms, n = 0ms, a = 350ms:
+(t-350ms) <-> (+150ms) <-> (+150ms) <-> `BP-B`接收提前50ms。
 
-## Example 4
-`BP-A` has 25% e and m = 200ms, c = 125ms, n = 0ms, a = 375ms:
-(t-375ms) <-> (+125ms) <-> (+125ms) <-> arrive at `BP-B` with 125ms to spare.
+## 例4
+`BP-A`具有25% e ，m = 200ms, c = 125ms, n = 0ms, a = 375ms:
+(t-375ms) <-> (+125ms) <-> (+125ms) <-> `BP-B`接收提前125ms。
 
-## Example 5
-`BP-A` has 10% e and m = 200ms, c = 50ms, n = 0ms, a = 450ms:
-(t-450ms) <-> (+50ms) <-> (+50ms) <-> arrive at `BP-B` with 350ms to spare.
+## 例5
+`BP-A`具有10% e ，m = 200ms, c = 50ms, n = 0ms, a = 450ms:
+(t-450ms) <-> (+50ms) <-> (+50ms) <-> `BP-B`接收提前350ms。
 
-## Example 6
-`BP-A` has 10% e and m = 200ms, c = 50ms, n = 15ms, a = 450ms:
-(t-450ms) <- +15ms -> (+50ms) <- +15ms -> (+50ms) <- +15ms -> `BP-B` <-> arrive with 305ms to spare.
+## 例6
+`BP-A` has 10% e，m = 200ms, c = 50ms, n = 15ms, a = 450ms:
+(t-450ms) <- +15ms -> (+50ms) <- +15ms -> (+50ms) <- +15ms -> `BP-B` <-> 接收提前305ms。
 
-## Example 7
-Example world-wide network:`BP-A`has 10% e and m = 200ms, c = 50ms, n = 15ms/250ms, a = 450ms:
-(t-450ms) <- +15ms -> (+50ms) <- +250ms -> (+50ms) <- +15ms -> `BP-B` <-> arrive with 70ms to spare.
+## 例7
+以因特网为例，`BP-A`具有10% e，m = 200ms, c = 50ms, n = 15ms/250ms, a = 450ms:
+(t-450ms) <- +15ms -> (+50ms) <- +250ms -> (+50ms) <- +15ms -> `BP-B` <-> 接收提前70ms。
 
-Running wasm-runtime=eos-vm-jit eos-vm-oc-enable on relay node will reduce the validation time.
+在中继节点上运行`wasm-runtime=QQBC-vm-jit QQBC-vm-oc-enable`，可降低验证时间。

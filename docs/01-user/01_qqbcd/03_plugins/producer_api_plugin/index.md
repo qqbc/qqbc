@@ -1,44 +1,46 @@
-# producer_api_plugin
+# producer_api_plugin插件
 
-## Description
+## 描述
 
-The `producer_api_plugin` exposes a number of endpoints for the [`producer_plugin`](../producer_plugin/index.md) to the RPC API interface managed by the [`http_plugin`](../http_plugin/index.md).
+`producer_api_plugin`为[`producer_plugin`](../producer_plugin/index.md)插件提供多个由[`http_plugin`](../http_plugin/index.md)插件管理的RPC API接口。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::producer_api_plugin
+plugin = qqbc::producer_api_plugin
 ```
+
 ```sh
 # qqbcd startup params
-qqbcd ... --plugin eosio::producer_api_plugin
+qqbcd ... --plugin qqbc::producer_api_plugin
 ```
 
-## Options
+## 选项
 
-None
+无
 
-## Dependencies
+## 依赖关系
 
 * [`producer_plugin`](../producer_plugin/index.md)
 * [`chain_plugin`](../chain_plugin/index.md)
 * [`http_plugin`](../http_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖示例
 
 ```console
 # config.ini
-plugin = eosio::producer_plugin
+plugin = qqbc::producer_plugin
 [options]
-plugin = eosio::chain_plugin
+plugin = qqbc::chain_plugin
 [options]
-plugin = eosio::http_plugin
+plugin = qqbc::http_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::producer_plugin [options]  \
-           --plugin eosio::chain_plugin [operations] [options]  \
-           --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::producer_plugin [options]  \
+           --plugin qqbc::chain_plugin [operations] [options]  \
+           --plugin qqbc::http_plugin [options]
 ```

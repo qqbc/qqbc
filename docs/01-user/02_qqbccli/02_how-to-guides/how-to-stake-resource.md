@@ -1,27 +1,27 @@
-## Goal
+## 目标
 
-Stake resource for your account
+为账户抵押资源。
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
 
-* Ensure the reference system contracts from `eosio.contracts` repository is deployed and used to manage system resources
+* 确保来自`QQBC.contracts`库中的系统合约已部署，并用于管理系统资源。
+  
+* 理解以下概念：
+  * 账户；
+  * 网络带宽
+  * CPU带宽
 
-* Understand the following:
-  * What is an account
-  * What is network bandwidth
-  * What is CPU bandwidth
+## 操作步骤
 
-## Steps
-
-Stake 0.01 SYS network bandwidth for `alice`
+为`alice`账户抵押0.01 SYS的网络带宽：
 
 ```sh
 qqbccli system delegatebw alice alice "0 SYS" "0.01 SYS"
 ```
 
-Stake 0.01 SYS CPU bandwidth for `alice`:
+为`alice`账户抵押0.01 SYS的CPU带宽：
 
 ```sh
 qqbccli system delegatebw alice alice "0.01 SYS" "0 SYS"

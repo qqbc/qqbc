@@ -8,11 +8,11 @@ The `chain_api_plugin` exposes functionality from the [`chain_plugin`](../chain_
 
 ```console
 # config.ini
-plugin = eosio::chain_api_plugin
+plugin = qqbc::chain_api_plugin
 ```
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_api_plugin
+qqbcd ... --plugin qqbc::chain_api_plugin
 ```
 
 ## Options
@@ -28,13 +28,13 @@ None
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin
+plugin = qqbc::chain_plugin
 [options]
-plugin = eosio::http_plugin
+plugin = qqbc::http_plugin
 [options]
 ```
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_plugin [operations] [options]  \
-           --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::chain_plugin [operations] [options]  \
+           --plugin qqbc::http_plugin [options]
 ```

@@ -1,47 +1,49 @@
-# test_control_api_plugin
+# test_control_api_plugin插件
 
-## Description
+## 描述
 
-The `test_control_api_plugin` allows to send a control message to the [test_control_plugin](../test_control_plugin/index.md) telling the plugin to shut down the `qqbcd` instance when reaching a particular block. It is intended for testing.
+`test_control_api_plugin`插件向[test_control_plugin](../test_control_plugin/index.md)插件发送控制消息，告知该插件在到达指定区块高度后关闭`qqbcd`实例。该插件主要用于测试。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::test_control_api_plugin
+plugin = qqbc::test_control_api_plugin
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::test_control_api_plugin
+qqbcd ... --plugin qqbc::test_control_api_plugin
 ```
 
-## Options
+## 选项
 
-None
+无
 
-## Usage Example
+## 使用示例
 
 ```sh
 curl %s/v1/test_control/kill_node_on_producer -d '{ \"producer\":\"%s\", \"where_in_sequence\":%d, \"based_on_lib\":\"%s\" }' -X POST -H \"Content-Type: application/json\"" %
 ```
 
-## Dependencies
+## 依赖关系
 
 * [`test_control_plugin`](../test_control_plugin/index.md)
 * [`chain_plugin`](../chain_plugin/index.md)
 * [`http_plugin`](../http_plugin/index.md)
 
-### Load Dependency Examples
+### 加载依赖示例
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin
+plugin = qqbc::chain_plugin
 [options]
-plugin = eosio::http_plugin
+plugin = qqbc::http_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::chain_plugin [operations] [options]  \
-           --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::chain_plugin [operations] [options]  \
+           --plugin qqbc::http_plugin [options]
 ```

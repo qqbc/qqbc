@@ -1,24 +1,24 @@
-# faucet_testnet_plugin
+# faucet_testnet_plugin插件
 
-## Description
+## 描述
 
-The `faucet_testnet_plugin` provides an interface that assists in the automation of distributing tokens on an QQBC testnet.
+`faucet_testnet_plugin`插件为辅助QQBC测试网上通证自动化派发提供操作接口。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::faucet_testnet_plugin
+plugin = qqbc::faucet_testnet_plugin
 ```
 ```sh
 # command-line
-qqbcd ... --plugin eosio::faucet_testnet_plugin
+qqbcd ... --plugin qqbc::faucet_testnet_plugin
 ```
 
-## Options
+## 选项
 
-None
+无
 
-## Dependencies
+## 依赖关系
 
 * [`http_plugin`](../http_plugin/index.md)

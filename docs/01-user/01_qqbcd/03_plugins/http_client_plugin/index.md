@@ -1,30 +1,31 @@
-# http_client_plugin
+# http_client_plugin插件
 
-## Description
+## 描述
 
-The `http_client_plugin`  is an internal utility plugin, providing the `producer_plugin` the ability to use securely an external `kqqbcd` instance as its block signer. It can only be used when the `producer_plugin` is configured to produce blocks.
+`http_client_plugin`是一种内部功能插件，为`producer_plugin`插件提供安全使用内部`kqqbcd`实例作为其区块签名者的功能。该插件只能在已配置`producer_plugin`插件生成区块的情况下使用。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::http_client_plugin
+plugin = qqbc::http_client_plugin
 https-client-root-cert = "path/to/my/certificate.pem"
 https-client-validate-peers = 1
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::http_client_plugin  \
+qqbcd ... --plugin qqbc::http_client_plugin  \
            --https-client-root-cert "path/to/my/certificate.pem"  \
            --https-client-validate-peers 1
 ```
 
-## Options
+## 选项
 
-These can be specified from both the `qqbcd` command-line or the `config.ini` file:
+下列选项可以从`qqbcd`命令行指定，也可以配置在`config.ini`文件中：
 
 ```console
-Config Options for eosio::http_client_plugin:
+Config Options for qqbc::http_client_plugin:
   --https-client-root-cert arg          PEM encoded trusted root certificate 
                                         (or path to file containing one) used 
                                         to validate any TLS connections made.  
@@ -36,6 +37,6 @@ Config Options for eosio::http_client_plugin:
                                         false: ignore cert errors
 ```
 
-## Dependencies
+## 依赖关系
 
 * [`producer_plugin`](../producer_plugin/index.md)

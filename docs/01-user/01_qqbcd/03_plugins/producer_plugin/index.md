@@ -1,29 +1,30 @@
-# producer_plugin
+# producer_plugin插件
 
-## Description
+## 描述
 
-The `producer_plugin` loads functionality required for a node to produce blocks.
+`producer_plugin`插件为节点提供生成区块所需功能。
 
-[[info]]
-| Additional configuration is required to produce blocks. Please read [Configuring Block Producing Node](../../02_usage/02_qqbcd-setups/00_producing-node.md).
+[[注意]]
+| 生成区块还需做其它配置，参见“[配置区块生成节点](../../02_usage/02_node-setups/00_producing-node.md)”一节。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::producer_plugin [options]
+plugin = qqbc::producer_plugin [options]
 ```
+
 ```sh
 # qqbcd startup params
-qqbcd ... -- plugin eosio::producer_plugin [options]
+qqbcd ... -- plugin qqbc::producer_plugin [options]
 ```
 
-## Options
+## 选项
 
-These can be specified from both the `qqbcd` command-line or the `config.ini` file:
+下列选项可以从`qqbcd`命令行指定，也可以在`config.ini`文件中设置：
 
 ```console
-Config Options for eosio::producer_plugin:
+Config Options for qqbc::producer_plugin:
 
   -e [ --enable-stale-production ]      Enable block production, even if the 
                                         chain is stale.
@@ -53,7 +54,7 @@ Config Options for eosio::producer_plugin:
                                         instead) Tuple of [public key, WIF 
                                         private key] (may specify multiple 
                                         times)
-  --signature-provider arg (=EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV=KEY:5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3)
+  --signature-provider arg (=QQBC6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV=KEY:5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3)
                                         Key=Value pairs in the form 
                                         <public-key>=<provider-spec>
                                         Where:
@@ -65,15 +66,14 @@ Config Options for eosio::producer_plugin:
                                                            form <provider-type>
                                                            :<data>
                                         
-                                           <provider-type> is KEY, or KEOSD
-                                        
+                                           <provider-type> is KEY, or kqqbcd                                        
                                            KEY:<data>      is a string form of 
                                                            a valid QQBC 
                                                            private key which 
                                                            maps to the provided
                                                            public key
                                         
-                                           KEOSD:<data>    is the URL where 
+                                           kqqbcd:<data>    is the URL where 
                                                            kqqbcd is available 
                                                            and the approptiate 
                                                            wallet(s) are 
@@ -111,34 +111,36 @@ Config Options for eosio::producer_plugin:
                                         application data dir)
 ```
 
-## Dependencies
+## 依赖关系
 
 * [`chain_plugin`](../chain_plugin/index.md)
 
-## The priority of transaction
+## 交易的优先级
 
-You can give one of the transaction types priority over another when the producer plugin has a queue of transactions pending.
+如果`producer_plugin`插件存在待处理的事务队列，用户可以将一种事务类型的优先级赋予另一种事务类型的优先级。
 
-The option below sets the ratio between the incoming transaction and the deferred transaction:
+下面的选项设置了传入事务与延迟事务间的比率：
 
 ```console
   --incoming-defer-ratio arg (=1)       
 ```
 
-By default value of `1`, the `producer` plugin processes one incoming transaction per deferred transaction. When `arg` sets to `10`, the `producer` plugin processes 10 incoming transactions per deferred transaction. 
+默认值为`1`，`producer`插件会为每个延迟的事务处理一个传入事务。 如果设置`arg`为`10`，那么`producer`插件将为每个延迟的事务处理10个传入事务。
 
-If the `arg` is set to a sufficiently large number, the plugin always processes the incoming transaction first until the queue of the incoming transactions is empty. Respectively, if the `arg` is 0, the `producer` plugin processes the deferred transactions queue first.
+如果`arg`设置为足够大的数字，那么插件将始终首先处理传入事务，直到传入事务的队列为空。相应地，如果`arg`设置为0，那么`producer`插件将首先处理延迟的事务队列。
 
 
-### Load Dependency Examples
+
+### 加载依赖示例
 
 ```console
 # config.ini
-plugin = eosio::chain_plugin [operations] [options]
-```
-```sh
-# command-line
-qqbcd ... --plugin eosio::chain_plugin [operations] [options]
+plugin = qqbc::chain_plugin [operations] [options]
 ```
 
-For details about how blocks are produced please read the following [block producing explainer](10_block-producing-explained.md).
+```sh
+# command-line
+qqbcd ... --plugin qqbc::chain_plugin [operations] [options]
+```
+
+区块生成细节，参阅“[区块生成](10_block-producing-explained.md)”一文。

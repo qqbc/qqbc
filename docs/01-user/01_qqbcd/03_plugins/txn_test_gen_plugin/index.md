@@ -1,30 +1,31 @@
-# txn_test_gen_plugin
+# txn_test_gen_plugin插件
 
-## Description
+## 描述
 
-The `txn_test_gen_plugin` is used for transaction test purposes.
+`txn_test_gen_plugin`用于测试交易。
 
-[[info | For More Information]]
-For more information, check the [txn_test_gen_plugin/README.md](https://github.com/qqbc/qqbc/blob/develop/plugins/txn_test_gen_plugin/README.md) on the QQBC/eos repository.
+[[提示]]
+更多信息，参阅插件的[README](README.md)文件。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::txn_test_gen_plugin
+plugin = qqbc::txn_test_gen_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::txn_test_gen_plugin [options]
+qqbcd ... --plugin qqbc::txn_test_gen_plugin [options]
 ```
 
-## Options
+## 选项
 
-These can be specified from both the `qqbcd` command-line or the `config.ini` file:
+下列选项可以从`qqbcd`命令行指定，也可以在`config.ini`文件中设置：
 
 ```console
-Config Options for eosio::txn_test_gen_plugin:
+Config Options for qqbc::txn_test_gen_plugin:
   --txn-reference-block-lag arg (=0)    Lag in number of blocks from the head 
                                         block when selecting the reference 
                                         block for transactions (-1 means Last 
@@ -36,6 +37,6 @@ Config Options for eosio::txn_test_gen_plugin:
                                         and used by this plugin
 ```
 
-## Dependencies
+## 依赖关系
 
-None
+无

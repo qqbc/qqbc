@@ -1,32 +1,34 @@
-# http_plugin
+# http_plugin插件
 
-## Description
+## 描述
 
-The `http_plugin` is a core plugin supported by both `qqbcd` and `kqqbcd`. The plugin is required to enable any RPC API functionality provided by a `qqbcd` or `kqqbcd` instance.
+`http_plugin`插件是`qqbcd`和`kqqbcd`均支持的核心插件。该插件为`qqbcd`和`kqqbcd`提供RPC API功能启用。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::http_plugin
+plugin = qqbc::http_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::http_plugin [options]
+qqbcd ... --plugin qqbc::http_plugin [options]
  (or)
-kqqbcd ... --plugin eosio::http_plugin [options]
+kqqbcd ... --plugin qqbc::http_plugin [options]
 ```
 
-## Options
+## 选项
 
-These can be specified from both the command-line or the `config.ini` file:
+
+下列选项可以从`qqbcd`和`kqqbcd`命令行指定，也可以配置在`config.ini`文件中：
 
 ```console
-Config Options for eosio::http_plugin:
+Config Options for qqbc::http_plugin:
   --unix-socket-path arg                The filename (relative to data-dir) to 
                                         create a unix socket for HTTP RPC; set 
-                                        blank to disable (=keosd.sock for keosd)
+                                        blank to disable (=kqqbcd.sock for kqqbcd)
   --http-server-address arg (=127.0.0.1:8888 for qqbcd)
                                         The local IP and port to listen for 
                                         incoming http connections; set blank to
@@ -69,6 +71,6 @@ Config Options for eosio::http_plugin:
                                         pool
 ```
 
-## Dependencies
+## 依赖关系
 
-None
+无

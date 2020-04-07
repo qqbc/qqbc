@@ -1,19 +1,20 @@
-## Description
-Invalidate all multisig approvals of an account
+## multisig-invalidate子命令功能
 
-## Positionals:
-  invalidator TEXT            invalidator name (string) (required)
+使账户的所有多签批准失效。
 
-## Options:
- - `-h,--help`                   Print this help message and exit
- - `-x,--expiration`             set the time in seconds before a transaction expires, defaults to 30s
--  `-f,--force-unique`           force the transaction to be unique. this will consume extra bandwidth and remove any protections against accidently issuing the same transaction multiple times
- - `-s,--skip-sign`              Specify if unlocked wallet keys should be used to sign transaction
- - `-j,--json`                   print result as json
- - `-d,--dont-broadcast`         don't broadcast transaction to the network (just print to stdout)
--  `--return-packed`             used in conjunction with --dont-broadcast to get the packed transaction
- - `-r,--ref-block` TEXT         set the reference block num or block id used for TAPOS (Transaction as Proof-of-Stake)
- - `-p,--permission` TEXT ...    An account and permission level to authorize, as in 'account@permission' (defaults to 'invalidator@active')
- - `--max-cpu-usage-ms` UINT     set an upper limit on the milliseconds of cpu usage budget, for the execution of the transaction (defaults to 0 which means no limit)
- - `--max-net-usage` UINT        set an upper limit on the net usage budget, in bytes, for the transaction (defaults to 0 which means no limit)
- - `--delay-sec` UINT            set the delay_sec seconds, defaults to 0s
+## 顺位项说明
+
+ -  invalidator TEXT：            失效者的账户名（字符串，必需项）
+
+## 选项说明
+
+- `-h,--help`：输出帮助信息并退出。
+- `-x,--expiration` _TEXT_：设置交易过期时间（秒数）。默认为30秒。
+- `-f,--force-unique`：强制交易唯一。设置将耗费额外带宽，并去除所有防止多次意外发出同一交易的保护措施。
+- `-s,--skip-sign`：指定交易签名是否可以使用解锁的钱包密钥。
+- `-d,--dont-broadcast` ：禁止将交易广播到网络中（只是输出到stdout）。
+- `-r,--ref-block` _TEXT_ ：设置用于TAPOS的参考区块号（或区块ID）。
+- `-p,--permission`  _TEXT_：指定认证的账户和权限，格式为“account@permission”（默认值为“account@active”）。
+- `--max-cpu-usage-ms` _UINT_：设置用于执行交易的CPU使用配额上限（微秒数）。默认为0，表示不设置任何限额。
+- `--max-net-usage` _UINT_ ：-设置用于执行交易的网络使用配额上限（字节数。默认为0，表示不设置任何限额。
+- `--delay-sec` _UINT_：设置延迟时间。默认为0。

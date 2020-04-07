@@ -1,24 +1,31 @@
-## Description
-Retrieve the stats of for a given currency
+## currency-stats子命令功能
 
-## Positional Parameters
-`contract` _TEXT_  - The contract that operates the currency
+获取指定通证的信息。
 
-`symbol` _TEXT_ - The symbol for the currency if the contract operates multiple currencies
-## Options
-There are no options for this subcommand
-## Example
-Get stats of the SYS token from the eosio.token contract. 
+## 顺位项说明
+
+`contract` _TEXT_ ：持有通证的合约名。
+
+`symbol` _TEXT_：如果合约支持操作多种通证，指定通证名。
+
+## 选项说明
+
+该子命令不支持任何选项。
+
+## 示例
+
+获取QQBC.token合约中的SYS通证信息。 
 
 ```sh
-qqbccli get currency stats eosio.token SYS
+qqbccli get currency stats QQBC.token SYS
 ```
+
 ```json
 {
   "SYS": {
     "supply": "1000000000.0000 SYS",
     "max_supply": "10000000000.0000 SYS",
-    "issuer": "eosio"
+    "issuer": "QQBC"
   }
 }
 ```

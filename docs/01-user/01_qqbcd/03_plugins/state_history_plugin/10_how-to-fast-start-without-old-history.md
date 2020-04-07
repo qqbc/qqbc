@@ -1,42 +1,42 @@
+# 如何不考虑过往区块链历史而快速启动？
 ---
-content_title: How to fast start without previous history
----
 
-## Goal
+## 目标
 
-This procedure records the current chain state and future history, without previous historical data on the local chain.
+该操作过程将记录当前区块链状态和完整历史，并不记录本地链的过往历史数据。
 
-## Before you begin
 
-* Make sure [QQBC is installed](../../../00_install/index.md).
-* Learn about [Using qqbcd](../../02_usage/index.md).
-* Get familiar with [state_history_plugin](../../03_plugins/state_history_plugin/index.md).
+## 准备工作
 
-## Steps
+* 确保[安装区块链](../../../00_install/index.md)；
+* 掌握[使用qqbcd](../../02_usage/index.md)；
+* 了解[state_history_plugin插件](../../03_plugins/state_history_plugin/index.md)。
 
-1. Get the following:
-   * A portable snapshot (`data/snapshots/snapshot-xxxxxxx.bin`)
-   * Optional: a block log which includes the block the snapshot was taken at
+## 操作步骤
 
-2. Make sure `data/state` does not exist
+1. 获取如下数据：
+   * 可移植快照（通常形式为`data/snapshots/snapshot-xxxxxxx.bin`）；
+   * 可选项：区块日志，其中包括记录快照的区块。
 
-3. Start `qqbcd` with the `--snapshot` option, and the options listed in the [`state_history_plugin`](#index.md).
+2. 确认目录`data/state`尚不存在。
 
-4. Look for `Placing initial state in block n` in the log, where n is the start block number.
+3. 使用`--snapshot`选项和[`state_history_plugin`](#index.md)给出的选项启动`qqbcd`。
 
-5. Start a filler with `--fpg-create` (if PostgreSQL), `--fill-skip-to n`, and `--fill-trim`. Replace `n` with the value above.
+4. 在日志中查找记录“`Placing initial state in block n` ”，其中`n`是起始区块。
 
-6. Do not stop `qqbcd` until it has received at least 1 block from the network, or it won't be able to restart.
+5. 使用`--fpg-create`、`--fill-skip-to n`和`--fill-trim`选项指定存储管理（例如PostgreSQL）), 其中`n` 是第4步获取的起始区块高度。
 
-## Remarks
+6. 在`qqbcd`接收到至少一个区块前，不要关闭整个区块链网络，否则会导致`qqbcd`无法正常重启。
 
-If `qqbcd` fails to receive blocks from the network, then try the above using `net_api_plugin`. Use `qqbccli net disconnect` and `qqbccli net connect` to reconnect nodes which timed out.
+## 注意事项
 
-[[caution | Caution when using `net_api_plugin`]]
-| Either use a firewall to block access to your `http-server-address`, or change it to `localhost:8888` to disable remote access.
+如果`qqbcd`没有成功从区块链接收区块，那么尝试使用`net_api_plugin`插件。运行命令`qqbccli net disconnect` 和`qqbccli net connect`连接报超时错误的节点。
 
-[[info]]
-| Whenever you run a filler after this point, use the `--fill-trim` option. Only use `--fpg-create` and `--fill-skip-to` the first time.
+[[注意：慎用`net_api_plugin`插件]]
+| 设置防火墙阻拦`http-server-address`，或是更改服务地址为`localhost:8888`，禁止远端访问。
 
-[[info]]
-| On large chains, this procedure creates a delta record that is too large for javascript processes to handle. 64-bit C++ processes can handle the large record. `fill-pg` and `fill-lmdb` break up the large record into smaller records when filling databases.
+[[提示]]
+| 如果存储管理在插件启动后尚未提供服务，那么需使用`--fill-trim`选项。第一次运行时，只需使用`--fpg-create` 和`--fill-skip-to`选项。
+
+[[提示]]
+| 对于一定规模的区块链，JavaScript过程无法处理大量增量创建记录，需使用64位C++过程处理大规模记录。 选项`fill-pg`和`fill-lmdb`可在写入数据库前将单个大记录切分为多个小记录。

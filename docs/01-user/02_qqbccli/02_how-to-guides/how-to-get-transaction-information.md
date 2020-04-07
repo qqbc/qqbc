@@ -1,20 +1,21 @@
-## Goal
+## 目标
 
-Query infomation of a transaction
+查询交易信息。
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
 
-* Understand the following:
+* 确保来自`QQBC.contracts`库中的系统合约已部署，并用于管理系统资源。
+  
+* 理解以下概念：
+  * 交易。
 
-  * What is a transaction
-
-## Steps
+## 操作步骤
 
 ```sh
 qqbccli get transaction id
 ```
 
-[[info]]
-| Be aware that you need to connect to a `qqbcd` instance that enables history API plugin to query transaction information.
+[[提示]]
+| 应确保所连接的`qqbcd`实例启用了history API插件，支持查询交易信息。

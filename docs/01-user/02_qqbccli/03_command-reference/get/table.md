@@ -1,30 +1,33 @@
-## Description
+## table子命令功能
 
-Retrieves the contents of a database table
+获取数据表的内容。
 
-## Positional Parameters
-`contract` _TEXT_ - The contract who owns the table
+## 顺位项说明
 
-`scope` _TEXT_ - The scope within the contract in which the table is found
+`contract` _TEXT_：数据表所属合约名。
 
-`table` _TEXT_ - The name of the table as specified by the contract abi
+`scope` _TEXT_：合约内查找数据表的范围。
 
-## Options
-`-b,--binary` _UINT_ - Return the value as BINARY rather than using abi to interpret as JSON
+`table` _TEXT_ ：合约ABI指定的数据表名
 
-`-l,--limit` _UINT_ - The maximum number of rows to return
+## 选项说明
 
-`-k,--key` _TEXT_ - The name of the key to index by as defined by the abi, defaults to primary key
+`-b,--binary` _UINT_：返回二进制形式的值，而非以JSON表示的ABI。
 
-`-L,--lower` _TEXT_ - JSON representation of lower bound value of key, defaults to first
+`-l,--limit` _UINT_ ：返回的最大行数。
 
-`-U,--upper` _TEXT_ - JSON representation of upper bound value value of key, defaults to last
+`-k,--key` _TEXT_：由ABI定义的索引键值，默认为主键。
 
-## Example
-Get the data from the accounts table for the eosio.token contract, for user eosio,
+`-L,--lower` _TEXT_：JSON格式表示的键值下限值，默认为第一行。
+
+`-U,--upper` _TEXT_：JSON格式表示的键值上限值，默认为最后一行。
+
+## 示例
+
+从QQBC.token合约的QQBC账户数据表中获取数据。
 
 ```sh
-qqbccli get table eosio.token eosio accounts
+qqbccli get table QQBC.token QQBC accounts
 ```
 ```json
 {

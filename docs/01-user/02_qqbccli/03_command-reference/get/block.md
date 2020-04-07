@@ -1,11 +1,16 @@
-## Description
-Retrieves a full block from the blockchain
+## block子命令功能
 
-## Positional Parameters
-- `block` _TEXT_ - The number **or** ID of the block to retrieve
-## Options
-- `--header-state` - Get block header state from fork database instead
-## Example
+从区块链获取一个完全区块信息。
+
+## 顺位项说明
+
+- `block` _TEXT_：需检索区块的编号或ID。
+
+## 选项说明
+
+- `--header-state`：从分叉数据库获取区块头部状态。
+
+## 示例
 
 
 ```sh
@@ -16,7 +21,7 @@ or
 qqbccli get block 0000000130d70e94e0022fd2fa035cabb9e542c34ea27f572ac90b5a7aa3d891
 ```
 
-This will output a block object similar to the following
+输出区块对象内容示例为：
 
 ```json
 {

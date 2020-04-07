@@ -1,27 +1,28 @@
-# net_plugin
+# net_plugin插件
 
-## Description
+## 描述
 
-The `net_plugin` provides an authenticated p2p protocol to persistently synchronize nodes.
+`net_plugin`提供经身份验证的p2p协议，支持持久化同步节点。
 
-## Usage
+## 使用
 
 ```console
 # config.ini
-plugin = eosio::net_plugin
+plugin = qqbc::net_plugin
 [options]
 ```
+
 ```sh
 # command-line
-qqbcd ... --plugin eosio::net_plugin [options]
+qqbcd ... --plugin qqbc::net_plugin [options]
 ```
 
-## Options
+## 选项
 
-These can be specified from both the `qqbcd` command-line or the `config.ini` file:
+下列选项可以从`qqbcd`命令行指定，也可以在`config.ini`文件中设置：
 
 ```console
-Config Options for eosio::net_plugin:
+Config Options for qqbc::net_plugin:
 
   --p2p-listen-endpoint arg (=0.0.0.0:9876)
                                         The actual host:port used to listen for
@@ -35,7 +36,7 @@ Config Options for eosio::net_plugin:
                                         compose a network.
   --p2p-max-nodes-per-host arg (=1)     Maximum number of client nodes from any
                                         single IP address
-  --agent-name arg (="EOS Test Agent")  The name supplied to identify this node
+  --agent-name arg (="QQBC Test Agent")  The name supplied to identify this node
                                         amongst the peers.
   --allowed-connection arg (=any)       Can be 'any' or 'producers' or 
                                         'specified' or 'none'. If 'specified', 
@@ -87,6 +88,6 @@ Config Options for eosio::net_plugin:
                                                   to peer
 ```
 
-## Dependencies
+## 依赖关系
 
-None
+无

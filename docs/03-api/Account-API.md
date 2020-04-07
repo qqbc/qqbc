@@ -33,15 +33,15 @@ balance(b, sizeof(balance));
 查询账户数据的c++语言api.例子: account balance
 
 ## 类
-> struct  [eosio::account::account_balance](#h2_tag)　　  
+> struct  [qqbc::account::account_balance](#h2_tag)　　  
 账户余额的二进制结构
 
 ## 函数
-* bool eosio::accout::get(account_balance &acnt)  
+* bool qqbc::accout::get(account_balance &acnt)  
 返回一个账户余额结构
 
 ## 函数说明
-* <h5>bool eosio::account::get(account_balance & acnt) </h5>  
+* <h5>bool qqbc::account::get(account_balance & acnt) </h5>  
  	返回一个账户余额结构
 
 >* 参数:
@@ -49,7 +49,7 @@ balance(b, sizeof(balance));
 >* 返回  
 如果找到帐户的余额，则为`true`
 
-<h2><span id="h2_tag">eosio::account::account_balance 类型说明</span></h2>
+<h2><span id="h2_tag">qqbc::account::account_balance 类型说明</span></h2>
 账户余额的二进制结构
 
 
@@ -61,7 +61,7 @@ balance(b, sizeof(balance));
 * <h5>account_name 	[account](#account)   </h5>
  	所查余额的账户名称
  
-* <h5>asset [eos_balance](#eos_balance)  </h5>
+* <h5>asset [QQBC_balance](#QQBC_balance)  </h5>
  	账户的余额
  
 * <h5>asset 	[staked_balance](#staked_balance)  </h5> 
@@ -80,36 +80,36 @@ account_balance test1_balance;
 test1_balance.account = N(test1);
 if (account_api::get(test1_balance))
 {
-   eosio::print("test1 balance=", test1_balance.eos_balance, "\n");
+   qqbc::print("test1 balance=", test1_balance.QQBC_balance, "\n");
 }
 ```
 
 ### 数据成员说明文档
 
 <h5 id="account">account</h5>
-> account_name eosio::account::account_balance::account   
+> account_name qqbc::account::account_balance::account   
 
         所查余额的账户名称
 
-<h5 id="eos_balance">eos_balance</h5>
-> asset eosio::account::account_balance::eos_balance   
+<h5 id="QQBC_balance">QQBC_balance</h5>
+> asset qqbc::account::account_balance::QQBC_balance   
         
      账户的余额
 
 <h5 id="last_unstaking_time">last_unstaking_time</h5>   
->time eosio::account::account_balance::last_unstaking_time   
+>time qqbc::account::account_balance::last_unstaking_time   
 
     账户正在取消抵押的余额
 
 <h5 id="staked_balance">staked_balance</h5>
-> asset eosio::account::account_balance::staked_balance   
+> asset qqbc::account::account_balance::staked_balance   
 
     账户的抵押余额
 
 <h5 id="unstaking_balance">unstaking_balance</h5>
-> asset eosio::account::account_balance::unstaking_balance   
+> asset qqbc::account::account_balance::unstaking_balance   
 
     这个账户最后取消抵押余额的时间
 
 ### 源文档
-<h5> contracts/eosiolib/account.hpp</h5>
+<h5> contracts/QQBClib/account.hpp</h5>

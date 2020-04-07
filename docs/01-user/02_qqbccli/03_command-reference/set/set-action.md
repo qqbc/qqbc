@@ -1,12 +1,14 @@
-## Description
-Sets or updates an action's state on the blockchain.
+## set action子命令功能
 
-**Command**
+设置或更新区块链操作状态。
+
+**命令**
 
 ```sh
 qqbccli set action
 ```
-**Output**
+
+**输出**
 
 ```console
 Usage: qqbccli set action [OPTIONS] SUBCOMMAND
@@ -17,53 +19,44 @@ Options:
 Subcommands:
   permission                  set parmaters dealing with account permissions
 ```
-**Command**
+
+**命令**
 
 ```sh
 qqbccli set action permission
 ```
 
-## Positionals
+## 顺位项说明
 
-`account` TEXT The account to set/delete a permission authority for (required
+- `account` TEXT：指定设置/删除许可权限的账户名（必需项）。
+- `code` _Text_：操作代码的属主账户名。
+- `type` _Type_：操作类型 。
+- `requirement` _Type_：执行指定操作所需的许可名称。
 
-`code` _Text_ The account that owns the code for the action
 
-`type` _Type_ the type of the action
+## 选项说明
 
-`requirement` _Type_ The permission name require for executing the given action
+- `-h,--help`：输出帮助信息并退出。
+- `--add-code` [code]：将`QQBC.code`许可添加到指定许可权限中。
+- `--remove-code` [code]：从指定许可权限中移除`QQBC.code`许可。
+- `-x,--expiration` _TEXT_：设定交易过期的时间限（秒数）。默认为30秒。
+- `-f,--force-unique`：强制交易唯一。设置将耗费额外带宽，并去除所有防止多次意外发出同一交易的保护措施。
+- `-s,--skip-sign`：指定交易签名是否可以使用解锁的钱包密钥。
+- `-j,--json`：以JSON格式输出结果。
+- `-d,--dont-broadcast`：禁止将交易广播到网络中（只是输出到stdout）。
+- `--return-packed`：与`--dont-broadcast`选项一并使用，获取打包的交易。
+- `-r,--ref-block` _TEXT_ ：设置用于TAPOS的参考区块号（或区块ID）。
+- `-p,--permission`  _TEXT_：指定认证的账户和权限，格式为“account@permission”（默认值为“account@active”）。
+- `--max-cpu-usage-ms` _UINT_：设置用于执行交易的CPU使用配额上限（微秒数）。默认为0，表示不设置任何限额。
+- `--max-net-usage` _UINT_ ：-设置用于执行交易的网络使用配额上限（字节数。默认为0，表示不设置任何限额。
+- `--delay-sec` _UINT_：设置延迟时间。默认为0。
 
-## Options
-`-h,--help` Print this help message and exit
 
-`-x,--expiration` _Type:Text_ - set the time in seconds before a transaction expires, defaults to 30s
-
-`-f,--force-unique` - force the transaction to be unique. this will consume extra bandwidth and remove any protections against accidently issuing the same transaction multiple times
-
-`-s,--skip-sign` Specify if unlocked wallet keys 
-should be used to sign transaction
-
-`-j,--json` print result as json
-
-`-d,--dont-broadcast` - Don't broadcast transaction to the network (just print to stdout)
-
-`--return-packed` used in conjunction with --dont-broadcast to get the packed transaction
-
-`-r,--ref-block` _TEXT_         set the reference block num or block id used for TAPOS (Transaction as Proof-of-Stake)
-
-`-p,--permission`  _Type:Text_ - An account and permission level to authorize, as in 'account@permission' (defaults to 'account@active')
-
-`--max-cpu-usage-ms` _UINT_ - Set an upper limit on the milliseconds of cpu usage budget, for the execution of the transaction (defaults to 0 which means no limit)
-
-`--max-net-usage` _UINT_ - Set an upper limit on the net usage budget, in bytes, for the transaction (defaults to 0 which means no limit)
-
-`--delay-sec` _UINT_ - set the delay_sec seconds, defaults to 0s
-
-## Usage
+## 使用
 
 ```sh
 #Link a `voteproducer` action to the 'voting' permissions
-qqbccli set action permission sandwichfarm eosio.system voteproducer voting -p sandwichfarm@voting
+qqbccli set action permission sandwichfarm QQBC.system voteproducer voting -p sandwichfarm@voting
 
 #Now can execute the transaction with the previously set permissions. 
 qqbccli system voteproducer approve sandwichfarm someproducer -p sandwichfarm@voting

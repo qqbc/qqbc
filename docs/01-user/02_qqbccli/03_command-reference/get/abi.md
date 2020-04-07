@@ -1,18 +1,22 @@
-## Description
-Retrieves the ABI for an account
+## abi子命令功能
 
-## Positional Parameters
-- `name` _TEXT_ - The name of the account whose abi should be retrieved
+获取账户的ABI。
 
-## Options
-- `-f,--file` _TEXT_ - The name of the file to save the contract .abi to instead of writing to console
+## 顺位项说明
 
-## Examples
-Retrieve and save abi for eosio.token contract
+- `name` _TEXT_：需检索abi信息的账户名。
+
+## 选项说明
+
+- `-f,--file` _TEXT_：合约abi写入的文件名，替代输出到终端。
+
+## 示例：
+
+检索QQBC.token合约并保存结果
 
 ```sh
-qqbccli get abi eosio.token -f eosio.token.abi
+qqbccli get abi QQBC.token -f QQBC.token.abi
 ```
 ```console
-saving abi to eosio.token.abi
+saving abi to QQBC.token.abi
 ```

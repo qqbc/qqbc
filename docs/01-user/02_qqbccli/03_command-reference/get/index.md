@@ -1,19 +1,20 @@
-## Description
+## get命令功能
 
-Retrieves various items and information from the blockchain
+从区块链检索各项的相关信息
 
-## Subcommands
-- [info](info.md) - Get current blockchain information
-- [block](block.md) - Retrieve a full block from the blockchain
-- [account](account.md) - Retrieve an account from the blockchain
-- [code](code.md) - Retrieve the code and ABI for an account
-- [abi](abi.md) - Retrieve the ABI for an account
-- [table](table.md) - Retrieve the contents of a database table
-- [scope](scope.md) - Retrieve a list of scopes and tables owned by a contract
-- [currency](currency.md) - Retrieve information related to standard currencies
-- [accounts](accounts.md) - Retrieve accounts associated with a public key
-- [servants](servants.md) - Retrieve accounts which are servants of a given account
-- [transaction](transaction.md) - Retrieve a transaction from the blockchain
-- [actions](actions.md) - Retrieve all actions with specific account name referenced in authorization or receiver
-- [schedule](schedule.md) - Retrieve the producer schedule
-- [transaction_id](transaction_id.md) - Get transaction id given transaction object
+## 子命令列表：
+
+- [info](info.md)：获取当前区块链信息。
+- [block](block.md)：从区块链获取一个完全区块信息。
+- [account](account.md)：从区块链获取一个账户信息。
+- [code](code.md)：获取账户的代码和ABI。
+- [abi](abi.md)：获取账户的ABI。
+- [table](table.md)：获取数据表的内容。
+- [scope](scope.md)：获取智能合约作用范围和数据不的信息列表。
+- [currency](currency.md) ：获取指定账户持有的标准通证信息。
+- [accounts](accounts.md) ：获取公钥相关账户信息。
+- [servants](servants.md) ：获取指定账户的控制账户信息。
+- [transaction](transaction.md) ：获取区块链交易信息。
+- [actions](actions.md) ：根据认证和接收情况，获取特定账户的所有操作。
+- [schedule](schedule.md)：获取生产者的计划任务。
+- [transaction_id](transaction_id.md)：根据指定交易对象获取交易ID。

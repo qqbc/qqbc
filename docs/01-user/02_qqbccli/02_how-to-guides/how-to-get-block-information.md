@@ -1,17 +1,17 @@
-## Goal
+## 目标
 
-Query infomation of a block
+查询区块信息
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
+  
+* 理解以下概念：
+  * 区块
+  
+## 操作步骤
 
-* Understand the following:
-  * What is a block
-
-## Steps
-
-Execute the command below:
+执行如下命令：
 
 ```sh
 qqbccli get block BLOCK_NUMBER

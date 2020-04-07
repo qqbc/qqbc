@@ -1,61 +1,67 @@
+# qqbcd的实现
 ---
-content_title: qqbcd Implementation
----
 
-The QQBC platform stores blockchain information in various data structures at various stages of a transaction's lifecycle. Some of these are described below. The producing node is the `qqbcd` instance run by the block producer who is currently creating blocks for the blockchain (which changes every 6 seconds, producing 12 blocks in sequence before switching to another producer.)
+QQBC平台为交易生命周期各阶段提供不同的数据结构存储区块链信息。本节将介绍其中一些数据结构设计。其中，生产者节点是有当前创建区块链区块的区块生产者运行的`qqbcd`实例。注意，生产者每6秒变动一次，期间顺序生成12个区块。
 
-## Blockchain State and Storage
+## 区块链状态和存储
 
-Every `qqbcd` instance creates some internal files to housekeep the blockchain state. These files reside in the `~/eosio/qqbcd/data` installation directory and their purpose is described below:
+每个`qqbcd`实例将创建一些用于维护区块链状态的内部文件。这些文件位于安装目录下的`~/QQBC/qqbcd/data`中，分别用于：
 
-* The `block.log` is an append only log of blocks written to disk and contains all the irreversible blocks.
-* `Reversible_blocks` is a memory mapped file and contains blocks that have been written to the blockchain but have not yet become irreversible.
-* The `chain state` or `database` is a memory mapped file, storing the blockchain state of each block (account details, deferred transactions, transactions, data stored using multi index tables in smart contracts, etc.). Once a block becomes irreversible we no longer cache the chain state.
-* The `pending block` is an in memory block containing transactions as they are processed into a block, this will/may eventually become the head block. If this instance of `qqbcd` is the producing node then the pending block is distributed to other `qqbcd` instances.
-* The head block is the last block written to the blockchain, stored in `reversible_blocks`.
+* `block.log`是写入磁盘的只添加区块日志，包含所有不可篡改的区块。
+* `reversible_blocks`是内存映射文件，包含已写入区块链但是尚未形成不可篡改的区块 
+* `区块链状态`（或`数据库` ）是内存映射文件，用于缓存每个区块的区块链状态，包括账户细节、延期交易、交易、智能合约中使用多索引表存储的数据等。一定区块形成不可篡改，无需缓存区块链状态。
+* `待处理区块`是内存中区块，其中包含处理添加到区块中的交易，并将最终形成`链头区块`。如果`qqbcd`实例正在生成区块，那么将发送待处理区块给其它`qqbcd`示例。
+* `链头区块`是将最新写入区块链的区块，存储在`reversible_blocks`中。
 
-## qqbcd Read Modes
+## qqbcd读取模式
 
-QQBC provides a set of [services and interfaces](https://developers.eos.io/eosio-cpp/docs/db-api) that enable contract developers to persist state across action, and consequently transaction, boundaries. Contracts may use these services and interfaces for different purposes. For example, `eosio.token` contract keeps balances for all users in the database.
+QQBC提供多个[服务和接口](https://developers.QQBC.io/QQBC-cpp/docs/db-api)，支持智能合约开发者持久化操作乃至交易和边界间的状态。智能合约普遍使用了这些服务和接口。例如，`QQBC.token`合约维护数据库中所有用户的账户状态。
 
-Each instance of `qqbcd` keeps the database in memory, so contracts can read and write data.   `qqbcd` also provides access to this data over HTTP RPC API for reading the database.
+每个`qqbcd`实例在内存中维护数据库，支持智能合约读写数据。`qqbcd`还提供访问数据库读取数据的HTTP RPC API。
 
-However, at any given time there can be multiple correct ways to query that data: 
-- `speculative`: this includes the side effects of confirmed and unconfirmed transactions.
-- `head`: this only includes the side effects of confirmed transactions, this mode processes unconfirmed transactions but does not include them.
-- `read-only`: this only includes the side effects of confirmed transactions.
-- `irreversible`: this mode also includes confirmed transactions only up to those included in the last irreversible block.
+QQBC支持通过多种方式查询访问数据：
 
-A transaction is considered confirmed when a `qqbcd` instance has received, processed, and written it to a block on the blockchain, i.e. it is in the head block or an earlier block.
+- `观望模式`：涵盖已确认和未确认交易。
+- `链头模式`：只涵盖已确认交易，处理未确认交易，但是并未涵盖其中；
+- `只读模式`: 只涵盖已确认交易；
+- `不可篡改模式`: 只涵盖最新生成区块中不可篡改的已确认交易。
 
-### Speculative Mode
+交易一旦被`qqbcd`实例接收、处理并在区块中写回区块链，就认为该交易已确认。即交易已添加到链头区块乃至更早的区块中。
 
-Clients such as `qqbccli` and the RPC API, will see database state as of the current head block plus changes made by all transactions known to this node but potentially not included in the chain, unconfirmed transactions for example.
 
-Speculative mode is low latency but fragile, there is no guarantee that the transactions reflected in the state will be included in the chain OR that they will reflected in the same order the state implies.  
+### 观望模式
 
-This mode features the lowest latency, but is the least consistent. 
+客户端（例如`qqbccli`等）和RPC API所看到的数据库状态，是链头区块当前状态加上该节点知悉的所有交易所做的更改，这些更改可能并未上链，例如未确认交易等情况。
 
-In speculative mode `qqbcd` is able to execute transactions which have TaPoS (Transaction as Proof of Stake) pointing to any valid block in a fork considered to be the best fork by this node.
+观望模式延迟低，但是易于出错。该模式不保证交易所体现的状态会添加到区块链中，也不保证所体现的交易顺序是最终链上确认顺序。
 
-### Head Mode
+该模式主要优点是延迟低，但是状态数据的一致性最差。
 
-Clients such as `qqbccli` and the RPC API will see database state as of the current head block of the chain.  Since current head block is not yet irreversible and short-lived forks are possible, state read in this mode may become inaccurate  if `qqbcd` switches to a better fork.  Note that this is also true of speculative mode.  
+在观望模式下，`qqbcd`可以执行在节点看来是最优分叉中经PoS经验证的任一区块中的交易。
 
-This mode represents a good trade-off between highly consistent views of the data and latency.
 
-In this mode `qqbcd` is able to execute transactions which have TaPoS pointing to any valid block in a fork considered to be the best fork by this node.
+### 链头模式
 
-### Read-Only Mode
+客户端（例如`qqbccli`等）和RPC API所看到的数据库状态，是区块链中当前链头区块的状态。鉴于当前链头区块尚未形成不可篡改区块，并可能短时间内存在链分叉可能，在链头模式下读取的状态可能由于`qqbcd`分叉切换而导致不准确。注意，观望模式存在同样的问题。
 
-Clients such as `qqbccli` and the RPC API will see database state as of the current head block of the chain. It **will not** include changes made by transactions known to this node but not included in the chain, such as unconfirmed transactions.
+该模式优点是在数据一致性视图和延迟间取得和很好的权衡。
 
-### Irreversible Mode
+在该模式下，`qqbcd`可以执行在节点看来是最优分叉中经PoS经验证的任一区块中的交易。
 
-When `qqbcd` is configured to be in irreversible read mode, it will still track the most up-to-date blocks in the fork database, but the state will lag behind the current best head block, sometimes referred to as the fork DB head, to always reflect the state of the last irreversible block. 
 
-Clients such as `qqbccli` and the RPC API will see database state as of the current head block of the chain. It **will not** include changes made by transactions known to this node but not included in the chain, such as unconfirmed transactions.
+### 只读模式
 
-## How To Specify the Read Mode
+客户端（例如`qqbccli`等）和RPC API所看到的数据库状态，是区块链中当前链头区块的状态。该模式并不反映尚未上链但是当前节点可见的交易所产生的更改，例如未确认交易。
 
-The mode in which `qqbcd` is run can be specified using the `--read-mode` option from the `eosio::chain_plugin`.
+
+### 不可篡改模式
+
+一旦`qqbcd`配置未不可篡改读取模式，尽管节点将追踪分叉链中的最新区块情况，但是状态变化将滞后于当前最优链头区块（也称为分叉链头数据库）。该模式总是给出最新不可篡改区块的状态。
+
+客户端（例如`qqbccli`等）和RPC API所看到的数据库状态，是区块链中当前链头区块的状态。该模式并不反映尚未上链但是当前节点可见的交易所产生的更改，例如未确认交易。
+
+
+## 如何指定读取模式
+
+`qqbcd`的运行模式由`qqbc::chain_plugin`插件的`--read-mode`选项指定。
+

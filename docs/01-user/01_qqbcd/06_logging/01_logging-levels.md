@@ -1,8 +1,8 @@
----
-content_title: Logging Levels
+# 日志记录级别
 ---
 
-There are six available logging levels:
+`qqbcd`提供六种日志记录级别：
+
 - all
 - debug
 - info
@@ -10,7 +10,7 @@ There are six available logging levels:
 - error
 - off  
 
-Sample `logging.json`:
+`logging.json`示例：
 
 ```
 {

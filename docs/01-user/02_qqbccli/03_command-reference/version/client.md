@@ -1,10 +1,12 @@
-## Description
+## version client子命令
 
-Retrieve version information of the client
+获取指定客户的版本信息。
 
-## Positionals
-none
-## Usage
+## 顺位项
+
+无
+
+## 使用
 
 ```sh
 qqbccli version client

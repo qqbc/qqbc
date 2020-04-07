@@ -1,31 +1,33 @@
----
-content_title: How to replay from a snapshot
+# 如何从快照重播
 ---
 
-Once you have obtained a copy of a valid snapshot file from which you wish to create a valid chain state, copy it to your data/snapshots directory, backing up (if you wish to keep them) and removing any existing contents of the data directory.
+一旦用户获取创建区块链状态所需经验证的快照备份文件，需将文件拷贝到`data/snapshots`目录中，备份或移除现有数据目录中所所有内容。
 
-location          | name                       |  action
+
+位置          | 名称                      |  操作
 ----------------- | -------------------------- | ------------
-data/snapshots    | <head block id in hex>.bin | place the snapshot file you want to replay here
-data/             | *                          | remove
+data/snapshots    | <head block id in hex>.bin | 此处放置替换所需的快照文件
+data/             | *                          | 移除
 
-You can use `snapshots-dir = "snapshots" ` in the configuration file or using the `--snapshots-dir` command line option, to specify the where to find the the snapshot to replay, use `--snapshot` to specify the name of the snapshot to replay.
+要指定重播快照文件的搜索目录，可在配置文件中设置`snapshots-dir = "snapshots" `选项，也可在命令行使用`--snapshots-dir`选项。指定重播快照文件名称，使用`--snapshot`选项。
+
 
 ```sh
 qqbcd --snapshot yoursnapshot.name \
-  -e -p eosio \
-  --plugin eosio::producer_plugin  \
-  --plugin eosio::chain_api_plugin \
-  --plugin eosio::http_plugin      \
+  -e -p QQBC \
+  --plugin qqbc::producer_plugin  \
+  --plugin qqbc::chain_api_plugin \
+  --plugin qqbc::http_plugin      \
   >> qqbcd.log 2>&1 &
 ```
 
-When replaying from a snapshot file it is recommended that all existing data is removed, however if a blocks.log file is provided it *must* at least contain blocks up to the snapshotted block and *may* contain additional blocks that will be applied as part of startup.  If a blocks.log file exists, but does not contain blocks up to and/or after the snapshotted block then replaying from a snapshot will create an exception. Any available reversible blocks will also be applied.
+在从快照文件重播时，推荐移除所有现有数据。如果设置了`blocks.log`文件，那么其中区块高度必须包括大于快照区块高度，此外也可包括高于此高度的额外区块，以在启动时加入节点中。如果`blocks.log`文件存储，但是其中区块高度低于快照，那么重播将抛出异常。所有可用的可撤回区块也将加以应用。
 
-blocks.log               | snapshot                    | action
+blocks.log               | 快照                  | 操作
 ------------------------ | --------------------------- | ------
-no blocks.log            | for irreversible block 2000 | ok
-contains blocks 1 - 1999 | for irreversible block 2000 | exception
-contains blocks 1 - 2001 | for irreversible block 2000 | ok - will recreate from snapshot and 'play' block 2001
+不存在blocks.log            | 不可撤回区块高度为2000 | 正常
+包含区块高度1-1999 | 不可撤回区块高度为2000 | 异常
+包含区块高度1 - 2001 | 不可撤回区块高度为2000 | 正常，从快照重建，并恢复至高度2001 
 
-When instantiating a node from a snapshot file, it is illegal to pass in the `--genesis-json` or `--genesis-timestamp` arguments to `qqbcd` as that information is loaded from the snapshot file. If a `blocks.log` file exists, the genesis information it contains will be validated against the genesis data in the snapshot.  The replay will fail with an error if the genesis data is not consistent, i.e. it checks that the blocks.log file and the snapshot file are for the same blockchain.
+从快照文件重建节点，不能对`qqbcd`设置`--genesis-json`或`--genesis-timestamp`选项，因为相关信息将从快照文件加载。如果存在`blocks.log`文件，那么其中包含的创世信息将与快照中的创世信息做验证。如果二者创世信息存在差异，重播将失败。也就是说，要检查`blocks.log`文件和快照文件是否来自同一区块链。
+

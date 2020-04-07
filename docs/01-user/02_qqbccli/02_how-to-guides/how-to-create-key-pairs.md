@@ -1,21 +1,22 @@
-## Goal
+## 目标
 
-## Before you begin
+创建密钥对
 
-* Install the currently supported version of `qqbccli`
+## 准备工作
 
-* Understand the following:
-  * What is a public and private key pair
+* 安装了适用版本的`qqbccli`。
+* 理解以下概念：
+  * 什么是密钥对？
 
-## Steps
+## 操作步骤
 
-To output the key pair to the console
+在控制台输出密钥对：
 
 ```sh
 qqbccli create key --to-console
 ```
 
-To save the key pair to file
+将密钥对保存到文件中：
 
 ```sh
 qqbccli create key --file FILE_TO_SAVEKEY

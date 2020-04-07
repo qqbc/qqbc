@@ -1,12 +1,11 @@
+# qqbcd插件
 ---
-content_title: qqbcd Plugins
----
 
-## Overview
+## 概览
 
-Plugins extend the core functionality implemented in `qqbcd`. Some plugins are mandatory, such as `chain_plugin`, `net_plugin`, and `producer_plugin`, which reflect the modular design of `qqbcd`. The other plugins are optional as they provide nice to have features, but non-essential for the nodes operation.
+插件扩展了`qqbcd`实现的核心功能。其中，一些插件是必需的，例如作为`qqbcd`模块化组成的`chain_plugin`、`net_plugin`和`producer_plugin`。也有一些插件时可选的，这些查询提供并非qqbcd必需功能的额外特性。
 
-For information on specific plugins, just select from the list below:
+各插件详细信息，访问相应插件规格声明：
 
 * [`chain_api_plugin`](chain_api_plugin/index.md)
 * [`chain_plugin`](chain_plugin/index.md)
@@ -25,5 +24,5 @@ For information on specific plugins, just select from the list below:
 * [`test_control_plugin`](test_control_plugin/index.md)
 * [`txn_test_gen_plugin`](txn_test_gen_plugin/index.md)
 
-[[info | qqbcd is modular]]
-| Plugins add incremental functionality to `qqbcd`. Unlike runtime plugins, `qqbcd` plugins are built at compile-time.
+[[提示 | qqbcd的模块化实现]]
+| 插件用于添加`qqbcd`的功能。`qqbcd`插件并非运行时插件，而是在编译时构建的。

@@ -1,22 +1,23 @@
-## Goal
+## 目标
 
-Setup an account that require multiple signatures for signning a transaction
+购买内存资源。
 
-## Before you begin
 
-* You have an account
+## 准备工作
 
-* Ensure the reference system contracts from `eosio.contracts` repository is deployed and used to manage system resources
+* 具有一个账户。
 
-* You have sufficient token allocated to your account
+* 确保所使用`QQBC.contracts`库中的合约已部署并用管理系统资源。
 
-* Install the currently supported version of `qqbccli`
+* 账户持有足量的通证。
 
-* Unlock your wallet
+* 安装了适用版本的`qqbccli`。
 
-## Steps
+* 钱包已解锁。
 
-Buys RAM in value of 0.1 SYS tokens for account `alice`:
+## 操作步骤
+
+使用0.1个SYS通证为账户`alice`购买内存资源：
 
 ```sh
 qqbccli system buyram alice alice "0.1 SYS" -p alice@active

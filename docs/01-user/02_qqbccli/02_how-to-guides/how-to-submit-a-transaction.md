@@ -1,18 +1,21 @@
-## Goal
+## 目标
 
-Push a transaction
+将交易推送到网络。
 
-## Before you begin
 
-* Install the currently supported version of `qqbccli`
+## 准备工作
 
-* Understand the following:
-  * What is a transaction
-  * How to generate a valid transaction JSON
+* 安装了适用版本的`qqbccli`。
 
-## Steps
+* 理解以下概念：
+  * 交易；
+  * 如何生成JSON格式的验证交易。
 
-* Create a JSON snippet contains a valid transaction such as the following:
+
+## 操作步骤：
+
+
+* 创建包含验证交易的JSON文件，部分展示如下：
 
 ```JSON
 {
@@ -24,7 +27,7 @@ Push a transaction
   "delay_sec": 0,
   "context_free_actions": [],
   "actions": [{
-      "account": "eosio.token",
+      "account": "QQBC.token",
       "name": "transfer",
       "authorization": [{
           "actor": "han",
@@ -39,10 +42,10 @@ Push a transaction
 }
 ```
 
-* You can also create a JSON snippet that uses clear text JSON for `data` field.
+* 也可在`data`使用JSON明文创建。
 
-[[info]]
-| Be aware that if a clear text `data` field is used, qqbccli need to fetch copies of required ABIs using `qqbcd` API. That operation has a performance overhead on `qqbcd`
+[[提示]]
+| 如果使用明文`data`域，那么`qqbccli`需要使用`qqbcd` API获取所需API的拷贝。该操作需要`qqbcd`的额外性能开销。
 
 ```JSON
 {
@@ -54,7 +57,7 @@ Push a transaction
   "delay_sec": 0,
   "context_free_actions": [],
   "actions": [{
-      "account": "eosio.token",
+      "account": "QQBC.token",
       "name": "transfer",
       "authorization": [{
           "actor": "han",
@@ -63,7 +66,7 @@ Push a transaction
       ],
       "data": {
         "from": "han",
-        "to": "eosio",
+        "to": "QQBC",
         "quantity": "0.0001 SYS",
         "memo": "m"
       }
@@ -74,13 +77,13 @@ Push a transaction
 }
 ```
 
-* Execute the following command:
+* 执行以下命令：
 
 ```sh
 qqbccli push transaction TRX_FILE.json
 ```
 
-* Submit a transaction from a JSON:
+* 从JSON提交交易：
 
 ```sh
 qqbccli push transaction JSON

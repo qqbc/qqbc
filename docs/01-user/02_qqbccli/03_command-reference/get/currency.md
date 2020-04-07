@@ -1,8 +1,9 @@
-## Description
+## currency子命令功能
 
-Exposes subcommands for accessing standard currencies
+进一步使用子命令，查询通证相关信息
 
-## Subcommands
-[currency balance](currency-balance.md) - Retrieve the balance of an account for a given currency
+## 支持的子命令说明
 
-[currency stats](currency-stats.md) - Retrieve the stats of for a given currency
+[currency balance](currency-balance.md)：获取账户中指定通证的持有情况。 
+
+[currency stats](currency-stats.md)：获取指定通证的状态。

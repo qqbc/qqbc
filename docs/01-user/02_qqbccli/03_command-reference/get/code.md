@@ -1,38 +1,43 @@
-## Description
-Retrieves the code and ABI for an account
+## code子命令功能
 
-## Positional Parameters
-- `name` _TEXT_ - The name of the account whose code should be retrieved
+获取账户的代码和ABI。
+
+## 顺位项说明
+
+- `name` _TEXT_：需检索代码的账户名。
+
 ## Options
-- `-c,--code` _TEXT_ - The name of the file to save the contract _.wast_ to
-- `-a,--abi` _TEXT_ - The name of the file to save the contract _.abi_ to
-- `--wasm` Save contract as wasm
-## Examples
-Simply output the hash of eosio.token contract 
+- `-c,--code` _TEXT_ ：指定保存合约_.wast_内容的文件名。
+- `-a,--abi` _TEXT_ ：指定保存合约 _.abi_内容的文件名
+- `--wasm`：以wasm格式保存
+
+## 示例
+
+输出QQBC.token合约的哈希值
 
 ```sh
-qqbccli get code eosio.token
+qqbccli get code QQBC.token
 ```
 ```console
 code hash: f675e7aeffbf562c033acfaf33eadff255dacb90d002db51c7ad7cbf057eb791
 ```
 
-Retrieve and save abi for eosio.token contract
+检索并保存QQBC.token合约的ABI。
 
 ```sh
-qqbccli get code eosio.token -a eosio.token.abi
+qqbccli get code QQBC.token -a QQBC.token.abi
 ```
 ```console
 code hash: f675e7aeffbf562c033acfaf33eadff255dacb90d002db51c7ad7cbf057eb791
-saving abi to eosio.token.abi
+saving abi to QQBC.token.abi
 ```
 
-Retrieve and save wast code for eosio.token contract
+检索并保存QQBC.token合约的wast代码。
 
 ```sh
-qqbccli get code eosio.token -c eosio.token.wast
+qqbccli get code QQBC.token -c QQBC.token.wast
 ```
 ```console
 code hash: f675e7aeffbf562c033acfaf33eadff255dacb90d002db51c7ad7cbf057eb791
-saving wast to eosio.token.wast
+saving wast to QQBC.token.wast
 ```

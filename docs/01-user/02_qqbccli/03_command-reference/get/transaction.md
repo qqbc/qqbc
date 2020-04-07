@@ -1,20 +1,24 @@
-## Description
-Retrieves a transaction from the blockchain
+## transaction子命令说明
 
-## Positional Parameters
-`id`` _TEXT_ - ID of the transaction to retrieve
+获取区块链交易信息。
 
-## Options
-` -b,--block-hint` UINT        the block number this transaction may be in
+## 顺位项说明
 
-**Command**
+`id`` _TEXT_ ：指定需检索交易的ID。
+
+## 选项说明
+
+` -b,--block-hint` UINT ：指定交易可能所在的区块号。
+
+**操作命令**
 
 ```sh
 qqbccli get transaction
 ```
-**Output**
 
-## Example
+**输出**
+
+## 示例
 
 ```sh
 qqbccli get transaction eb4b94b72718a369af09eb2e7885b3f494dd1d8a20278a6634611d5edd76b703
@@ -34,7 +38,7 @@ qqbccli get transaction eb4b94b72718a369af09eb2e7885b3f494dd1d8a20278a6634611d5e
       "1f22e64240e1e479eee6ccbbd79a29f1a6eb6020384b4cca1a958e7c708d3e562009ae6e60afac96f9a3b89d729a50cd5a7b5a7a647540ba1678831bf970e83312"
     ],
     "messages": [{
-        "code": "eos",
+        "code": "QQBC",
         "type": "transfer",
         "authorization": [{
             "account": "inita",
@@ -75,5 +79,5 @@ qqbccli get transaction eb4b94b72718a369af09eb2e7885b3f494dd1d8a20278a6634611d5e
 }
 ```
 
-[[info | Important Note]]
-| The above transaction id will not exist on your blockchain
+[[重要提示] ]
+| 上面示例给出的交易ID，可能在用户环境中并不存在。

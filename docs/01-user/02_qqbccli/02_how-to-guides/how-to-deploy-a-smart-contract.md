@@ -1,19 +1,20 @@
-## Goal
+## 目标
 
-Deploy an QQBC contract
+部署系统合约。
 
-## Before you begin
+## 准备工作
 
-* Install the currently supported version of `qqbccli`
+* 安装了适用版本的`qqbccli`。
 
-* Unlock the wallet which contains the private key of the contract account
+* 已解锁包含合约账户私钥的钱包。
 
-## Steps
+## 操作步骤
 
-Execute:
+执行：
 
 ```sh
 qqbccli set contract contract_account contract_directory_path
 ```
 
-Replace the `contract_directory_path` with the path points to your contract folder
+将命令中`contract_directory_path`替换为用户合约所在目录路径。
+

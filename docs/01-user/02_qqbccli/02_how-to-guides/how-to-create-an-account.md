@@ -1,21 +1,23 @@
-## Goal
+## 目标
 
-## Before you begin
+创建账户
 
-* Install the currently supported version of `qqbccli`
+## 准备工作
 
-* Understand the following:
-  * What is an account
-  * What is a public and private key pair
+## 准备工作
 
-* Created an Owner and an Active key pair
-* Imported a key pair which can authorize on behalf of a creator account
+* 安装了适用版本的`qqbccli`。
+* 理解以下概念：
+  * 什么是账户？
+  * 什么是密钥对？
+* 创建所有者账户和密钥对。
+* 已导入可认证创建者账户的密钥对。
 
-## Steps
+## 操作步骤
 
 ```sh
 qqbccli create account creator name OwnerKey [ActiveKey]
 ```
 
-[[info | Recommend]]
-| `ActiveKey` is optional but recommended.
+[[提示 | 推荐选项]]
+| 推荐使用可选选项`ActiveKey`。
