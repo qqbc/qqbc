@@ -23,5 +23,5 @@ excerpt: "Deposit into a CPU loan fund"
 ## Examples
 
 ```sh
-qqbccli system rex fundcpuloan accountname1 abc123 "1 EOS"
+qqbccli system rex fundcpuloan accountname1 abc123 "1 SYS"
 ```

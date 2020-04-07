@@ -13,7 +13,7 @@ sudo ./scripts/qqbc_install.sh
 
 ## QQBC手动安装
 
-作为替代`qqbc_install.sh`脚本，用户可以在`eos/build`文件夹中调用`make install`命令，完成QQBC二进制文件的安装。同样，执行该命令需要操作系统文件夹的相应权限。操作如下：
+作为替代`qqbc_install.sh`脚本，用户可以在`qqbc/build`文件夹中调用`make install`命令，完成QQBC二进制文件的安装。同样，执行该命令需要操作系统文件夹的相应权限。操作如下：
 
 
 ```sh

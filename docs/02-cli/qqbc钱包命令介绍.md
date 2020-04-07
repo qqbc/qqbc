@@ -2,18 +2,18 @@
 
 ## 综述
 
-命令行界面钱包程序为 kqqbcd,位于 eos/build/programs/kqqbcd 路径下，用于存储交易签名的私钥。kqqbcd 在本地节点上运行，并将私钥保存在本地节点上。
+命令行界面钱包程序为 kqqbcd,位于 qqbc/build/programs/kqqbcd 路径下，用于存储交易签名的私钥。kqqbcd 在本地节点上运行，并将私钥保存在本地节点上。
 
 ## 如何运行kqqbcd 
 
 
-默认情况下，kqqbcd会在目录 ~/eosio-wallet 中生成一个基础的配置文件 config.in。在运行命令行钱包时，通过配置命令行参数 --config-dir指定config.ini配置文件的目录。该配置文件中保存用于接入 http 链接的服务器配置http-server-address参数，以及其他用于资源共享的配置参数。
+默认情况下，kqqbcd会在目录 ~/qqbcio-wallet 中生成一个基础的配置文件 config.in。在运行命令行钱包时，通过配置命令行参数 --config-dir指定config.ini配置文件的目录。该配置文件中保存用于接入 http 链接的服务器配置http-server-address参数，以及其他用于资源共享的配置参数。
 
-默认情况下，kqqbcd将钱包文件保存在 ~/eosio-wallet 目录下，钱包文件名为：<wallet-name>.wallet。例如，默认钱包文件名为 default.wallet。当建立了其他钱包后，在该目录下会分别建立每个钱包文件，例如当建立了一个名称为"foo"的钱包，会生成一个钱包文件foo.wallet。钱包文件可以通过命令行参数--data-dir存放在指定的目录中。
+默认情况下，kqqbcd将钱包文件保存在 ~/qqbcio-wallet 目录下，钱包文件名为：<wallet-name>.wallet。例如，默认钱包文件名为 default.wallet。当建立了其他钱包后，在该目录下会分别建立每个钱包文件，例如当建立了一个名称为"foo"的钱包，会生成一个钱包文件foo.wallet。钱包文件可以通过命令行参数--data-dir存放在指定的目录中。
 
 ## 命令参考
 
-与 kqqbcd 交互使用的工具是qqbccli，该命令在目录eos/build/programs/qqbccli 目录下。 该工具提供了与 kqqbcd 交互的各种命令。
+与 kqqbcd 交互使用的工具是qqbccli，该命令在目录qqbc/build/programs/qqbccli 目录下。 该工具提供了与 kqqbcd 交互的各种命令。
 
 * 新建钱包
 

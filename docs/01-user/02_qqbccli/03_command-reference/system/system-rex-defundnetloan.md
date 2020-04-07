@@ -25,5 +25,5 @@ Withdraw from a Network loan fund
 
 
 ```sh
-qqbccli system rex defundnetloan accountname1 abc123 "1 EOS"
+qqbccli system rex defundnetloan accountname1 abc123 "1 QQBC"
 ```

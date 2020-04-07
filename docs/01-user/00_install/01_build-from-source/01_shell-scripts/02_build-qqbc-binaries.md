@@ -3,7 +3,7 @@
 
 ## 基本概念：Shell脚本
 
-> QQBC代码库在中`eos/scripts`g文件夹中g提供了多个自动化Shell脚本文件，实现QQBC软件的依赖性构建、安装和可选卸载功能。
+> QQBC代码库在中`qqbc/scripts`g文件夹中g提供了多个自动化Shell脚本文件，实现QQBC软件的依赖性构建、安装和可选卸载功能。
 
 ## 构建脚本
 

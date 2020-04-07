@@ -57,8 +57,8 @@ The authority JSON object ...
 ```json
 {
   "threshold"       : 100,    /*An integer that defines cumulative signature weight required for authorization*/
-  "keys"            : [],     /*An array made up of individual permissions defined with an EOS PUBLIC KEY*/
-  "accounts"        : []      /*An array made up of individual permissions defined with an EOS ACCOUNT*/
+  "keys"            : [],     /*An array made up of individual permissions defined with an QQBC PUBLIC KEY*/
+  "accounts"        : []      /*An array made up of individual permissions defined with an QQBC ACCOUNT*/
 }
 ```
 ...which includes one or more permissions objects.

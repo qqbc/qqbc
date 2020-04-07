@@ -771,7 +771,7 @@ $ qqbccli get table inita currency account
 
 ### 使用独立的钱包应用
 
-您可以使用可在program/keosd中找到的单独的钱包应用程序，而不是使用内置于 qqbcd 的钱包功能。默认情况下，节点使用端口 8888，因此请为钱包应用选择另一个端口。
+您可以使用可在program/kqqbcd中找到的单独的钱包应用程序，而不是使用内置于 qqbcd 的钱包功能。默认情况下，节点使用端口 8888，因此请为钱包应用选择另一个端口。
 
 `$ kqqbcd --http-server-endpoint 127.0.0.1:8887`
 

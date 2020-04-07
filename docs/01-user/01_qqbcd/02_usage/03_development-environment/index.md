@@ -20,7 +20,7 @@ While this option can technically be used for smart contract development, it may
 
 The official testnet is available for testing QQBC dApps and smart contracts:
 
-* [testnet.eos.io](https://testnet.eos.io/)
+* [testnet.qqbc](https://testnet.qqbc.io/)
 
 ## Third-Party Testnets
 

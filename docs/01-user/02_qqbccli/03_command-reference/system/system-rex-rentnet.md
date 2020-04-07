@@ -20,5 +20,5 @@
 
 
 ```sh
-qqbccli system rex rentnet accountname1 accountname2 "1 EOS" 0
+qqbccli system rex rentnet accountname1 accountname2 "1 QQBC" 0
 ```

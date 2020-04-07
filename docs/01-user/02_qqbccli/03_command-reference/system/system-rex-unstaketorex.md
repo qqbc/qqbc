@@ -20,5 +20,5 @@
 
 
 ```sh
-qqbccli system rex unstaketorex accountname1 accountname2 "1 EOS" 0
+qqbccli system rex unstaketorex accountname1 accountname2 "1 SYS" 0
 ```

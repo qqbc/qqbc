@@ -22,5 +22,5 @@ excerpt: "Deposit into a Network loan fund"
 
 
 ```sh
-qqbccli system rex fundnetloan accountname1 abc123 "1 EOS"
+qqbccli system rex fundnetloan accountname1 abc123 "1 QQBC "
 ```

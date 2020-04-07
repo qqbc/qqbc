@@ -1,6 +1,6 @@
 RPC接口
 ----
-描述怎样去调用eosd的HTTP RPC.
+描述怎样去调用qqbcd的HTTP RPC.
 
 内容列表
 ---
@@ -32,17 +32,17 @@ RPC接口
 
 # 配置
 
-eosd使用REST RPC接口，插件可以在API服务器上注册自己的端点。 本页将解释如何使用一些API来获取有关区块链和发送事务的信息。
+qqbcd使用REST RPC接口，插件可以在API服务器上注册自己的端点。 本页将解释如何使用一些API来获取有关区块链和发送事务的信息。
 
-在查询eosd之前，您必须先启用必要的API插件。根据您希望启用的API，将以下行添加到您的eosd的config.ini中：
+在查询qqbcd之前，您必须先启用必要的API插件。根据您希望启用的API，将以下行添加到您的qqbcd的config.ini中：
 
 ```C++
 plugin = eosio::chain_api_plugin // 生效链API
 plugin = eosio::wallet_api_plugin // 生效钱包API
 ```
-另外，对于电子钱包API，您还可以通过单独运行eos-walletd将电子钱包功能与eosd分开。
+另外，对于电子钱包API，您还可以通过单独运行qqbc-walletd将电子钱包功能与qqbcd分开。
 
-对于以下指南，我们假定我们已经在127.0.0.1:8888（启用了链接API插件，电子钱包API插件已禁用）以及在127.0.0.1:8889上运行的eos-walletd运行。
+对于以下指南，我们假定我们已经在127.0.0.1:8888（启用了链接API插件，电子钱包API插件已禁用）以及在127.0.0.1:8889上运行的qqbc-walletd运行。
 
 # 链接口
 ## get_info
@@ -113,9 +113,9 @@ $ curl  http://127.0.0.1:8888/v1/chain/get_account -X POST -d '{"account_name":"
 ```json
 {
   "name": "inita",
-  "eos_balance": "999998.9574 EOS",
-  "staked_balance": "0.0000 EOS",
-  "unstaking_balance": "0.0000 EOS",
+  "eos_balance": "999998.9574 SYS",
+  "staked_balance": "0.0000 SYS",
+  "unstaking_balance": "0.0000 SYS",
   "last_unstaking_time": "2106-02-07T06:28:15",
   "permissions": [
     {

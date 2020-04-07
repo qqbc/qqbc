@@ -9,7 +9,7 @@
 
 ### 详细描述
 
-A EOS.IO事务具有以下抽象结构：
+A qqbc事务具有以下抽象结构：
 ```C++
 struct transaction {
   Name scope[]; 
