@@ -13,6 +13,4 @@
 4. [测试QQBC二进制文件](04_test-qqbc-binaries.md)
 5. [卸载QQBC](05_uninstall-qqbc.md)
 
-[提示：适用于高级开发人员的QQBC构建]
 
-| 对于初次接触QQBC的用户，推荐安装[QQBC预先构建的二进制文件](../../00_install-prebuilt-binaries.md)，而非从源文件构建。

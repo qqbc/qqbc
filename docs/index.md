@@ -14,7 +14,6 @@ QQBC的生态应用主要是围绕支付业务展开的，具体包括：通过Q
 
 * [项目简介](chap/qqbc-basics.md)
 * [目标市场分析](chap/qqbc-marketing.md)
-* [通证经济模型](chap/qqbc-tokeneco.md)
 * [关键词汇表](chap/qqbc-glossary.md)
 
 # 快速上手

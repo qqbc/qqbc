@@ -1,7 +1,7 @@
 # QQBC软件安装
 ---
 
-QQBC软件提供多种安装方式：
+QQBC软件提供如下安装方式：
 
 * [从QQBC源文件构建](01_build-from-source/index.md)
 
