@@ -1,5 +1,5 @@
 
-# QQBC- The Most Powerful Infrastructure for Decentralized Applications
+# ![](./images/qqbc.jpeg)QQBC- The Most Powerful Infrastructure for Decentralized Applications
 
 
 Welcome to the QQBC source code repository! This software enables businesses to rapidly build and deploy high-performance and high-security blockchain-based applications.
