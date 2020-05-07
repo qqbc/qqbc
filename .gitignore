@@ -23,8 +23,8 @@ Makefile
 compile_commands.json
 moc_*
 *.moc
+.vimrc
 
-genesis.json
 hardfork.hpp
 
 libraries/utilities/git_revision.cpp
