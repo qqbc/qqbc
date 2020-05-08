@@ -2,7 +2,7 @@
 ---
 
 QQBC软件提供如下安装方式：
-
+* [二进制安装包](00_install-prebuilt-binaries.md)
 * [从QQBC源文件构建](01_build-from-source/index.md)
 
 ## 受支持的操作系统
